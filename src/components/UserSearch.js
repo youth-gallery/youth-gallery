@@ -10,9 +10,6 @@ function UserSearch() {
                 <UserName>유저 이름</UserName>
                 <UserEmail>유저 이메일</UserEmail>
             </UserInfoWarp>
-            <FollowButton>팔로우</FollowButton>
-            {/* 나중에 아래 코드로 바꿔서 짜고 싶습니다. */}
-            {/* {팔로우상태 === false ? <FollowButton /> : null} */}
         </Div>
     );
 }
@@ -48,16 +45,6 @@ const UserEmail = styled.span`
     line-height: 15.02px;
     color: #767676;
     margin: 0;
-`;
-
-const FollowButton = styled.button`
-    font-size: 12px;
-    color: #212121;
-    background-color: #ffbb2f;
-    border-radius: 26px;
-    border: none;
-    word-break: keep-all;
-    padding: 7px 11px;
 `;
 
 export default UserSearch;

@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import basicProfileImg from '../assets/basic-profile-img-.png';
-import { useState } from 'react';
+// import { useState } from 'react';
 
 function UserFollow() {
-    const [followState] = useState(false);
+    // const [followState] = useState(false);
     return (
         <Div>
             <ProfileImg src={basicProfileImg} />
@@ -12,11 +12,9 @@ function UserFollow() {
                 <UserName>유저 이름</UserName>
                 <UserEmail>유저 이메일</UserEmail>
             </UserInfoWarp>
-            {followState === false ? (
-                <FollowButton color="#212121">팔로우</FollowButton>
-            ) : (
-                <FollowButton color="#767676">취소</FollowButton>
-            )}
+            {/* 버튼컴포넌트 추가 시 들어갈 자리 */}
+            {/* {followState === false ? 
+                <팔로우> : <취소>} */}
         </Div>
     );
 }
@@ -52,21 +50,6 @@ const UserEmail = styled.span`
     line-height: 15.02px;
     color: #767676;
     margin: 0;
-`;
-
-const FollowButton = styled.button`
-    width: 56px;
-    height: 28px;
-    box-sizing: border-box;
-    font-size: 12px;
-    color: ${(props) => props.color};
-    background-color: ${(props) =>
-        props.color === '#212121' ? '#ffbb2f' : '#fff'};
-    border-radius: 26px;
-    border: ${(props) =>
-        props.color === '#212121' ? 'none' : '1px solid #dbdbdb'};
-    word-break: keep-all;
-    flex-shrink: 0;
 `;
 
 export default UserFollow;

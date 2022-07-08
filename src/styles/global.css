@@ -10,6 +10,12 @@
     --comment-black: #333333;
 }
 
+html {
+    font-size: 62.5%;
+}
+
 body {
+    font-size: 1.6rem;
+    line-height: 1.25;
     font-family: 'SpoqaHanSansNeo-R';
 }

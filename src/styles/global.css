@@ -1,0 +1,21 @@
+@import url('../font.css');
+
+:root {
+    --logo-black: #212121;
+    --logo-yellow: #ffbb2f;
+    --btn-gray: #dedede;
+    --error-red: #eb5757;
+    --gray-color: #767676;
+    --light-gray: #c4c4c4;
+    --comment-black: #333333;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-size: 1.6rem;
+    line-height: 1.25;
+    font-family: 'SpoqaHanSansNeo-R';
+}

@@ -9,7 +9,7 @@ function TabMenuMove() {
                 <Route path="/" element={<TabMenu img={'homeImg'} />} />
                 <Route path="/news" element={<TabMenu img={'newsImg'} />} />
                 <Route
-                    path="/post/update"
+                    path="/post"
                     element={<TabMenu img={'uploadImg'} />}
                 />
                 <Route

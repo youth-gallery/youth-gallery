@@ -67,7 +67,7 @@ const menuRendering = (img) => {
     ];
     const imgIconFill = [homeImgFill, newsImgFill, postImg, profileImgFill];
     const tabTitle = ['홈', '소식', '게시물 작성', '프로필'];
-    const link = ['/', '/news', '/post', '/profile'];
+    const link = ['/', '/news', '/post/upload', '/profile'];
     for (let i = 0; i < 4; i++) {
         result.push(
             <StyledLink to={link[i]} key={i}>

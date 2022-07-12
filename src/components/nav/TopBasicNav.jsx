@@ -8,6 +8,7 @@ const NavStyle = styled.section`
     justify-content: space-between;
     align-items: center;
     padding: 12px 12px 12px 13px;
+    border-bottom: 1px solid #DBDBDB;
 `;
 
 const NavButton = styled.button`

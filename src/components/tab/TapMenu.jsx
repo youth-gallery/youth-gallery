@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 
 const NavStyle = styled.section`
     padding: 12px 6px 6px 6px;
+    border-top: 1px solid #dbdbdb;
 `;
 
 const Ul = styled.ul`

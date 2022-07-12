@@ -48,6 +48,7 @@ function Search() {
                         <li key={user._id}>
                             {/* {user.username} ({user.accountname}) */}
                             <UserSearch
+                                userImg={user.image}
                                 username={user.username}
                                 accountname={user.accountname}
                             />

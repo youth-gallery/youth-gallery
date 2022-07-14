@@ -1,0 +1,18 @@
+@font-face {
+    font-family: 'SpoqaHanSansNeo-B';
+    src: url('./assets/font/SpoqaHanSansNeo-Bold.woff') format('woff');
+}
+@font-face {
+    font-family: 'SpoqaHanSansNeo-M';
+    src: url('./assets/font/SpoqaHanSansNeo-Medium.woff') format('woff');
+}
+@font-face {
+    font-family: 'SpoqaHanSansNeo-R';
+    src: url('./assets/font/SpoqaHanSansNeo-Regular.woff') format('woff');
+}
+
+* {
+    font-size: 1.6rem;
+    line-height: 1.25;
+    font-family: 'SpoqaHanSansNeo-R';
+}

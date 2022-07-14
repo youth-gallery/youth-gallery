@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
 import iconArrowLeft from '../../assets/icon-arrow-left.png';
+import { useNavigate } from 'react-router-dom';
 
 const NavStyle = styled.section`
     display: flex;
@@ -24,10 +25,15 @@ const ArrowLeftButton = styled(NavButton)`
 `;
 
 function TopUploadNav() {
+    const navigate = useNavigate();
+    const handleGoBack = () => {
+        navigate(-1);
+    };
+
     return (
         <>
             <NavStyle className="nav">
-                <ArrowLeftButton />
+                <ArrowLeftButton name="back" onClick={handleGoBack} />
                 {/* 나중에 저장버튼 component 넣을 공간 */}
                 <NavButton>저장</NavButton>
             </NavStyle>

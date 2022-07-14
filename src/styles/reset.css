@@ -127,3 +127,19 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
+
+/* reset css 추가 */
+button {
+    border: initial;
+    background-color: initial;
+    padding: 0;
+}
+
+input {
+    border: initial;
+}
+
+a {
+    text-decoration: none;
+    color: initial;
+}

@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import iconArrowLeft from '../../assets/icon-arrow-left.png';
 import logoutDot from '../../assets/icon-more-vertical.png';
 
-function TopBasicNav({ navTitle, styles }) {
+function TopBasicNav({ navTitle}) {
     return (
     <>
-        <NavStyle className={styles.top_nav}>
+        <NavStyle>
             <Warpper>
                 <ArrowLeft />
                 <NavTitle>{navTitle}</NavTitle>
@@ -24,6 +24,10 @@ const NavStyle = styled.section`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0 ;
 `;
 
 const Warpper = styled.div`

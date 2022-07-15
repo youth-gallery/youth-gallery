@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 // import basicProfileImg from '../assets/basic-profile-img-.png';
 
-function UserFollow({ followers, i, styles }) {
+function UserFollow({ followers, i }) {
     return (
-        <Li className={styles.user_follow}>
+        <Li >
             <ProfileImg src={followers[i].image} />
             <UserInfoWarp>
                 <UserName>{followers[i].accountname}</UserName>
@@ -21,6 +21,10 @@ const Li = styled.li`
     align-items: center;
     width: 100%;
     background-color: #fff;
+    margin-bottom: 16px;
+    &:last-child {
+        margin-bottom: 0;
+    }
 `;
 
 const ProfileImg = styled.img`

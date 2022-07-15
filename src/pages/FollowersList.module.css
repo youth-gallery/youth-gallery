@@ -4,30 +4,8 @@
   height: 100vh;
 }
 
-.top_nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0 ;
-}
-
 .user_follow_warp {
   margin: 48px 16px 0;
   padding-top: 24px;
   padding-bottom: 60px;
-}
-
-.user_follow {
-  margin-bottom: 16px;
-}
-
-.user_follow:last-child {
-  margin-bottom: 0;
-}
-
-.tab_menu {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
 }

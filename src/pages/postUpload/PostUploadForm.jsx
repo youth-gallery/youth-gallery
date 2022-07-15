@@ -9,23 +9,27 @@ const PostUploadForm = () => {
     };
 
     return (
-        <PostForm>
-            <textarea
-                className={styles.uploadform_txt}
-                placeholder="게시글 입력하기..."
-            />
-            <button
-                type="button"
-                className={styles.uploadform_picture_btn}
-                onClick={onPicBtnClick}
-            />
-            <input
-                type="file"
-                accept="image/*"
-                ref={inpRef}
-                className={styles.uploadform_picture_inp}
-            />
-        </PostForm>
+        <>
+            <PostForm>
+                <textarea
+                    className={styles.uploadform_txt}
+                    placeholder="게시글 입력하기..."
+                />
+            </PostForm>
+            <div className={styles.uploadform_picture}>
+                <button
+                    type="button"
+                    className={styles.uploadform_picture_btn}
+                    onClick={onPicBtnClick}
+                />
+                <input
+                    type="file"
+                    accept="image/*"
+                    ref={inpRef}
+                    className={styles.uploadform_picture_inp}
+                />
+            </div>
+        </>
     );
 };
 

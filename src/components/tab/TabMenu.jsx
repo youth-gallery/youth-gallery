@@ -23,7 +23,6 @@ const Ul = styled.ul`
     list-style: none;
     padding: 0;
     margin: 0 auto;
-
     display: flex;
     justify-content: space-between;
     
@@ -45,7 +44,6 @@ const Li = styled.li`
     list-style: none;
     padding: 0;
     margin: 0 auto;
-
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -28,6 +28,8 @@ const NavStyle = styled.section`
     top: 0;
     left: 0;
     right: 0 ;
+    padding: 12px 12px 12px 13px;
+    border-bottom: 1px solid #DBDBDB;
 `;
 
 const Warpper = styled.div`

@@ -7,7 +7,19 @@ const NavStyle = styled.section`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: #fff;
     padding: 12px 12px 12px 13px;
+    border-bottom: 1px solid #dbdbdb;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+`;
+
+const Warpper = styled.div`
+    display: flex;
+    align-items: center;
+    margin-left: 16px;
 `;
 
 const NavButton = styled.button`
@@ -16,11 +28,20 @@ const NavButton = styled.button`
     background-color: initial;
 `;
 
+const NavTitle = styled.h1`
+    font-size: 14px;
+    margin: 0;
+    margin-left: 8px;
+`;
+
 const ArrowLeftButton = styled(NavButton)`
     width: 22px;
     height: 22px;
     background-image: url(${iconArrowLeft});
     background-size: cover;
+    background-color: initial;
+    border: none;
+    flex-shrink: 0;
 `;
 
 const LogoutButton = styled(NavButton)`
@@ -30,17 +51,18 @@ const LogoutButton = styled(NavButton)`
     background-size: cover;
 `;
 
-function TopBasicNav() {
+function TopBasicNav({ navTitle }) {
     return (
         <>
             <NavStyle className="nav">
-                <ArrowLeftButton />
-                <LogoutButton />
+                <Warpper>
+                    <ArrowLeftButton />
+                    <NavTitle>{navTitle}</NavTitle>
+                </Warpper>
+                {navTitle !== 'Followers' ? null : <LogoutButton />}
             </NavStyle>
         </>
     );
 }
 
 export default TopBasicNav;
-
-

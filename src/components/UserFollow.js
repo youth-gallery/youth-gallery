@@ -1,29 +1,35 @@
 import React from 'react';
 import styled from 'styled-components';
-import basicProfileImg from '../assets/basic-profile-img-.png';
-// import { useState } from 'react';
+// import basicProfileImg from '../assets/basic-profile-img-.png';
 
-function UserFollow() {
+function UserFollow({ followers, i }) {
     // const [followState] = useState(false);
     return (
-        <Div>
-            <ProfileImg src={basicProfileImg} />
+        <Li>
+            <ProfileImg src={followers[i].image} />
             <UserInfoWarp>
-                <UserName>유저 이름</UserName>
-                <UserEmail>유저 이메일</UserEmail>
+                <UserName>{followers[i].accountname}</UserName>
+                <UserEmail>{followers[i]._id}</UserEmail>
             </UserInfoWarp>
             {/* 버튼컴포넌트 추가 시 들어갈 자리 */}
-            {/* {followState === false ? 
-                <팔로우> : <취소>} */}
-        </Div>
+            {followers[i].isfalse === false ? (
+                <div>팔로우</div>
+            ) : (
+                <div>취소</div>
+            )}
+        </Li>
     );
 }
 
-const Div = styled.div`
+const Li = styled.div`
     display: flex;
     align-items: center;
     width: 100%;
     background-color: #fff;
+    margin-bottom: 16px;
+    &:last-child {
+        margin-bottom: 0;
+    }
 `;
 
 const ProfileImg = styled.img`

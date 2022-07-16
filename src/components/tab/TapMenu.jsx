@@ -11,6 +11,7 @@ import { Link, Outlet } from 'react-router-dom';
 
 const NavStyle = styled.section`
     padding: 12px 6px 6px 6px;
+    border-top: 1px solid #dbdbdb;
     position: fixed;
     bottom: 0;
     right: 0;

@@ -1,5 +1,6 @@
 .uploadform_txt {
-    height: 250px;
+    width: 90%;
+    height: 150px;
     margin-left: 10px;
     border: none;
     /* 나중에 rem 단위로 고쳐야함 */
@@ -32,4 +33,34 @@
 
 .uploadform_picture_inp {
     display: none;
+}
+
+.preview_pics {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.preview_pics .preview_div {
+    position: relative;
+}
+
+.preview_div .preview_pic {
+    width: 304px;
+    height: 228px;
+    border-radius: 10px;
+}
+
+.preview_div .preview_xbtn {
+    /* rem 단위로 고치기 */
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-image: url(../../assets/x.png);
+    background-size: 100%;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
 }

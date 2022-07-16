@@ -1,0 +1,11 @@
+.followers_page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.user_follow_warp {
+    margin: 48px 16px 0;
+    padding-top: 24px;
+    padding-bottom: 60px;
+}

@@ -7,7 +7,7 @@ const NavStyle = styled.section`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 12px 12px 13px;
+    padding: 5px 10px 5px 10px;
     border-bottom: 1px solid #dbdbdb;
 `;
 
@@ -35,7 +35,7 @@ function TopUploadNav() {
             <NavStyle className="nav">
                 <ArrowLeftButton name="back" onClick={handleGoBack} />
                 {/* 나중에 저장버튼 component 넣을 공간 */}
-                <NavButton>저장</NavButton>
+                <NavButton type="submit">저장</NavButton>
             </NavStyle>
         </>
     );

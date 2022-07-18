@@ -13,12 +13,14 @@ const PostForm = (props) => {
         const token =
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyY2FkNjA3ODJmZGNjNzEyZjQzN2QyZCIsImV4cCI6MTY2MjcxMDYxOCwiaWF0IjoxNjU3NTI2NjE4fQ.w47m557FRqRQhF8PGM_VUxF10mFtDexYJIxqUasFQ7I';
         const accountName = 'fff';
+        localStorage.setItem('token', token);
+        const getToken = localStorage.getItem('token');
 
         try {
             const res = await axios.get(`${url}/profile/${accountName}`, {
                 method: 'GET',
                 headers: {
-                    'Authorization': `Bearer ${token}`,
+                    'Authorization': `Bearer ${getToken}`,
                     'Content-type': 'application/json',
                 },
             });
@@ -32,14 +34,14 @@ const PostForm = (props) => {
 
     return (
         <>
-            <div className={styles.form_div}>
+            <form className={styles.form_div}>
                 <img
                     src={profileImg}
                     className={styles.form_profile}
                     alt="프로필 이미지"
                 />
                 {props.children}
-            </div>
+            </form>
         </>
     );
 };

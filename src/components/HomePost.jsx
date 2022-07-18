@@ -1,21 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
+import profile from '../assets/basic-profile.png';
 import moreIcon from '../assets/s-icon-more-vertical.png';
+import sampleImg from '../assets/post-sample-image.png';
 import heartIcon from '../assets/icon-heart.png';
-import heartIconFill from '../assets/icon-heartFill.png';
 import messageIcon from '../assets/icon-message-circle-1.png';
-import axios from 'axios';
 
 const HomePostDiv = styled.div`
     display: flex;
     width: 358px;
+
+    /* 영역 구분 위해 임시로 넣음. 후에 빼기 */
+    border: 1px solid #767676;
 `;
 
 const HomePostProfile = styled.img`
     width: 42px;
     height: 42px;
     padding-right: 12px;
-    border-radius: 50%;
 `;
 
 const FlexDiv = styled.div`
@@ -31,7 +33,6 @@ const HomePostName = styled.span`
 `;
 
 const HomePostId = styled.span`
-    display: block;
     font-weight: 400;
     font-size: 12px;
     line-height: 1.2;
@@ -53,25 +54,10 @@ const HomePostTxt = styled.p`
     line-height: 1.4;
 `;
 
-const HomePostImgList = styled.div`
-    display: flex;
-    width: 304px;
-    height: 230px;
-    overflow-x: scroll;
-    scrollbar-width: none;
-`;
-
-const HomePostImg = styled.img`
-    height: 100%;
-    object-fit: cover;
-    border-radius: 10px;
-`;
-
 const HeartBtn = styled.button`
     width: 45px;
     height: 20px;
-    background: url(${(props) => props.img || heartIcon}) no-repeat left / 18px
-        18px;
+    background: url(${heartIcon}) no-repeat left / 18px 18px;
     text-align: right;
     border: none;
     cursor: pointer;
@@ -88,7 +74,6 @@ const CommentBtn = styled.button`
     cursor: pointer;
     color: #767676;
 `;
-
 const HomePostDate = styled.span`
     display: block;
     margin-bottom: 4px;
@@ -97,82 +82,31 @@ const HomePostDate = styled.span`
     line-height: 1.2;
 `;
 
-const HomePost = ({ datas }) => {
-  const [state, setState] = useState(datas.hearted);
-  const [count, setCount] = useState(datas.heartCount);
-
-    const url = 'https://mandarin.api.weniv.co.kr';
-    const token =
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzE2MjM5ODJmZGNjNzEyZjQzMzk4YiIsImV4cCI6MTY2MjcwMTIyMiwiaWF0IjoxNjU3NTE3MjIyfQ.A75fUeLUj8TKdD1LVGGph-M1-coF8pr_oq8BY6R-k4k';
-
-    async function useAxios(url = '', method = '') {
-        try {
-          axios(url, {
-            method: method,
-            headers: {
-              'Authorization': `Bearer ${token}`,
-              'Content-type': 'application/json',
-            },
-          })
-            .then((response) => {
-              setState(response.data.post.hearted)
-              setCount(response.data.post.heartCount)
-            })
-                .then(console.log(state))
-                .then(console.log(count));
-        } catch (error) {
-            console.log(error);
-        }
-    }
-    const onClick = () => {
-        state
-            ? useAxios(url + `/post/${datas.id}/unheart`, 'DELETE')
-            : useAxios(url + `/post/${datas.id}/heart`, 'POST');
-    };
-    console.log(state);
-
+const HomePost = () => {
     return (
         <>
             <HomePostDiv>
                 <div>
-                    <HomePostProfile src={datas.author.image} />
+                    <HomePostProfile src={profile} />
                 </div>
                 <div>
                     <FlexDiv>
                         {/* 클릭시 해당 사용자 피드 목록으로 이동하도록 후에 처리 */}
                         <div>
-                            <HomePostName>{datas.author.username}</HomePostName>
-                            <HomePostId>@이메일나중에등록</HomePostId>
+                            <HomePostName>애월읍 위니브 감귤농장</HomePostName>
+                            <HomePostId>@weniv_Mandarin</HomePostId>
                         </div>
                         <MoreIcon />
                     </FlexDiv>
-                    <HomePostTxt>{datas.content}</HomePostTxt>
-                    {/* ul,li, img 형태로 변경 */}
-                    {datas.image && (
-                        <HomePostImgList>
-                            {datas.image.split(',').map((img, i) => (
-                                <HomePostImg
-                                    src={img}
-                                    alt="포스트 이미지"
-                                    key={i}
-                                />
-                            ))}
-                        </HomePostImgList>
-                    )}
-                    {/* 좋아요 버튼 */}
-                    <div>
-                        {state ? (
-                            <HeartBtn img={heartIconFill} onClick={onClick}>
-                                {count}
-                            </HeartBtn>
-                        ) : (
-                            <HeartBtn img={heartIcon} onClick={onClick}>
-                                {count}
-                            </HeartBtn>
-                        )}
-                        <CommentBtn>{datas.commentCount}</CommentBtn>
-                    </div>
-                    <HomePostDate>{datas.createdAt.slice(0, 10)}</HomePostDate>
+                    <HomePostTxt>
+                        옷을 인생을 그러므로 없으면 것은 이상은 것은 우리의
+                        위하여, 뿐이다. 이상의 청춘의 뼈 따뜻한 그들의 그와
+                        약동하다. 대고, 못할 넣는 풍부하게 뛰노는 인생의 힘있다.
+                    </HomePostTxt>
+                    <img src={sampleImg} alt="포스트 이미지" />
+                    <HeartBtn>58</HeartBtn>
+                    <CommentBtn>12</CommentBtn>
+                    <HomePostDate>2020년 10월 21일</HomePostDate>
                 </div>
             </HomePostDiv>
         </>

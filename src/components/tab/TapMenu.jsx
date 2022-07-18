@@ -12,11 +12,6 @@ import { Link } from 'react-router-dom';
 const NavStyle = styled.section`
     padding: 12px 6px 6px 6px;
     border-top: 1px solid #dbdbdb;
-    background-color: white;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
 `;
 
 const Ul = styled.ul`

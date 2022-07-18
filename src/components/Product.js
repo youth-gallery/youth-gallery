@@ -1,17 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function Product() {
+function Product({ productList, i }) {
     return (
         <ContentWrap>
-            <ProductImg />
-            <ProductName>상품이름</ProductName>
-            <ProductPrice>상품 가격</ProductPrice>
+            <ProductImg src={productList[i].itemImage} />
+            <ProductName>{productList[i].itemName}</ProductName>
+            <ProductPrice>{`${productList[i].price.toLocaleString(
+                'ko-KR'
+            )}원`}</ProductPrice>
         </ContentWrap>
     );
 }
 
-const ContentWrap = styled.article`
+const ContentWrap = styled.li`
     width: fit-content;
     text-align: start;
     background-color: #fff;

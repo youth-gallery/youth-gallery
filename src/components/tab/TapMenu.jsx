@@ -7,11 +7,15 @@ import profileImg from '../../assets/icon-user.png';
 import homeImgFill from '../../assets/icon-home-fill.png';
 import newsImgFill from '../../assets/icon-message-circle-fill.png';
 import profileImgFill from '../../assets/icon-user-fill.png';
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 
 const NavStyle = styled.section`
     padding: 12px 6px 6px 6px;
     border-top: 1px solid #dbdbdb;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
 `;
 
 const Ul = styled.ul`
@@ -19,10 +23,8 @@ const Ul = styled.ul`
     list-style: none;
     padding: 0;
     margin: 0 auto;
-
     display: flex;
     justify-content: space-between;
-    
 `;
 
 const StyledLink = styled(Link)`
@@ -41,7 +43,6 @@ const Li = styled.li`
     list-style: none;
     padding: 0;
     margin: 0 auto;
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -74,7 +75,11 @@ const menuRendering = (img) => {
             <StyledLink to={link[i]} key={i}>
                 <Li key={i}>
                     <Img
-                        src={imgIcon[i].key === img ? imgIconFill[i] : imgIcon[i].value}
+                        src={
+                            imgIcon[i].key === img
+                                ? imgIconFill[i]
+                                : imgIcon[i].value
+                        }
                         alt=""
                     />
                     <Span>{tabTitle[i]}</Span>
@@ -85,9 +90,10 @@ const menuRendering = (img) => {
     return result;
 };
 
-function TabMenu({ img }) {
+function TapMenu({ img }) {
     return (
         <>
+            <Outlet></Outlet>
             <NavStyle className="buttom-nav">
                 <Ul>{menuRendering(img)}</Ul>
             </NavStyle>
@@ -95,4 +101,4 @@ function TabMenu({ img }) {
     );
 }
 
-export default TabMenu;
+export default TapMenu;

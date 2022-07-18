@@ -1,0 +1,31 @@
+.modal_page {
+    background-color: rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+}
+
+.modal_lists {
+    background-color: white;
+    border-radius: 10px 10px 0 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 36px 0 10px;
+}
+
+.modal_lists::before {
+    position: absolute;
+    content: '';
+    top: 16px;
+    left: 50%;
+    width: 50px;
+    height: 4px;
+    background-color: #dbdbdb;
+    border-radius: 5px;
+    transform: translateX(-50%);
+}

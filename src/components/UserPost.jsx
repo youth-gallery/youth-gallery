@@ -90,7 +90,7 @@ const HomePostDate = styled.span`
     line-height: 1.2;
 `;
 
-const HomePost = ({ postList, profileData, i }) => {
+const UserPost = ({ postList, profileData, i }) => {
     const postDate = new Date(postList[i].updatedAt);
     return (
         <>
@@ -112,7 +112,9 @@ const HomePost = ({ postList, profileData, i }) => {
                     <HeartBtn>{postList[i].heartCount}</HeartBtn>
                     <CommentBtn>{postList[i].commentCount}</CommentBtn>
                     <HomePostDate>
-                        {`${postDate.getFullYear()}년 ${postDate.getMonth()}월 ${postDate.getDate()}일`}
+                        {`${postDate.getFullYear()}년 ${
+                            postDate.getMonth() + 1
+                        }월 ${postDate.getDate()}일`}
                     </HomePostDate>
                 </div>
             </HomePostLi>
@@ -120,4 +122,4 @@ const HomePost = ({ postList, profileData, i }) => {
     );
 };
 
-export default HomePost;
+export default UserPost;

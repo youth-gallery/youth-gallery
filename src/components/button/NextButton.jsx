@@ -4,8 +4,10 @@ import styled from 'styled-components';
 const NextButtonBody = styled.button`
     background-color: var(--logo-black);
     border: initial;
-    padding: 13px 148px;
+    width: 100%;
+    padding: 13px 0;
     border-radius: 44px;
+    cursor: pointer;
 `;
 
 const Span = styled.span`

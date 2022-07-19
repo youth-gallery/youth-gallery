@@ -4,8 +4,11 @@ import styled from 'styled-components';
 const NextDisabledButtonBody = styled.button`
     background-color: var(--btn-gray);
     border: initial;
-    padding: 13px 148px;
+    width: 100%;
+    padding: 13px 0;
+    margin-top: 14px;
     border-radius: 44px;
+    cursor: pointer;
 `;
 
 const Span = styled.span`

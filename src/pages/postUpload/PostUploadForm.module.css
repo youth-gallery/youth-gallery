@@ -28,7 +28,8 @@
     border-radius: 50%;
     border: none;
     background: url('../../assets/icon-image.png') no-repeat center / 30px 30px;
-    background-color: var(--logo-black);
+    /* var()로 고치기 */
+    background-color: #212121;
     cursor: pointer;
 }
 

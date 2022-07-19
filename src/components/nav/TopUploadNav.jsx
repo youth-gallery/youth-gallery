@@ -15,6 +15,7 @@ const NavButton = styled.button`
     //reset
     border: initial;
     background-color: initial;
+    cursor: pointer;
 `;
 
 const ArrowLeftButton = styled(NavButton)`
@@ -24,7 +25,7 @@ const ArrowLeftButton = styled(NavButton)`
     background-size: cover;
 `;
 
-function TopUploadNav() {
+function TopUploadNav(props) {
     const navigate = useNavigate();
     const handleGoBack = () => {
         navigate(-1);
@@ -35,7 +36,7 @@ function TopUploadNav() {
             <NavStyle className="nav">
                 <ArrowLeftButton name="back" onClick={handleGoBack} />
                 {/* 나중에 저장버튼 component 넣을 공간 */}
-                <NavButton type="submit">저장</NavButton>
+                <NavButton>{props.value}</NavButton>
             </NavStyle>
         </>
     );

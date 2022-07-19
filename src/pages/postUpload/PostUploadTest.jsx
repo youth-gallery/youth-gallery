@@ -17,7 +17,7 @@ const PostUploadTest = () => {
                 게시물 작성
             </NavLink>
             <Routes>
-                <Route path="post/upload" element={<PostUpload />} />
+                <Route path="/post/upload" element={<PostUpload />} />
             </Routes>
         </BrowserRouter>
     );

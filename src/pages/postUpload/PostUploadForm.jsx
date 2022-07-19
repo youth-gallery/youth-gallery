@@ -38,43 +38,48 @@ const PostUploadForm = () => {
 
     // 임시로 token과 사용자를 설정하였습니다. 로그인 기능 완성후 수정 예정
 
-    const createPost = async () => {
+    const createPost = async (e) => {
+        e.preventDefault();
         const url = 'https://mandarin.api.weniv.co.kr';
         const token =
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyY2FkNjA3ODJmZGNjNzEyZjQzN2QyZCIsImV4cCI6MTY2MjcxMDYxOCwiaWF0IjoxNjU3NTI2NjE4fQ.w47m557FRqRQhF8PGM_VUxF10mFtDexYJIxqUasFQ7I';
         localStorage.setItem('token', token);
         const getToken = localStorage.getItem('token');
         console.log(getToken);
+
         try {
-            await axios.post(`${url}/post`, {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${getToken}`,
-                    'Content-type': 'application/json',
-                },
-                body: JSON.stringify({
+            await axios.post(
+                `${url}/post`,
+                {
                     post: {
                         content: `${txt}`,
                         image: `${showImages.join(',')}`,
                     },
-                }),
-            });
+                },
+                {
+                    headers: {
+                        'Authorization': `Bearer ${getToken}`,
+                        'Content-type': 'application/json',
+                    },
+                }
+            );
         } catch (error) {
             console.log(error);
         }
+        // 나중에 useNavigate() 추가하여 프로필 경로로 이동
+        // navigate('');
     };
 
     return (
         <>
-            <PostForm onSubmit={createPost()}>
-                <TopUploadNav />
+            <PostForm onSubmit={createPost}>
+                <TopUploadNav value="업로드" />
                 <textarea
                     className={styles.uploadform_txt}
                     placeholder="게시글 입력하기..."
                     value={txt}
                     onChange={handleTxt}
                 />
-
                 <div className={styles.uploadform_picture}>
                     <button
                         type="button"

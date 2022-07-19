@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './PostForm.module.css';
 import axios from 'axios';
 import { useState } from 'react';
-import PropTypes from 'prop-types';
 
 const PostForm = (props) => {
     const [profileImg, setProfileImg] = useState();
@@ -34,7 +33,7 @@ const PostForm = (props) => {
 
     return (
         <>
-            <form className={styles.form_div}>
+            <form onSubmit={props.onSubmit} className={styles.form_div}>
                 <img
                     src={profileImg}
                     className={styles.form_profile}
@@ -44,10 +43,6 @@ const PostForm = (props) => {
             </form>
         </>
     );
-};
-
-PostForm.propTypes = {
-    children: PropTypes.node.isRequired,
 };
 
 export default PostForm;

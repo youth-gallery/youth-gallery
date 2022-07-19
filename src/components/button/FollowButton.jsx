@@ -4,8 +4,10 @@ import styled from 'styled-components';
 const FollowButtonBody = styled.button`
     background-color: var(--logo-yellow);
     border: initial;
-    padding: 8px 41px;
+    width: 100%;
+    padding: 8px 0;
     border-radius: 30px;
+    cursor: pointer;
 `;
 
 const Span = styled.span`

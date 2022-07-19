@@ -3,9 +3,11 @@ import styled from 'styled-components';
 
 const UnFollowButtonBody = styled.button`
     background-color: #ffffff;
-    padding: 8px 34px;
+    width: 100%;
+    padding: 8px 0;
     border-radius: 30px;
     border: 1px solid #dbdbdb;
+    cursor: pointer;
 `;
 
 const Span = styled.span`

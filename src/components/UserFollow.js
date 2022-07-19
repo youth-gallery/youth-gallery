@@ -11,7 +11,7 @@ function UserFollow({ followers, i }) {
             <ProfileImg src={followers[i].image} />
             <UserInfoWarp>
                 <UserName>{followers[i].accountname}</UserName>
-                <UserEmail>{followers[i]._id}</UserEmail>
+                <UserEmail>{followers[i].intro}</UserEmail>
             </UserInfoWarp>
             {/* 버튼컴포넌트 추가 시 들어갈 자리 */}
             {followers[i].isfalse === false ? (

@@ -6,7 +6,7 @@ import styles from './UserProfile.module.css';
 import TopBasicNav from '../../components/nav/TopBasicNav';
 import Profile from '../../components/Profile';
 import Product from '../../components/Product';
-import HomePost from '../../components/HomePost';
+import UserPost from '../../components/UserPost';
 
 function UserProfile() {
     const [profileData, setProfileData] = useState({});
@@ -85,7 +85,7 @@ function UserProfile() {
                     {postList.map((_, i) => {
                         return (
                             // eslint-disable-next-line react/jsx-key
-                            <HomePost
+                            <UserPost
                                 postList={postList}
                                 i={i}
                                 profileData={profileData}

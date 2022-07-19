@@ -1,22 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
-import profile from '../assets/basic-profile.png';
 import moreIcon from '../assets/s-icon-more-vertical.png';
-import sampleImg from '../assets/post-sample-image.png';
 import heartIcon from '../assets/icon-heart.png';
 import messageIcon from '../assets/icon-message-circle-1.png';
 
-const HomePostDiv = styled.div`
+const HomePostLi = styled.li`
     display: flex;
-    width: 358px;
-
-    /* 영역 구분 위해 임시로 넣음. 후에 빼기 */
-    border: 1px solid #767676;
+    max-width: 358px;
 `;
 
 const HomePostProfile = styled.img`
     width: 42px;
     height: 42px;
+    border-radius: 50%;
     padding-right: 12px;
 `;
 
@@ -25,16 +21,21 @@ const FlexDiv = styled.div`
     justify-content: space-between;
 `;
 
+const UserWarp = styled.div`
+    display: flex;
+    flex-direction: column;
+`;
+
 const HomePostName = styled.span`
     font-weight: 700;
-    font-size: 14px;
+    font-size: 1.4rem;
     line-height: 1.2;
     padding: 4px 80px 0 0;
 `;
 
 const HomePostId = styled.span`
     font-weight: 400;
-    font-size: 12px;
+    font-size: 1.2rem;
     line-height: 1.2;
     color: #767676;
     padding: 0 180px 16px 0;
@@ -50,8 +51,15 @@ const MoreIcon = styled.button`
 `;
 
 const HomePostTxt = styled.p`
-    font-size: 14px;
+    font-size: 1.4rem;
     line-height: 1.4;
+`;
+
+const HomePostImg = styled.img`
+    width: 304px;
+    height: 228px;
+    object-fit: cover;
+    border-radius: 10px;
 `;
 
 const HeartBtn = styled.button`
@@ -78,37 +86,36 @@ const HomePostDate = styled.span`
     display: block;
     margin-bottom: 4px;
     color: #767676;
-    font-size: 10px;
+    font-size: 1rem;
     line-height: 1.2;
 `;
 
-const HomePost = () => {
+const HomePost = ({ postList, profileData, i }) => {
+    const postDate = new Date(postList[i].updatedAt);
     return (
         <>
-            <HomePostDiv>
+            <HomePostLi>
                 <div>
-                    <HomePostProfile src={profile} />
+                    <HomePostProfile src={profileData.image} />
                 </div>
                 <div>
                     <FlexDiv>
                         {/* 클릭시 해당 사용자 피드 목록으로 이동하도록 후에 처리 */}
-                        <div>
-                            <HomePostName>애월읍 위니브 감귤농장</HomePostName>
-                            <HomePostId>@weniv_Mandarin</HomePostId>
-                        </div>
+                        <UserWarp>
+                            <HomePostName>{profileData.username}</HomePostName>
+                            <HomePostId>{`@${profileData.accountname}`}</HomePostId>
+                        </UserWarp>
                         <MoreIcon />
                     </FlexDiv>
-                    <HomePostTxt>
-                        옷을 인생을 그러므로 없으면 것은 이상은 것은 우리의
-                        위하여, 뿐이다. 이상의 청춘의 뼈 따뜻한 그들의 그와
-                        약동하다. 대고, 못할 넣는 풍부하게 뛰노는 인생의 힘있다.
-                    </HomePostTxt>
-                    <img src={sampleImg} alt="포스트 이미지" />
-                    <HeartBtn>58</HeartBtn>
-                    <CommentBtn>12</CommentBtn>
-                    <HomePostDate>2020년 10월 21일</HomePostDate>
+                    <HomePostTxt>{postList[i].content}</HomePostTxt>
+                    <HomePostImg src={postList[i].image} alt="포스트 이미지" />
+                    <HeartBtn>{postList[i].heartCount}</HeartBtn>
+                    <CommentBtn>{postList[i].commentCount}</CommentBtn>
+                    <HomePostDate>
+                        {`${postDate.getFullYear()}년 ${postDate.getMonth()}월 ${postDate.getDate()}일`}
+                    </HomePostDate>
                 </div>
-            </HomePostDiv>
+            </HomePostLi>
         </>
     );
 };

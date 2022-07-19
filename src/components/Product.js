@@ -1,17 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function Product() {
+function Product({ productList, i }) {
     return (
         <ContentWrap>
-            <ProductImg />
-            <ProductName>상품이름</ProductName>
-            <ProductPrice>상품 가격</ProductPrice>
+            <ProductImg src={productList[i].itemImage} />
+            <ProductName>{productList[i].itemName}</ProductName>
+            <ProductPrice>{`${productList[i].price.toLocaleString(
+                'ko-KR'
+            )}원`}</ProductPrice>
         </ContentWrap>
     );
 }
 
-const ContentWrap = styled.article`
+const ContentWrap = styled.li`
     width: fit-content;
     text-align: start;
     background-color: #fff;
@@ -25,7 +27,7 @@ const ProductImg = styled.img`
 `;
 
 const ProductName = styled.p`
-    font-size: 14px;
+    font-size: 1.4rem;
     line-height: 17.53px;
     color: #000;
     margin: 0;
@@ -33,7 +35,7 @@ const ProductName = styled.p`
 `;
 
 const ProductPrice = styled.span`
-    font-size: 12px;
+    font-size: 1.2rem;
     line-height: 15.02px;
     color: #212121;
 `;

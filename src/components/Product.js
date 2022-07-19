@@ -27,7 +27,7 @@ const ProductImg = styled.img`
 `;
 
 const ProductName = styled.p`
-    font-size: 14px;
+    font-size: 1.4rem;
     line-height: 17.53px;
     color: #000;
     margin: 0;
@@ -35,7 +35,7 @@ const ProductName = styled.p`
 `;
 
 const ProductPrice = styled.span`
-    font-size: 12px;
+    font-size: 1.2rem;
     line-height: 15.02px;
     color: #212121;
 `;

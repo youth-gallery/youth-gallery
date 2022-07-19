@@ -19,13 +19,13 @@
 }
 
 .num_warpper .num {
-    font-size: 18px;
+    font-size: 1.8rem;
     line-height: 1.25;
     color: #000;
 }
 
 .num_warpper .num_title {
-    font-size: 10px;
+    font-size: 1rem;
     line-height: 1.2;
 }
 
@@ -37,21 +37,21 @@
 }
 
 .user_name {
-    font-size: 16px;
+    font-size: 1.6rem;
     line-height: 1.25;
     color: #000;
     margin-bottom: 6px;
 }
 
 .user_id {
-    font-size: 12px;
+    font-size: 1.2rem;
     line-height: 1.16;
     color: var(--gray-color);
     margin-bottom: 16px;
 }
 
 .user_intro {
-    font-size: 14px;
+    font-size: 1.4rem;
     line-height: 1.25;
     color: var(--gray-color);
     margin-bottom: 24px;

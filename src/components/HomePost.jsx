@@ -28,14 +28,14 @@ const UserWarp = styled.div`
 
 const HomePostName = styled.span`
     font-weight: 700;
-    font-size: 14px;
+    font-size: 1.4rem;
     line-height: 1.2;
     padding: 4px 80px 0 0;
 `;
 
 const HomePostId = styled.span`
     font-weight: 400;
-    font-size: 12px;
+    font-size: 1.2rem;
     line-height: 1.2;
     color: #767676;
     padding: 0 180px 16px 0;
@@ -51,7 +51,7 @@ const MoreIcon = styled.button`
 `;
 
 const HomePostTxt = styled.p`
-    font-size: 14px;
+    font-size: 1.4rem;
     line-height: 1.4;
 `;
 
@@ -86,7 +86,7 @@ const HomePostDate = styled.span`
     display: block;
     margin-bottom: 4px;
     color: #767676;
-    font-size: 10px;
+    font-size: 1rem;
     line-height: 1.2;
 `;
 

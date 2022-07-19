@@ -5,10 +5,14 @@ import heartIcon from '../assets/icon-heart.png';
 import heartIconFill from '../assets/icon-heartFill.png';
 import messageIcon from '../assets/icon-message-circle-1.png';
 import axios from 'axios';
+import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
+import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const HomePostDiv = styled.div`
     display: flex;
     width: 358px;
+    margin-bottom: 25px;
 `;
 
 const HomePostProfile = styled.img`
@@ -20,6 +24,14 @@ const HomePostProfile = styled.img`
 
 const FlexDiv = styled.div`
     display: flex;
+    height: 40px;
+    justify-content: space-between;
+    margin-bottom: 10px;
+`;
+
+const FlexDivInner = styled.div`
+    display: flex;
+    flex-direction: column;
     justify-content: space-between;
 `;
 
@@ -36,7 +48,6 @@ const HomePostId = styled.span`
     font-size: 12px;
     line-height: 1.2;
     color: #767676;
-    padding: 0 180px 16px 0;
 `;
 
 const MoreIcon = styled.button`
@@ -53,37 +64,70 @@ const HomePostTxt = styled.p`
     line-height: 1.4;
 `;
 
-const HomePostImgList = styled.div`
-    display: flex;
+const ImgDiv = styled.div`
     width: 304px;
     height: 230px;
-    overflow-x: scroll;
-    scrollbar-width: none;
+    position: relative;
+    overflow: hidden;
+    margin: 10px 0;
+`;
+
+const HomePostImgLists = styled.ul`
+    display: flex;
+    transform: translate(${(props) => `-${(props.imgIndex - 1) * 304}px`}, 0px);
+    transition: 0.6s;
+`;
+
+const ImgLi = styled.li`
+    width: 304px;
+    height: 230px;
+    /* object-fit: cover; */
+    border-radius: 10px;
 `;
 
 const HomePostImg = styled.img`
+    width: 304px;
+    height: 230px;
     height: 100%;
     object-fit: cover;
     border-radius: 10px;
 `;
 
-const HeartBtn = styled.button`
+const ArrowBtn = styled.button`
+    background-color: white;
+    color: none;
+    opacity: 30%;
+    position: absolute;
+    top: 48%;
+    line-height: 150%;
+    height: 20px;
+    width: 20px;
+    border-radius: 10px;
+    margin: 0 5px;
+`;
+const ArrowLeft = styled(ArrowBtn)`
+    left: 0;
+`;
+const ArrowRight = styled(ArrowBtn)`
+    right: 0;
+`;
+
+const PostBtn = styled.button`
     width: 45px;
     height: 20px;
+    padding-left: 10px;
+`;
+
+const HeartBtn = styled(PostBtn)`
     background: url(${(props) => props.img || heartIcon}) no-repeat left / 18px
         18px;
-    text-align: right;
     border: none;
     cursor: pointer;
     color: #767676;
 `;
 
-const CommentBtn = styled.button`
-    width: 45px;
-    height: 20px;
-    margin: 7px 206px 15px 8px;
+const CommentBtn = styled(PostBtn)`
     background: url(${messageIcon}) no-repeat left / 18px 18px;
-    text-align: right;
     border: none;
     cursor: pointer;
     color: #767676;
@@ -91,6 +135,7 @@ const CommentBtn = styled.button`
 
 const HomePostDate = styled.span`
     display: block;
+    margin-top: 12px;
     margin-bottom: 4px;
     color: #767676;
     font-size: 10px;
@@ -98,8 +143,9 @@ const HomePostDate = styled.span`
 `;
 
 const HomePost = ({ datas }) => {
-  const [state, setState] = useState(datas.hearted);
-  const [count, setCount] = useState(datas.heartCount);
+    const [state, setState] = useState(datas.hearted);
+    const [count, setCount] = useState(datas.heartCount);
+    const [index, setIndex] = useState(1);
 
     const url = 'https://mandarin.api.weniv.co.kr';
     const token =
@@ -107,17 +153,17 @@ const HomePost = ({ datas }) => {
 
     async function useAxios(url = '', method = '') {
         try {
-          axios(url, {
-            method: method,
-            headers: {
-              'Authorization': `Bearer ${token}`,
-              'Content-type': 'application/json',
-            },
-          })
-            .then((response) => {
-              setState(response.data.post.hearted)
-              setCount(response.data.post.heartCount)
+            axios(url, {
+                method: method,
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-type': 'application/json',
+                },
             })
+                .then((response) => {
+                    setState(response.data.post.hearted);
+                    setCount(response.data.post.heartCount);
+                })
                 .then(console.log(state))
                 .then(console.log(count));
         } catch (error) {
@@ -131,33 +177,71 @@ const HomePost = ({ datas }) => {
     };
     console.log(state);
 
+    const leftClick = () => {
+        if (index > 1) {
+            setIndex(index - 1);
+            console.log(index);
+            console.log(datas.image.split(',').length);
+        }
+    };
+    const rightClick = () => {
+        if (index < datas.image.split(',').length) {
+            setIndex(index + 1);
+            console.log(index);
+            console.log(datas.image.split(',').length);
+        }
+    };
+    const postDate = new Date(datas.updatedAt);
     return (
         <>
             <HomePostDiv>
+                <HomePostProfile src={datas.author.image} />
                 <div>
-                    <HomePostProfile src={datas.author.image} />
-                </div>
-                <div>
-                    <FlexDiv>
-                        {/* 클릭시 해당 사용자 피드 목록으로 이동하도록 후에 처리 */}
-                        <div>
-                            <HomePostName>{datas.author.username}</HomePostName>
-                            <HomePostId>@이메일나중에등록</HomePostId>
-                        </div>
-                        <MoreIcon />
-                    </FlexDiv>
+                    <div>
+                        <FlexDiv>
+                            <FlexDivInner>
+                                <HomePostName>
+                                    {datas.author.username}
+                                </HomePostName>
+                                <HomePostId>{datas.author.intro}</HomePostId>
+                            </FlexDivInner>
+                            <MoreIcon />
+                        </FlexDiv>
+                    </div>
+
                     <HomePostTxt>{datas.content}</HomePostTxt>
-                    {/* ul,li, img 형태로 변경 */}
                     {datas.image && (
-                        <HomePostImgList>
-                            {datas.image.split(',').map((img, i) => (
-                                <HomePostImg
-                                    src={img}
-                                    alt="포스트 이미지"
-                                    key={i}
-                                />
-                            ))}
-                        </HomePostImgList>
+                        <ImgDiv>
+                            <HomePostImgLists imgIndex={index}>
+                                {datas.image.split(',').map((img, i) => (
+                                    <ImgLi key={i}>
+                                        <HomePostImg
+                                            src={img}
+                                            alt="포스트 이미지"
+                                        />
+                                    </ImgLi>
+                                ))}
+                            </HomePostImgLists>
+                            {datas.image.split(',').length !== 1 && (
+                                <>
+                                    {index !== 1 && (
+                                        <ArrowLeft onClick={leftClick}>
+                                            <FontAwesomeIcon
+                                                icon={faAngleLeft}
+                                            />
+                                        </ArrowLeft>
+                                    )}
+                                    {index !==
+                                        datas.image.split(',').length && (
+                                        <ArrowRight onClick={rightClick}>
+                                            <FontAwesomeIcon
+                                                icon={faAngleRight}
+                                            />
+                                        </ArrowRight>
+                                    )}
+                                </>
+                            )}
+                        </ImgDiv>
                     )}
                     {/* 좋아요 버튼 */}
                     <div>
@@ -172,7 +256,11 @@ const HomePost = ({ datas }) => {
                         )}
                         <CommentBtn>{datas.commentCount}</CommentBtn>
                     </div>
-                    <HomePostDate>{datas.createdAt.slice(0, 10)}</HomePostDate>
+                    <HomePostDate>
+                        {`${postDate.getFullYear()}년 ${
+                            postDate.getMonth() + 1
+                        }월 ${postDate.getDate()}일`}
+                    </HomePostDate>
                 </div>
             </HomePostDiv>
         </>

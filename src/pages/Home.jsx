@@ -11,8 +11,7 @@ const Div = styled.div`
     flex-direction: column;
     align-items: center;
     height: 100%;
-    overflow-y: scroll;
-    margin: 0 auto;
+    margin: 60px auto 60px;
 `;
 
 function Home() {

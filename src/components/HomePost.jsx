@@ -91,6 +91,7 @@ const HomePostDate = styled.span`
 `;
 
 const HomePost = ({ postList, profileData, i }) => {
+    const postDate = new Date(postList[i].updatedAt);
     return (
         <>
             <HomePostLi>
@@ -111,8 +112,7 @@ const HomePost = ({ postList, profileData, i }) => {
                     <HeartBtn>{postList[i].heartCount}</HeartBtn>
                     <CommentBtn>{postList[i].commentCount}</CommentBtn>
                     <HomePostDate>
-                        {postList[i].updatedAt.toLocaleString('ko-KR')}
-                        {/* 한국 형식으로 바꿀 수 있도록 수정 */}
+                        {`${postDate.getFullYear()}년 ${postDate.getMonth()}월 ${postDate.getDate()}일`}
                     </HomePostDate>
                 </div>
             </HomePostLi>

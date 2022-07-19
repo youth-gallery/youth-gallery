@@ -6,6 +6,7 @@ const SearchCancelButtonBody = styled.button`
     padding: 7px 11px;
     border-radius: 26px;
     border: 1px solid #dbdbdb;
+    word-break: keep-all;
 `;
 
 const Span = styled.span`

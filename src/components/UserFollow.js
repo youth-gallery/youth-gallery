@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import FollowButton from './button/FollowButton';
+import SearchCancelButton from './button/SearchCancelButton';
 // import basicProfileImg from '../assets/basic-profile-img-.png';
 
 function UserFollow({ followers, i }) {
@@ -9,13 +11,13 @@ function UserFollow({ followers, i }) {
             <ProfileImg src={followers[i].image} />
             <UserInfoWarp>
                 <UserName>{followers[i].accountname}</UserName>
-                <UserEmail>{followers[i]._id}</UserEmail>
+                <UserEmail>{followers[i].intro}</UserEmail>
             </UserInfoWarp>
             {/* 버튼컴포넌트 추가 시 들어갈 자리 */}
             {followers[i].isfalse === false ? (
-                <div>팔로우</div>
+                <FollowButton />
             ) : (
-                <div>취소</div>
+                <SearchCancelButton />
             )}
         </Li>
     );

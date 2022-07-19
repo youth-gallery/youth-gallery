@@ -1,0 +1,20 @@
+.login_body {
+    padding-right: 142px;
+    padding-left: 142px;
+}
+
+.login_btn {
+    background-color: var(--btn-gray);
+    color: white;
+    border-radius: 44px;
+    margin-top: 14px;
+    padding: 13px 0;
+    width: 100%;
+}
+
+.login_span {
+    font-size: 1.4rem;
+}
+
+.email_join {
+}

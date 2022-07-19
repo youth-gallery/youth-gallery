@@ -14,7 +14,6 @@ const Span = styled.span`
 const Input = styled.input`
     color: var(--logo-black);
     font-size: 1.4rem;
-    padding: 25px 184px 9px 0;
     width: 100%;
     border: initial;
     border-bottom: 1px solid var(--btn-gray);
@@ -22,14 +21,15 @@ const Input = styled.input`
         outline: none;
         border-bottom: 1px solid var(--logo-yellow);
     }
+    margin-bottom: 16px;
 `;
 
-function LoginInput({ title }) {
+function LoginInput({ title, placeholder }) {
     return (
         <>
             <InputBody>
                 <Span>{title}</Span>
-                <Input placeholder="paul-lab@naver.com"></Input>
+                <Input placeholder={placeholder}></Input>
             </InputBody>
         </>
     );

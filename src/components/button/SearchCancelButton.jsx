@@ -8,6 +8,7 @@ const SearchCancelButtonBody = styled.button`
     border-radius: 26px;
     border: 1px solid #dbdbdb;
     cursor: pointer;
+    word-break: keep-all;
 `;
 
 const Span = styled.span`

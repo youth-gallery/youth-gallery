@@ -62,6 +62,7 @@ const MoreIcon = styled.button`
 const HomePostTxt = styled.p`
     font-size: 14px;
     line-height: 1.4;
+    width: 304px;
 `;
 
 const ImgDiv = styled.div`

@@ -1,27 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import profile from '../assets/basic-profile.png';
 import moreIcon from '../assets/s-icon-more-vertical.png';
-import sampleImg from '../assets/post-sample-image.png';
 import heartIcon from '../assets/icon-heart.png';
+import heartIconFill from '../assets/icon-heartFill.png';
 import messageIcon from '../assets/icon-message-circle-1.png';
+import axios from 'axios';
+import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
+import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const HomePostDiv = styled.div`
     display: flex;
     width: 358px;
-
-    /* 영역 구분 위해 임시로 넣음. 후에 빼기 */
-    border: 1px solid #767676;
+    margin-bottom: 25px;
 `;
 
 const HomePostProfile = styled.img`
     width: 42px;
     height: 42px;
     padding-right: 12px;
+    border-radius: 50%;
 `;
 
 const FlexDiv = styled.div`
     display: flex;
+    height: 40px;
+    justify-content: space-between;
+    margin-bottom: 10px;
+`;
+
+const FlexDivInner = styled.div`
+    display: flex;
+    flex-direction: column;
     justify-content: space-between;
 `;
 
@@ -33,11 +43,11 @@ const HomePostName = styled.span`
 `;
 
 const HomePostId = styled.span`
+    display: block;
     font-weight: 400;
     font-size: 12px;
     line-height: 1.2;
     color: #767676;
-    padding: 0 180px 16px 0;
 `;
 
 const MoreIcon = styled.button`
@@ -52,61 +62,206 @@ const MoreIcon = styled.button`
 const HomePostTxt = styled.p`
     font-size: 14px;
     line-height: 1.4;
+    width: 304px;
 `;
 
-const HeartBtn = styled.button`
+const ImgDiv = styled.div`
+    width: 304px;
+    height: 230px;
+    position: relative;
+    overflow: hidden;
+    margin: 10px 0;
+`;
+
+const HomePostImgLists = styled.ul`
+    display: flex;
+    transform: translate(${(props) => `-${(props.imgIndex - 1) * 304}px`}, 0px);
+    transition: 0.6s;
+`;
+
+const ImgLi = styled.li`
+    width: 304px;
+    height: 230px;
+    /* object-fit: cover; */
+    border-radius: 10px;
+`;
+
+const HomePostImg = styled.img`
+    width: 304px;
+    height: 230px;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+`;
+
+const ArrowBtn = styled.button`
+    background-color: white;
+    color: none;
+    opacity: 30%;
+    position: absolute;
+    top: 48%;
+    line-height: 150%;
+    height: 20px;
+    width: 20px;
+    border-radius: 10px;
+    margin: 0 5px;
+`;
+const ArrowLeft = styled(ArrowBtn)`
+    left: 0;
+`;
+const ArrowRight = styled(ArrowBtn)`
+    right: 0;
+`;
+
+const PostBtn = styled.button`
     width: 45px;
     height: 20px;
-    background: url(${heartIcon}) no-repeat left / 18px 18px;
-    text-align: right;
+    padding-left: 10px;
+`;
+
+const HeartBtn = styled(PostBtn)`
+    background: url(${(props) => props.img || heartIcon}) no-repeat left / 18px
+        18px;
     border: none;
     cursor: pointer;
     color: #767676;
 `;
 
-const CommentBtn = styled.button`
-    width: 45px;
-    height: 20px;
-    margin: 7px 206px 15px 8px;
+const CommentBtn = styled(PostBtn)`
     background: url(${messageIcon}) no-repeat left / 18px 18px;
-    text-align: right;
     border: none;
     cursor: pointer;
     color: #767676;
 `;
+
 const HomePostDate = styled.span`
     display: block;
+    margin-top: 12px;
     margin-bottom: 4px;
     color: #767676;
     font-size: 10px;
     line-height: 1.2;
 `;
 
-const HomePost = () => {
+const HomePost = ({ datas }) => {
+    const [state, setState] = useState(datas.hearted);
+    const [count, setCount] = useState(datas.heartCount);
+    const [index, setIndex] = useState(1);
+
+    const url = 'https://mandarin.api.weniv.co.kr';
+    const token =
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzE2MjM5ODJmZGNjNzEyZjQzMzk4YiIsImV4cCI6MTY2MjcwMTIyMiwiaWF0IjoxNjU3NTE3MjIyfQ.A75fUeLUj8TKdD1LVGGph-M1-coF8pr_oq8BY6R-k4k';
+
+    async function useAxios(url = '', method = '') {
+        try {
+            axios(url, {
+                method: method,
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-type': 'application/json',
+                },
+            })
+                .then((response) => {
+                    setState(response.data.post.hearted);
+                    setCount(response.data.post.heartCount);
+                })
+                .then(console.log(state))
+                .then(console.log(count));
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    const onClick = () => {
+        state
+            ? useAxios(url + `/post/${datas.id}/unheart`, 'DELETE')
+            : useAxios(url + `/post/${datas.id}/heart`, 'POST');
+    };
+    console.log(state);
+
+    const leftClick = () => {
+        if (index > 1) {
+            setIndex(index - 1);
+            console.log(index);
+            console.log(datas.image.split(',').length);
+        }
+    };
+    const rightClick = () => {
+        if (index < datas.image.split(',').length) {
+            setIndex(index + 1);
+            console.log(index);
+            console.log(datas.image.split(',').length);
+        }
+    };
+    const postDate = new Date(datas.updatedAt);
     return (
         <>
             <HomePostDiv>
+                <HomePostProfile src={datas.author.image} />
                 <div>
-                    <HomePostProfile src={profile} />
-                </div>
-                <div>
-                    <FlexDiv>
-                        {/* 클릭시 해당 사용자 피드 목록으로 이동하도록 후에 처리 */}
-                        <div>
-                            <HomePostName>애월읍 위니브 감귤농장</HomePostName>
-                            <HomePostId>@weniv_Mandarin</HomePostId>
-                        </div>
-                        <MoreIcon />
-                    </FlexDiv>
-                    <HomePostTxt>
-                        옷을 인생을 그러므로 없으면 것은 이상은 것은 우리의
-                        위하여, 뿐이다. 이상의 청춘의 뼈 따뜻한 그들의 그와
-                        약동하다. 대고, 못할 넣는 풍부하게 뛰노는 인생의 힘있다.
-                    </HomePostTxt>
-                    <img src={sampleImg} alt="포스트 이미지" />
-                    <HeartBtn>58</HeartBtn>
-                    <CommentBtn>12</CommentBtn>
-                    <HomePostDate>2020년 10월 21일</HomePostDate>
+                    <div>
+                        <FlexDiv>
+                            <FlexDivInner>
+                                <HomePostName>
+                                    {datas.author.username}
+                                </HomePostName>
+                                <HomePostId>{datas.author.intro}</HomePostId>
+                            </FlexDivInner>
+                            <MoreIcon />
+                        </FlexDiv>
+                    </div>
+
+                    <HomePostTxt>{datas.content}</HomePostTxt>
+                    {datas.image && (
+                        <ImgDiv>
+                            <HomePostImgLists imgIndex={index}>
+                                {datas.image.split(',').map((img, i) => (
+                                    <ImgLi key={i}>
+                                        <HomePostImg
+                                            src={img}
+                                            alt="포스트 이미지"
+                                        />
+                                    </ImgLi>
+                                ))}
+                            </HomePostImgLists>
+                            {datas.image.split(',').length !== 1 && (
+                                <>
+                                    {index !== 1 && (
+                                        <ArrowLeft onClick={leftClick}>
+                                            <FontAwesomeIcon
+                                                icon={faAngleLeft}
+                                            />
+                                        </ArrowLeft>
+                                    )}
+                                    {index !==
+                                        datas.image.split(',').length && (
+                                        <ArrowRight onClick={rightClick}>
+                                            <FontAwesomeIcon
+                                                icon={faAngleRight}
+                                            />
+                                        </ArrowRight>
+                                    )}
+                                </>
+                            )}
+                        </ImgDiv>
+                    )}
+                    {/* 좋아요 버튼 */}
+                    <div>
+                        {state ? (
+                            <HeartBtn img={heartIconFill} onClick={onClick}>
+                                {count}
+                            </HeartBtn>
+                        ) : (
+                            <HeartBtn img={heartIcon} onClick={onClick}>
+                                {count}
+                            </HeartBtn>
+                        )}
+                        <CommentBtn>{datas.commentCount}</CommentBtn>
+                    </div>
+                    <HomePostDate>
+                        {`${postDate.getFullYear()}년 ${
+                            postDate.getMonth() + 1
+                        }월 ${postDate.getDate()}일`}
+                    </HomePostDate>
                 </div>
             </HomePostDiv>
         </>

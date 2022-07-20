@@ -1,6 +1,11 @@
 .login_body {
-    padding-right: 142px;
-    padding-left: 142px;
+    max-width: 80%;
+    min-width: 322px;
+    margin: 0 auto;
+}
+
+.login_title {
+    padding-top: 40px;
 }
 
 .login_btn {
@@ -8,8 +13,10 @@
     color: white;
     border-radius: 44px;
     margin-top: 14px;
+    margin-bottom: 20px;
     padding: 13px 0;
     width: 100%;
+    cursor: pointer;
 }
 
 .login_span {
@@ -17,4 +24,11 @@
 }
 
 .email_join {
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.email_join_link {
+    color: var(--gray-color);
 }

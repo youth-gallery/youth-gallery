@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import HomePost from '../components/HomePost';
-// import HomePostOnlyTxt from '../components/HomePostOnlyTxt';
 import axios from 'axios';
-import TopBasicNav from '../components/nav/TopBasicNav';
-import TabMenu from '../components/tab/TapMenu';
+import TabMenu from '../components/tab/TabMenu';
+import Nav from '../components/nav/Nav';
+import TopMainNav from '../components/nav/TopMainNav';
 
 const Div = styled.div`
     display: flex;
@@ -36,13 +36,14 @@ function Home() {
     console.log(posts);
     return (
         <>
-            <TopBasicNav title={'youth-gallery 홈'} />
+            <Nav>
+                <TopMainNav title={'youth-gallery 홈'} />
+            </Nav>
             <Div>
                 {posts.data &&
                     posts.data.posts.map((post) => (
                         <HomePost key={post.id} datas={post} />
                     ))}
-                {/* <HomePostOnlyTxt /> */}
             </Div>
             <TabMenu img={'homeImg'} />
         </>

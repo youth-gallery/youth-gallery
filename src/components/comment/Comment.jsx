@@ -67,7 +67,6 @@ const Comment = () => {
     const [profileImg, setProfileImg] = useState();
 
     const handleInp = (event) => {
-        console.log(inp);
         setInp(event.target.value);
     };
 
@@ -95,9 +94,36 @@ const Comment = () => {
     };
     renderProfile();
 
+    const createComment = async (e) => {
+        e.preventDefault();
+        const url = 'https://mandarin.api.weniv.co.kr';
+        const getToken = localStorage.getItem('token');
+        const postId = '62d6321482fdcc712f4d5861';
+
+        try {
+            await axios.post(
+                `${url}/post/${postId}/comments`,
+                {
+                    comment: {
+                        content: `${inp}`,
+                    },
+                },
+                {
+                    headers: {
+                        'Authorization': `Bearer ${getToken}`,
+                        'Content-type': 'application/json',
+                    },
+                }
+            );
+        } catch (error) {
+            console.log(error);
+        }
+        e.target.reset();
+    };
+
     return (
         <Div>
-            <CommentForm>
+            <CommentForm onSubmit={createComment}>
                 <CommentImg src={profileImg} />
                 <CommnetInp
                     type="text"

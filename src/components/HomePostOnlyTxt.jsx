@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-// import profile from '../assets/basic-profile.png';
 import moreIcon from '../assets/s-icon-more-vertical.png';
 // import heartIcon from '../assets/icon-heart.png';
 // import messageIcon from '../assets/icon-message-circle-1.png';
@@ -40,7 +39,6 @@ const HomePostSpan = styled.span`
     font-size: 12px;
     line-height: 1.2;
     color: #767676;
-    padding: 0 180px 16px 0;
     margin-left: 5px;
 `;
 
@@ -88,7 +86,7 @@ const MoreIcon = styled.button`
 // `;
 
 const HomePostOnlyTxt = ({ profileImg, name, time, children }) => {
-    // 작성 시간 계산 함수
+    // 작성 시간 계산 함수. 나중에 util로 빼기
     const getTimeGap = (createTime) => {
         const today = new Date();
         const timeValue = new Date(createTime);

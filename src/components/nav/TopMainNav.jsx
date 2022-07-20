@@ -7,7 +7,7 @@ const Span = styled.span`
     font-size: 1.8rem;
 `;
 
-const LogoutButton = styled.button`
+const SearchButton = styled.button`
     width: 24px;
     height: 24px;
     background-image: url(${iconSearch});
@@ -20,7 +20,7 @@ function TopMainNav({ title }) {
         <>
             <Span>{title}</Span>
             <Link to={'/search'}>
-                <LogoutButton />
+                <SearchButton />
             </Link>
         </>
     );

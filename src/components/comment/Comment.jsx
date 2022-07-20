@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import profile from '../../assets/basic-profile.png';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const Div = styled.div`
     position: relative;
@@ -11,7 +11,7 @@ const CommentForm = styled.form`
     justify-content: space-between;
     align-items: center;
     padding: 13px 16px 12px 16px;
-    border: 1px solid black;
+    border-top: 1px solid #dbdbdb;
     width: 98%;
     position: fixed;
     bottom: 0;
@@ -36,6 +36,7 @@ const CommnetInp = styled.input`
 const CommentImg = styled.img`
     width: 36px;
     height: 36px;
+    border-radius: 50%;
 `;
 
 const CommentBtn = styled.button`
@@ -63,15 +64,41 @@ const CommentBtnActive = styled.button`
 
 const Comment = () => {
     const [inp, setInp] = useState('');
+    const [profileImg, setProfileImg] = useState();
+
     const handleInp = (event) => {
         console.log(inp);
         setInp(event.target.value);
     };
 
+    const renderProfile = async () => {
+        const url = 'https://mandarin.api.weniv.co.kr';
+        const token =
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZDU1NDNkODJmZGNjNzEyZjRjZjMyYiIsImV4cCI6MTY2MzM5MzAxMSwiaWF0IjoxNjU4MjA5MDExfQ.QA5ERldGsJAbMg0uqfz1HrIWH_ziwq2g7uD3mGZ2atg';
+        const accountName = 'abc2id';
+        localStorage.setItem('token', token);
+        const getToken = localStorage.getItem('token');
+
+        try {
+            const res = await axios.get(`${url}/profile/${accountName}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${getToken}`,
+                    'Content-type': 'application/json',
+                },
+            });
+            const userProfile = await res.data.profile.image;
+            setProfileImg(userProfile);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    renderProfile();
+
     return (
         <Div>
             <CommentForm>
-                <CommentImg src={profile} />
+                <CommentImg src={profileImg} />
                 <CommnetInp
                     type="text"
                     id="inputID"

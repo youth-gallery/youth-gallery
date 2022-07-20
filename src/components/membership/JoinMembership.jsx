@@ -11,7 +11,9 @@ function JoinMembership() {
                 <span className={styles.joinMembership_titleSpan}>
                     나중에 언제든지 변경할 수 있습니다.
                 </span>
-                <div className={styles.joinMembership_uploadImg}></div>
+                <div className={styles.joinMembership_uploadImg}>
+                    <div className={styles.joinMembership_fileImg}></div>
+                </div>
                 <LoginInput
                     title={'사용자 이름'}
                     placeholder={'2~10자 이내여야 합니다.'}

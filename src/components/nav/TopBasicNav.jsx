@@ -2,40 +2,21 @@ import styled from 'styled-components';
 import React from 'react';
 import iconArrowLeft from '../../assets/icon-arrow-left.png';
 import logoutDot from '../../assets/icon-more-vertical.png';
-
-const NavStyle = styled.section`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #fff;
-    padding: 12px 12px 12px 13px;
-    border-bottom: 1px solid #dbdbdb;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 10;
-`;
+import { useNavigate } from 'react-router-dom';
 
 const Warpper = styled.div`
     display: flex;
     align-items: center;
-    margin-left: 16px;
-`;
-
-const NavButton = styled.button`
-    //reset
-    border: initial;
-    background-color: initial;
+    margin-right: 8px;
 `;
 
 const NavTitle = styled.h1`
-    font-size: 14px;
+    font-size: 1.4rem;
     margin: 0;
     margin-left: 8px;
 `;
 
-const ArrowLeftButton = styled(NavButton)`
+const ArrowLeftButton = styled.button`
     width: 22px;
     height: 22px;
     background-image: url(${iconArrowLeft});
@@ -43,25 +24,28 @@ const ArrowLeftButton = styled(NavButton)`
     background-color: initial;
     border: none;
     flex-shrink: 0;
+    cursor: pointer;
 `;
 
-const LogoutButton = styled(NavButton)`
+const LogoutButton = styled.button`
     width: 24px;
     height: 24px;
     background-image: url(${logoutDot});
     background-size: cover;
 `;
 
-function TopBasicNav({ navTitle }) {
+function TopBasicNav({ title }) {
+    const navigate = useNavigate();
+    const handleGoBack = () => {
+        navigate(-1);
+    };
     return (
         <>
-            <NavStyle className="nav">
-                <Warpper>
-                    <ArrowLeftButton />
-                    <NavTitle>{navTitle}</NavTitle>
-                </Warpper>
-                {navTitle !== 'Followers' ? null : <LogoutButton />}
-            </NavStyle>
+            <Warpper>
+                <ArrowLeftButton name="back" onClick={handleGoBack} />
+                <NavTitle>{title}</NavTitle>
+            </Warpper>
+            {title === 'Followers' ? null : <LogoutButton />}
         </>
     );
 }

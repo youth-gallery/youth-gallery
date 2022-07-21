@@ -1,31 +1,19 @@
 import styled from 'styled-components';
 import React from 'react';
 import iconArrowLeft from '../../assets/icon-arrow-left.png';
-
-const NavStyle = styled.section`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 16px 8px 13px;
-    border-bottom: 1px solid #dbdbdb;
-`;
-
-const NavButton = styled.button`
-    //reset
-    border: initial;
-    background-color: initial;
-`;
+import { useNavigate } from 'react-router-dom';
 
 const NavInput = styled.input`
     //reset
     border: initial;
 `;
 
-const ArrowLeftButton = styled(NavButton)`
+const ArrowLeftButton = styled.button`
     width: 22px;
     height: 22px;
     background-image: url(${iconArrowLeft});
     background-size: cover;
+    cursor: pointer;
 `;
 
 const InputIdSearch = styled(NavInput)`
@@ -41,21 +29,23 @@ const InputIdSearch = styled(NavInput)`
 function TopSearchNav(props) {
     const inputOnChange = (event) => {
         props.propFunc(event.target.value);
-    };
+  };
+  const navigate = useNavigate();
+  const handleGoBack = () => {
+      navigate(-1);
+  };
     return (
         <>
-            <NavStyle className="nav">
-                <ArrowLeftButton />
-                <label id="idSearch"></label>
-                <InputIdSearch
-                    type="text"
-                    name="계정검색"
-                    id="idSearch"
-                    className="inp-idSearch"
-                    placeholder="계정검색"
-                    onChange={inputOnChange}
-                />
-            </NavStyle>
+            <ArrowLeftButton name="back" onClick={handleGoBack} />
+            <label id="idSearch"></label>
+            <InputIdSearch
+                type="text"
+                name="계정검색"
+                id="idSearch"
+                className="inp-idSearch"
+                placeholder="계정검색"
+                onChange={inputOnChange}
+            />
         </>
     );
 }

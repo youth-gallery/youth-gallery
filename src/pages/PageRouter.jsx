@@ -1,10 +1,10 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Search from '../components/Search';
 import TabMenu from '../components/tab/TabMenu';
 import FollowersList from './FollowersList';
 import FollowingsList from './FollowingsList';
 import Home from './Home';
+import Search from './Search';
 
 function PageRouter() {
     return (

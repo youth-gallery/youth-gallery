@@ -12,6 +12,7 @@ const Span = styled.span`
 `;
 
 const Input = styled.input`
+    min-height: 32px;
     color: var(--logo-black);
     font-size: 1.4rem;
     width: 100%;
@@ -22,14 +23,18 @@ const Input = styled.input`
         border-bottom: 1px solid var(--logo-yellow);
     }
     margin-bottom: 16px;
+    ::placeholder {
+        font-size: 1.4rem;
+        color: var(--btn-gray);
+    }
 `;
 
-function LoginInput({ title, placeholder }) {
+function LoginInput({ title, placeholder, type }) {
     return (
         <>
             <InputBody>
                 <Span>{title}</Span>
-                <Input placeholder={placeholder}></Input>
+                <Input placeholder={placeholder} type={type}></Input>
             </InputBody>
         </>
     );

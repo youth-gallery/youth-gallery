@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import CommentList from './CommentList';
+import CommentBox from './CommentBox';
 
 const TestPost = () => {
     const [content, setContent] = useState('');
@@ -42,7 +42,7 @@ const TestPost = () => {
             >
                 게시물 내용 : {content}
             </h1>
-            <CommentList />
+            <CommentBox />
         </>
     );
 };

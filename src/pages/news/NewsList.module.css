@@ -1,0 +1,18 @@
+.news_title {
+    margin: 6rem 0 2rem 0;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--logo-black);
+    text-align: center;
+}
+
+.news_title .title_span {
+    font-size: 3.5rem;
+    color: var(--logo-yellow);
+    text-shadow: 1px 1px 1px var(--logo-black);
+}
+
+.news_box {
+    width: 40rem;
+    margin: 0 auto;
+}

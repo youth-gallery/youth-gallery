@@ -1,15 +1,32 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function DeleteAlert({ title, rightText }) {
+function DeleteAlert({
+    title,
+    rightText,
+    closeModalPropFunc,
+    rightBtnPropFunc,
+}) {
+    const closeModal = () => {
+        closeModalPropFunc(false);
+    };
+    const rightBtnOnClick = () => {
+        rightBtnPropFunc(true);
+    };
     return (
         <Article>
             <Message>{title}</Message>
             <ButtonWarp>
-                <Button color="#000" border="1px solid #DBDBDB">
+                <Button
+                    color="#000"
+                    border="1px solid #DBDBDB"
+                    onClick={closeModal}
+                >
                     취소
                 </Button>
-                <Button color="#EA4335">{rightText}</Button>
+                <Button color="#EA4335" onClick={rightBtnOnClick}>
+                    {rightText}
+                </Button>
             </ButtonWarp>
         </Article>
     );
@@ -20,10 +37,11 @@ const Article = styled.article`
     border-radius: 10px;
     background-color: #fff;
     overflow: hidden;
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    z-index: 30;
 `;
 
 const Message = styled.p`

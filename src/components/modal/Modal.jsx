@@ -1,14 +1,11 @@
 import React from 'react';
 import styles from './Modal.module.css';
 
-
-function Modal({ values, children }) {
+function Modal({ children }) {
     return (
-        <section className={styles.modal_page}>
+        <section>
             <h2 className="ir">모달창</h2>
-            <ul className={styles.modal_lists} values={values}>
-                {children}
-            </ul>
+            <ul className={styles.modal_lists}>{children}</ul>
         </section>
     );
 }

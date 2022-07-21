@@ -7,6 +7,9 @@ import TopBasicNav from '../../components/nav/TopBasicNav';
 import Profile from '../../components/Profile';
 import Product from '../../components/Product';
 import UserPost from '../../components/UserPost';
+import TabMenu from '../../components/tab/TabMenu';
+import Nav from '../../components/nav/Nav';
+import DeleteAlert from '../../components/modal/DeleteAlert';
 
 function UserProfile() {
     const [profileData, setProfileData] = useState({});
@@ -66,34 +69,69 @@ function UserProfile() {
             });
     }, []);
     console.log(postList);
+
+    //모달 동작
+    const [showModal, setShowModal] = useState(false);
+    const openModal = (propState) => {
+        console.log(propState);
+        setShowModal(propState);
+    };
+
+    const closeModal = () => {
+        console.log(false);
+        setShowModal(false);
+    };
+
+    //로그아웃
+    const logout = () => {
+        console.log('로그아웃');
+    };
     return (
         <>
-            <TopBasicNav />
-            <Profile profileData={profileData} />
-            <section className={styles.product_section}>
-                <h2 className={styles.title}>판매 중인 상품</h2>
-                <ul className={styles.item_warp}>
-                    {productList.map((_, i) => {
-                        // eslint-disable-next-line react/jsx-key
-                        return <Product productList={productList} i={i} />;
-                    })}
-                </ul>
-            </section>
-            <section className={styles.post_section}>
-                <h2 className={styles.ir}>작성한 게시글</h2>
-                <ul className={styles.post_warp}>
-                    {postList.map((_, i) => {
-                        return (
+            <Nav>
+                <TopBasicNav
+                    title={'youth-gallery 홈'}
+                    openModalProp={openModal}
+                />
+            </Nav>
+            <div className={styles.user_profile_wrap}>
+                <Profile profileData={profileData} />
+                <section className={styles.product_section}>
+                    <h2 className={styles.title}>판매 중인 상품</h2>
+                    <ul className={styles.item_warp}>
+                        {productList.map((_, i) => {
                             // eslint-disable-next-line react/jsx-key
-                            <UserPost
-                                postList={postList}
-                                i={i}
-                                profileData={profileData}
-                            />
-                        );
-                    })}
-                </ul>
-            </section>
+                            return <Product productList={productList} i={i} />;
+                        })}
+                    </ul>
+                </section>
+                <section className={styles.post_section}>
+                    <h2 className={styles.ir}>작성한 게시글</h2>
+                    <ul className={styles.post_warp}>
+                        {postList.map((_, i) => {
+                            return (
+                                // eslint-disable-next-line react/jsx-key
+                                <UserPost
+                                    postList={postList}
+                                    i={i}
+                                    profileData={profileData}
+                                />
+                            );
+                        })}
+                    </ul>
+                </section>
+            </div>
+            {showModal ? (
+                <div className={styles.backgroundModal} onClick={closeModal}>
+                    <DeleteAlert
+                        title={'로그아웃 하시겠어요? '}
+                        rightText={'로그아웃'}
+                        propsFunc={logout}
+                        onClick={(e) => e.stopPropagation()}
+                    />
+                </div>
+            ) : null}
+            <TabMenu img={'profileImg'} />
         </>
     );
 }

@@ -1,15 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function DeleteAlert() {
+function DeleteAlert({ title, rightText }) {
     return (
         <Article>
-            <Message>상품을 삭제할까요?</Message>
+            <Message>{title}</Message>
             <ButtonWarp>
                 <Button color="#000" border="1px solid #DBDBDB">
                     취소
                 </Button>
-                <Button color="#EA4335">삭제</Button>
+                <Button color="#EA4335">{rightText}</Button>
             </ButtonWarp>
         </Article>
     );
@@ -20,6 +20,10 @@ const Article = styled.article`
     border-radius: 10px;
     background-color: #fff;
     overflow: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 `;
 
 const Message = styled.p`
@@ -43,6 +47,7 @@ const Button = styled.button`
     border: none; // 아직 reset.css 없어서 넣은 부분
     border-right: ${(props) => props.border};
     padding: 0;
+    cursor: pointer;
 `;
 
 export default DeleteAlert;

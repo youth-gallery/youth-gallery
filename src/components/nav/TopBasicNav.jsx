@@ -32,12 +32,16 @@ const LogoutButton = styled.button`
     height: 24px;
     background-image: url(${logoutDot});
     background-size: cover;
+    cursor: pointer;
 `;
 
-function TopBasicNav({ title }) {
+function TopBasicNav({ title, openModalProp }) {
     const navigate = useNavigate();
     const handleGoBack = () => {
         navigate(-1);
+    };
+    const openModal = () => {
+        openModalProp(true);
     };
     return (
         <>
@@ -45,7 +49,9 @@ function TopBasicNav({ title }) {
                 <ArrowLeftButton name="back" onClick={handleGoBack} />
                 <NavTitle>{title}</NavTitle>
             </Warpper>
-            {title === 'Followers' ? null : <LogoutButton />}
+            {title === 'Followers' ? null : (
+                <LogoutButton onClick={openModal} />
+            )}
         </>
     );
 }

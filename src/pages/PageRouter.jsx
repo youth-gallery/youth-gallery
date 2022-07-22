@@ -1,11 +1,14 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+import EmailJoin from '../components/join/EmailJoin';
+import Login from '../components/login/Login';
 import TabMenu from '../components/tab/TabMenu';
 import FollowersList from './FollowersList';
 import FollowingsList from './FollowingsList';
 import Home from './Home';
 import Search from './Search';
 import PostDetail from './postDetail/PostDetail';
+import UserProfile from './userprofile/UserProfile';
 
 function PageRouter() {
     return (
@@ -22,10 +25,14 @@ function PageRouter() {
                 element={<PostDetail />}
             />
             <Route path="/profile" element={<TabMenu img={'profileImg'} />}>
+            <Route path="/profile" element={<UserProfile />}>
                 <Route path="followers" element={<FollowersList />} />
                 <Route path="followings" element={<FollowingsList />} />
             </Route>
             <Route path="/search" element={<Search />} />
+            {/* 나중에 페이지 만들면 수정해야함 */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/join" element={<EmailJoin />} />
         </Routes>
     );
 }

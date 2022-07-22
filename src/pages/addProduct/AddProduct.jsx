@@ -3,6 +3,7 @@ import React from 'react';
 import { useState } from 'react';
 // import { useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import Nav from '../../components/nav/Nav';
 import TopUploadNav from '../../components/nav/TopUploadNav';
 import styles from './AddProduct.module.css';
 
@@ -15,7 +16,9 @@ function AddProduct() {
     return (
         <form className={styles.add_product_section} action="post">
             <BrowserRouter>
-                <TopUploadNav title="저장" />
+                <Nav>
+                    <TopUploadNav title="저장" />
+                </Nav>
             </BrowserRouter>
             <section className={styles.input_section}>
                 <h2 className={styles.add_image_title}>이미지 등록</h2>

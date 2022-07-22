@@ -58,7 +58,7 @@ youth gallery는 미술 대학 학생들이 자신의 작품을 전시하고, �
 
 |                                                         **FE 김수현**                                                         |                                                               **FE 김아름**                                                               |                                                  **FE 정예지**                                                   |                                                    **FE 조민경**                                                     |
 | :---------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------: |
-|                     <img src="https://avatars.githubusercontent.com/u/79143800?v=4" height=180 width=180>                     |                           <img src="https://avatars.githubusercontent.com/u/48472537?v=4" height=180 width=180>                           |              <img src="https://avatars.githubusercontent.com/u/93499084?v=4" height=180 width=180>               |                <img src="https://avatars.githubusercontent.com/u/93359953?v=4" height=180 width=180>                 |
+|                     <img width="180" alt="logo" src="https://user-images.githubusercontent.com/76866502/180384109-76e9d195-419c-49f2-879c-e2ef0f7adf9e.png">                    |                           <img width="180" alt="logo" src="https://user-images.githubusercontent.com/76866502/180384109-76e9d195-419c-49f2-879c-e2ef0f7adf9e.png">                           |              <img width="180" alt="logo" src="https://user-images.githubusercontent.com/76866502/180384109-76e9d195-419c-49f2-879c-e2ef0f7adf9e.png">               |                <img width="180" alt="logo" src="https://user-images.githubusercontent.com/76866502/180384109-76e9d195-419c-49f2-879c-e2ef0f7adf9e.png">                 |
 |      **blog**: [bellnoona.log](https://velog.io/@tngusglaso) </br> **github**: [bellnoona](https://github.com/bellnoona)      |                **blog**: [areumz.log](https://velog.io/@tngusglaso) </br> **github**: [areumz](https://github.com/areumz)                 | **blog**: [sabit1997.log](https://m122.tistory.com/) </br> **github**: [sabit1997](https://github.com/sabit1997) | **blog**: [minkyeongJ.log](https://velog.io/@jisu243) </br> **github**: [minkyeongJ](https://github.com/minkyeongJ)  |
 | ![FrontEnd](https://img.shields.io/badge/FrontEnd-3f97fb) ![Team%20leader](https://img.shields.io/badge/-Team%20leader-green) | ![FrontEnd](https://img.shields.io/badge/FrontEnd-3f97fb) ![Functional%20Design](https://img.shields.io/badge/Functional%20Design-f8b62d) | ![FrontEnd](https://img.shields.io/badge/FrontEnd-3f97fb) ![Design](https://img.shields.io/badge/-Design-orange) | ![FrontEnd](https://img.shields.io/badge/FrontEnd-3f97fb) ![Planning](https://img.shields.io/badge/-Planning-f67280) |
 
@@ -115,50 +115,6 @@ youth gallery는 미술 대학 학생들이 자신의 작품을 전시하고, �
 (gif 추가해서, 표로 정리)
 
 <div align='center'>
-
-|                                                            0.splash                                                            |                                                           1.회원가입                                                           |
-| :----------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------: |
-| <img src="https://user-images.githubusercontent.com/93499084/159185394-5f47183e-56f8-46ff-a3be-1a70ca731fe3.gif" width="300"/> | <img src="https://user-images.githubusercontent.com/93499084/159185380-0dcca112-82a7-4a6c-8aea-150deb37c708.gif" width="300"/> |
-
-|                                                            2.로그인                                                            |                                                            3.홈화면                                                            |
-| :----------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------: |
-| <img src="https://user-images.githubusercontent.com/93499084/159185423-dd2fdee9-5e7c-4a16-8c61-9296e2677fc9.gif" width="300"/> | <img src="https://user-images.githubusercontent.com/93499084/159185431-cef5ae99-acc0-4c3a-aba8-6b59e37c6fdb.gif" width="300"/> |
-
-|                                                          4.계정 검색                                                           |                                                           5.농촌소식                                                           |
-| :----------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------: |
-| <img src="https://user-images.githubusercontent.com/93499084/159186060-205d2955-6dbf-4c38-b9ef-f6ddc6aedcb2.gif" width="300"/> | <img src="https://user-images.githubusercontent.com/93499084/159185434-6a649920-fa1b-4e77-9f8a-60910e0c7aa2.gif" width="300"/> |
-
-|                                                         6.마이 프로필                                                          |                                                      6-1.마이 프로필 수정                                                      |
-| :----------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------: |
-| <img src="https://user-images.githubusercontent.com/93499084/159185777-c06c1a0f-5886-4616-9941-2f316e4248a9.gif" width="300"/> | <img src="https://user-images.githubusercontent.com/93499084/159185784-e2d7d0d7-96b6-4f06-bac7-a3808f5ddbc6.gif" width="300"/> |
-
-|                                                          7.상품 등록                                                           |                                                       7-1.상품 등록 수정                                                       |
-| :----------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------: |
-| <img src="https://user-images.githubusercontent.com/93499084/159185847-9af280e1-b1d1-4769-8fe7-142f5a21d659.gif" width="300"/> | <img src="https://user-images.githubusercontent.com/93499084/159185849-fc8d4719-138d-4b34-a6f8-1c170f848f00.gif" width="300"/> |
-
-|                                                         8.게시글 등록                                                          |                                                      8-1.게시글 등록 수정                                                      |
-| :----------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------: |
-| <img src="https://user-images.githubusercontent.com/93499084/159185974-ea9d52c1-1444-4d8b-8700-25509fa1a8aa.gif" width="300"/> | <img src="https://user-images.githubusercontent.com/93499084/159185981-b236e7e1-430f-4e27-a27c-c9c721e8862b.gif" width="300"/> |
-
-|                                                        9.팔로우, 팔로워                                                        |                                                         10.유저 프로필                                                         |
-| :----------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------: |
-| <img src="https://user-images.githubusercontent.com/93499084/159186100-16a21bc9-de2d-4bb2-80a8-90c18a3f1b0d.gif" width="300"/> | <img src="https://user-images.githubusercontent.com/93499084/159186180-dd2e3322-df1e-42a6-91d0-cd1e21194ba0.gif" width="300"/> |
-
-|                                                      11.게시글 댓글, 삭제                                                      |                                                         12.게시글 신고                                                         |
-| :----------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------: |
-| <img src="https://user-images.githubusercontent.com/93499084/159186599-1c1252f1-e085-497f-93bf-6240ca1fae3e.gif" width="300"/> | <img src="https://user-images.githubusercontent.com/93499084/159186588-2670182b-caca-45f1-a6fe-791d8191fa2b.gif" width="300"/> |
-
-|                                                       13.상품 댓글, 삭제                                                       |                                                          14.상품 신고                                                          |
-| :----------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------: |
-| <img src="https://user-images.githubusercontent.com/93499084/159186652-b78b0ed7-552e-4ff1-8a00-7d725e6fea36.gif" width="300"/> | <img src="https://user-images.githubusercontent.com/93499084/159186654-ea02f1cd-9bed-4c96-a6a9-aa8d0be30a53.gif" width="300"/> |
-
-|                                                            15. 소식                                                            |                                                            16. 챗봇                                                            |
-| :----------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------: |
-| <img src="https://user-images.githubusercontent.com/93499084/159186652-b78b0ed7-552e-4ff1-8a00-7d725e6fea36.gif" width="300"/> | <img src="https://user-images.githubusercontent.com/93499084/159186654-ea02f1cd-9bed-4c96-a6a9-aa8d0be30a53.gif" width="300"/> |
-
-<br>
-<br>
-  
 </div>
 
 -   splash

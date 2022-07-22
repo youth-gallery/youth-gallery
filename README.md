@@ -1,4 +1,4 @@
-# youth-gallery(유스갤러리)
+# 🎨 youth-gallery(유스갤러리)
 
 ## 1. 소개와 기능
 

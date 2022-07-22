@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './JoinMembership.module.css';
 import LoginInput from '../LoginInput';
 import Title from '../login/Title';
 
 function JoinMembership() {
+    const [file, setFile] = useState('');
+    console.log(file);
+    const backgroundstyle = {
+        backgroundImage: `url('${file}')`,
+    };
+
     return (
         <>
             <section className={styles.joinMembership_body}>
@@ -11,16 +17,23 @@ function JoinMembership() {
                 <span className={styles.joinMembership_titleSpan}>
                     나중에 언제든지 변경할 수 있습니다.
                 </span>
-                <div className={styles.joinMembership_uploadImg}>
+                <div className={styles.joinMembership_uploadContainer}>
+                    {/* {file === null ? ( */}
+                    <div className={styles.preview} style={backgroundstyle} />
+                    {/* ) : null} */}
+
                     <label
-                        htmlFor="input-file"
+                        htmlFor="input_file"
                         className={styles.joinMembership_fileImg}
                     />
                     <input
                         type="file"
-                        id="input-file"
+                        id="input_file"
                         style={{ display: 'none' }}
-                    ></input>
+                        onChange={(e) => {
+                            setFile(URL.createObjectURL(e.target.files[0]));
+                        }}
+                    />
                 </div>
                 <LoginInput
                     title={'사용자 이름'}

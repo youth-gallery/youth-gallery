@@ -14,7 +14,7 @@
     margin: 0 auto;
 }
 
-.joinMembership_uploadImg {
+.joinMembership_uploadContainer {
     position: relative;
     background-image: url(../../assets/basic-profile-img-.png);
     width: 100%;
@@ -23,6 +23,16 @@
     background-position: center;
     background-size: 14vh;
     margin: 10px 0;
+}
+
+.preview {
+    width: 16vh;
+    height: 16vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 16vh;
+    margin: 10px auto;
+    border-radius: 50%;
 }
 
 .joinMembership_fileImg {
@@ -35,10 +45,6 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: 5vh;
-}
-
-#input-file {
-    display: none;
 }
 
 .joinMembership_btn {

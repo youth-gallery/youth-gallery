@@ -12,7 +12,15 @@ function JoinMembership() {
                     나중에 언제든지 변경할 수 있습니다.
                 </span>
                 <div className={styles.joinMembership_uploadImg}>
-                    <div className={styles.joinMembership_fileImg}></div>
+                    <label
+                        htmlFor="input-file"
+                        className={styles.joinMembership_fileImg}
+                    />
+                    <input
+                        type="file"
+                        id="input-file"
+                        style={{ display: 'none' }}
+                    ></input>
                 </div>
                 <LoginInput
                     title={'사용자 이름'}

@@ -37,6 +37,10 @@
     background-size: 5vh;
 }
 
+#input-file {
+    display: none;
+}
+
 .joinMembership_btn {
     background-color: var(--btn-gray);
     border: initial;

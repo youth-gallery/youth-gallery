@@ -6,6 +6,8 @@ import TabMenu from '../components/tab/TabMenu';
 import FollowersList from './FollowersList';
 import FollowingsList from './FollowingsList';
 import Home from './Home';
+import NonFollowing from './NonFollowing';
+import NotFound from './NotFound';
 import Search from './Search';
 import UserProfile from './userprofile/UserProfile';
 
@@ -16,6 +18,7 @@ function PageRouter() {
             <Route path="/news" element={<TabMenu img={'newsImg'} />} />
             <Route path="/post">
                 <Route path="upload" element={<TabMenu img={'uploadImg'} />} />
+                <Route path="edit" element={<TabMenu img={'uploadImg'} />} />
             </Route>
             <Route path="/profile" element={<UserProfile />}>
                 <Route path="followers" element={<FollowersList />} />
@@ -25,6 +28,8 @@ function PageRouter() {
             {/* 나중에 페이지 만들면 수정해야함 */}
             <Route path="/login" element={<Login />} />
             <Route path="/join" element={<EmailJoin />} />
+            <Route path="/notFound" element={<NotFound />} />
+            <Route path="/nonFollowing" element={<NonFollowing />} />
         </Routes>
     );
 }

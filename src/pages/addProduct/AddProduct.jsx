@@ -15,7 +15,7 @@ function AddProduct() {
     return (
         <form className={styles.add_product_section} action="post">
             <BrowserRouter>
-                <TopUploadNav />
+                <TopUploadNav title="저장" />
             </BrowserRouter>
             <section className={styles.input_section}>
                 <h2 className={styles.add_image_title}>이미지 등록</h2>

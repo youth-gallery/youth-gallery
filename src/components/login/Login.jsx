@@ -1,14 +1,34 @@
 import React from 'react';
 import styles from './Login.module.css';
-// import LoginInput from '../LoginInput';
 import Title from './Title';
 import { Link } from 'react-router-dom';
-// import { useState } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 // import axios from 'axios';
 
 function Login() {
-    // const [loginId, setLoginId] = useState('');
-    // const [loginPw, setLoginPw] = useState('');
+    const [loginId, setLoginId] = useState('');
+    const [loginPw, setLoginPw] = useState('');
+    const [isActive, setIsActive] = useState(false);
+
+    console.log(loginId);
+    console.log(loginPw);
+
+    const handleLoginId = (e) => {
+        setLoginId(e.target.value);
+    };
+
+    const handleLoginPw = (e) => {
+        setLoginPw(e.target.value);
+    };
+
+    useEffect(() => {
+        if (loginId && loginPw) {
+            setIsActive(true);
+        } else {
+            setIsActive(false);
+        }
+    }, [loginId, loginPw]);
 
     return (
         <>
@@ -19,20 +39,20 @@ function Login() {
                     <input
                         id="input_id"
                         type="email"
-                        onChange={(e) => {
-                            e.target.value;
-                        }}
+                        onChange={handleLoginId}
                     />
                     <label htmlFor="input_pw">비밀번호</label>
                     <input
                         id="input_pw"
                         type="password"
-                        onChange={(e) => {
-                            e.target.value;
-                        }}
+                        onChange={handleLoginPw}
                     />
                 </div>
-                <button className={styles.login_btn}>
+                <button
+                    className={
+                        isActive ? styles.login_btn_active : styles.login_btn
+                    }
+                >
                     <span className={styles.login_span}>로그인</span>
                 </button>
                 <span className={styles.email_join}>

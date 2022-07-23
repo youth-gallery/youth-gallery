@@ -8,6 +8,17 @@
     padding-top: 40px;
 }
 
+.login_btn_active {
+    background-color: var(--logo-black);
+    color: white;
+    border-radius: 44px;
+    margin-top: 14px;
+    margin-bottom: 20px;
+    padding: 13px 0;
+    width: 100%;
+    cursor: pointer;
+}
+
 .login_btn {
     background-color: var(--btn-gray);
     color: white;

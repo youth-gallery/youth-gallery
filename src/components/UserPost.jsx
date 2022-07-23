@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import moreIcon from '../assets/s-icon-more-vertical.png';
 import heartIcon from '../assets/icon-heart.png';
 import messageIcon from '../assets/icon-message-circle-1.png';
+import ButtonModal from './modal/ButtonModal';
+import ButtonModalActive from './modal/ButtonModalActive';
 
 const HomePostLi = styled.li`
     display: flex;
@@ -39,15 +40,6 @@ const HomePostId = styled.span`
     line-height: 1.2;
     color: #767676;
     padding: 0 180px 16px 0;
-`;
-
-const MoreIcon = styled.button`
-    width: 20px;
-    height: 20px;
-    margin-top: 4px;
-    background: url(${moreIcon}) no-repeat center / 18px 18px;
-    border: none;
-    cursor: pointer;
 `;
 
 const HomePostTxt = styled.p`
@@ -92,6 +84,20 @@ const HomePostDate = styled.span`
 
 const UserPost = ({ postList, profileData, i }) => {
     const postDate = new Date(postList[i].updatedAt);
+    const [showModal, setShowModal] = useState(false);
+    const openModal = (propState) => {
+        console.log(propState);
+        setShowModal(propState);
+    };
+
+    const closeModal = (props) => {
+        setShowModal(props);
+    };
+
+    const deletePost = () => {
+        console.log('삭제하였습니다.');
+    };
+
     return (
         <>
             <HomePostLi>
@@ -105,7 +111,7 @@ const UserPost = ({ postList, profileData, i }) => {
                             <HomePostName>{profileData.username}</HomePostName>
                             <HomePostId>{`@${profileData.accountname}`}</HomePostId>
                         </UserWarp>
-                        <MoreIcon />
+                        <ButtonModal openModalProp={openModal} />
                     </FlexDiv>
                     <HomePostTxt>{postList[i].content}</HomePostTxt>
                     <HomePostImg src={postList[i].image} alt="포스트 이미지" />
@@ -118,6 +124,18 @@ const UserPost = ({ postList, profileData, i }) => {
                     </HomePostDate>
                 </div>
             </HomePostLi>
+            <ButtonModalActive
+                propState={showModal}
+                propsCloseFunc={closeModal}
+                postModalValues={{
+                    values: ['삭제', '수정'],
+                }}
+                innerAlertValues={{
+                    title: '게시물을 삭제할까요? ',
+                    rightText: '삭제',
+                    rightBtnPropFunc: deletePost,
+                }}
+            />
         </>
     );
 };

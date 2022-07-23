@@ -3,6 +3,7 @@ import React from 'react';
 import iconArrowLeft from '../../assets/icon-arrow-left.png';
 import { useNavigate } from 'react-router-dom';
 import SaveButton from '../button/SaveButton';
+import SaveDisabledButton from '../button/SaveDisabledButton';
 
 const ArrowLeftButton = styled.button`
     width: 22px;
@@ -16,7 +17,7 @@ const ButtonDiv = styled.div`
     width: 90px;
 `;
 
-function TopUploadNav({ title }) {
+function TopUploadNav({ title, state }) {
     const navigate = useNavigate();
     const handleGoBack = () => {
         navigate(-1);
@@ -26,7 +27,11 @@ function TopUploadNav({ title }) {
         <>
             <ArrowLeftButton name="back" onClick={handleGoBack} />
             <ButtonDiv>
-                <SaveButton title={title} />
+                {state ? (
+                    <SaveButton title={title} />
+                ) : (
+                    <SaveDisabledButton title={title} />
+                )}
             </ButtonDiv>
         </>
     );

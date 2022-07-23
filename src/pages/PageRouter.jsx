@@ -8,6 +8,7 @@ import FollowingsList from './FollowingsList';
 import Home from './Home';
 import Search from './Search';
 import UserProfile from './userprofile/UserProfile';
+import PostUpload from './postUpload/PostUpload';
 
 function PageRouter() {
     return (
@@ -15,7 +16,7 @@ function PageRouter() {
             <Route path="/" element={<Home />} />
             <Route path="/news" element={<TabMenu img={'newsImg'} />} />
             <Route path="/post">
-                <Route path="upload" element={<TabMenu img={'uploadImg'} />} />
+                <Route path="upload" element={<PostUpload />} />
             </Route>
             <Route path="/profile" element={<UserProfile />}>
                 <Route path="followers" element={<FollowersList />} />

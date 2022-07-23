@@ -22,12 +22,16 @@
 
 .input_section .upload_img_section {
     width: 100%;
+    max-width: 322px;
     height: 204px;
     background-color: #f2f2f2;
     border-radius: 10px;
     border: 0.5px solid #dbdbdb;
-    margin-bottom: 30px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
     position: relative;
+    margin: 0 auto 30px auto;
 }
 
 .image_upload_button {
@@ -39,6 +43,17 @@
     position: absolute;
     bottom: 12px;
     right: 12px;
+}
+
+#image_upload_input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
 }
 
 .input_section .input_title {

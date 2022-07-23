@@ -1,25 +1,51 @@
+// import axios from 'axios';
 import React from 'react';
+import { useState } from 'react';
+// import { useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import Nav from '../../components/nav/Nav';
 import TopUploadNav from '../../components/nav/TopUploadNav';
 import styles from './AddProduct.module.css';
 
 function AddProduct() {
+    const [upload, setUpload] = useState('');
+    const backgroundstyle = {
+        backgroundImage: `url('${upload}')`,
+    };
+    console.log(backgroundstyle);
     return (
         <form className={styles.add_product_section} action="post">
             <BrowserRouter>
-                <TopUploadNav />
+                <Nav>
+                    <TopUploadNav title="저장" />
+                </Nav>
             </BrowserRouter>
             <section className={styles.input_section}>
                 <h2 className={styles.add_image_title}>이미지 등록</h2>
-                <section className={styles.upload_img_section}>
-                    <h3 className={styles.ir}>
-                        업로드할 이미지가 보이는 곳 입니다.
-                    </h3>
-                    <button
-                        className={styles.image_upload_button}
-                        type="button"
-                    ></button>
-                </section>
+                {
+                    <section
+                        className={styles.upload_img_section}
+                        style={backgroundstyle}
+                    >
+                        <h3 className={styles.ir}>
+                            업로드할 이미지가 보이는 곳 입니다.
+                        </h3>
+                        <label
+                            className={styles.image_upload_button}
+                            htmlFor={styles.image_upload_input}
+                        ></label>
+                        <input
+                            id={styles.image_upload_input}
+                            type="file"
+                            onChange={(e) => {
+                                setUpload(
+                                    URL.createObjectURL(e.target.files[0])
+                                );
+                                console.log(upload);
+                            }}
+                        ></input>
+                    </section>
+                }
                 <label
                     className={styles.input_title}
                     htmlFor={styles.product_name_input}

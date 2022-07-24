@@ -9,6 +9,7 @@ import Home from './Home';
 import NonFollowing from './NonFollowing';
 import NotFound from './NotFound';
 import Search from './Search';
+import PostDetail from './postDetail/PostDetail';
 import UserProfile from './userprofile/UserProfile';
 
 function PageRouter() {
@@ -20,6 +21,13 @@ function PageRouter() {
                 <Route path="upload" element={<TabMenu img={'uploadImg'} />} />
                 <Route path="edit" element={<TabMenu img={'uploadImg'} />} />
             </Route>
+            {/* 임시로 게시물 id 지정 
+            나중에 /post/:id 로 넣으면됨*/}
+            <Route
+                path="/post/62d9039917ae66658183d2c8"
+                element={<PostDetail />}
+            />
+            <Route path="/profile" element={<TabMenu img={'profileImg'} />}>
             <Route path="/profile" element={<UserProfile />}>
                 <Route path="followers" element={<FollowersList />} />
                 <Route path="followings" element={<FollowingsList />} />

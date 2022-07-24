@@ -1,6 +1,7 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import PostForm from '../../components/PostForm/PostForm';
 import TopUploadNav from '../../components/nav/TopUploadNav';
+import Nav from '../../components/nav/Nav';
 import styles from './PostUploadForm.module.css';
 import axios from 'axios';
 
@@ -9,6 +10,7 @@ const PostUploadForm = () => {
     const onPicBtnClick = () => {
         inpRef.current.click();
     };
+    const [state, setState] = useState(false);
 
     const [txt, setTxt] = useState('');
     const handleTxt = (event) => {
@@ -35,6 +37,14 @@ const PostUploadForm = () => {
     const handleDeleteImage = (id) => {
         setShowImages(showImages.filter((_, index) => index !== id));
     };
+
+    useEffect(() => {
+        if (txt.length > 0 || showImages.length > 0) {
+            setState(true);
+        } else {
+            setState(false);
+        }
+    }, [txt, showImages]);
 
     // 임시로 token과 사용자를 설정하였습니다. 로그인 기능 완성후 수정 예정
 
@@ -73,7 +83,9 @@ const PostUploadForm = () => {
     return (
         <>
             <PostForm onSubmit={createPost}>
-                <TopUploadNav value="업로드" />
+                <Nav>
+                    <TopUploadNav title="업로드" state={state} />
+                </Nav>
                 <textarea
                     className={styles.uploadform_txt}
                     placeholder="게시글 입력하기..."

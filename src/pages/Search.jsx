@@ -32,12 +32,10 @@ function Search() {
             },
         })
             .then((response) => setUsers(response))
-            .then(console.log(users));
     }, [keyword]);
 
     const inputOnChange = (value) => {
         setKeyword(value);
-        console.log(keyword);
     };
     return (
         <>
@@ -45,16 +43,20 @@ function Search() {
                 <TopSearchNav propFunc={inputOnChange} />
             </Nav>
             <Ul>
-                {users.data &&
+                {users.data && users.data.length ? (
                     users.data.map((user) => (
                         <Li key={user._id}>
                             <UserSearch
                                 userImg={user.image}
                                 username={user.username}
                                 accountname={user.accountname}
+                                keyword={keyword}
                             />
                         </Li>
-                    ))}
+                    ))
+                ) : (
+                    <p>검색할 수 있는 계정이 없습니다.</p>
+                )}
             </Ul>
             <TabMenu img={'homeImg'} />
         </>

@@ -95,7 +95,8 @@ const UserPost = ({ postList, profileData, i }) => {
     };
 
     const deletePost = () => {
-        console.log('삭제하였습니다.');
+        alert('삭제하였습니다.');
+        setShowModal(false);
     };
 
     return (

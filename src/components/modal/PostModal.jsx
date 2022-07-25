@@ -16,6 +16,7 @@ function PostModal({ values, propFunc }) {
                 break;
             case '삭제':
                 //삭제 모달 띄우기
+                propFunc(true);
                 break;
             case '수정':
                 //수정 페이지로 이동
@@ -23,6 +24,7 @@ function PostModal({ values, propFunc }) {
                 break;
             case '신고하기':
                 //신고 모달 띄우기
+                propFunc(true);
                 break;
             case '웹사이트에서 상품보기':
                 //웹사이트 상품 페이지로 이동
@@ -40,7 +42,7 @@ function PostModal({ values, propFunc }) {
                         <button
                             className={styles.modal_listBtn}
                             onClick={() => {
-                                setButton(value, navigate, propFunc[i]);
+                                setButton(value, navigate, propFunc);
                             }}
                         >
                             {value}

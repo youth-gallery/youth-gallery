@@ -9,9 +9,7 @@ import Product from '../../components/Product';
 import UserPost from '../../components/UserPost';
 import TabMenu from '../../components/tab/TabMenu';
 import Nav from '../../components/nav/Nav';
-import DeleteAlert from '../../components/modal/DeleteAlert';
-import PostModal from '../../components/modal/PostModal';
-import Modal from '../../components/modal/Modal';
+import ButtonModalActive from '../../components/modal/ButtonModalActive';
 
 function UserProfile() {
     const [profileData, setProfileData] = useState({});
@@ -74,29 +72,19 @@ function UserProfile() {
 
     //모달 동작
     const [showModal, setShowModal] = useState(false);
-    const [showLogoutModal, setShowLogoutModal] = useState(false);
     const openModal = (propState) => {
         console.log(propState);
         setShowModal(propState);
-        console.log(showLogoutModal);
     };
 
-    const closeModal = () => {
-        console.log(false);
-        setShowModal(false);
-        setShowLogoutModal(false);
+    const closeModal = (props) => {
+        setShowModal(props);
     };
 
-    const openLogoutModal = (propState) => {
-        setShowLogoutModal(propState);
-        console.log(showLogoutModal);
-    };
-
-    //로그아웃
     const logout = () => {
-        //로그인 구현시 수정
         console.log('로그아웃');
     };
+
     return (
         <>
             <Nav>
@@ -132,28 +120,16 @@ function UserProfile() {
                     </ul>
                 </section>
             </div>
-            {showModal ? (
-                <>
-                    <div
-                        className={styles.backgroundModal}
-                        onClick={closeModal}
-                    />
-                    <Modal>
-                        <PostModal
-                            values={['설정 및 개인정보', '로그아웃']}
-                            propFunc={['', openLogoutModal]}
-                        />
-                    </Modal>
-                    {showLogoutModal ? (
-                        <DeleteAlert
-                            title={'로그아웃 하시겠어요? '}
-                            rightText={'로그아웃'}
-                            closeModalPropFunc={closeModal}
-                            rightBtnPropFunc={logout}
-                        />
-                    ) : null}
-                </>
-            ) : null}
+            <ButtonModalActive
+                propState={showModal}
+                propsCloseFunc={closeModal}
+                postModalValues={{ values: ['설정 및 개인정보', '로그아웃'] , type:'logout'}}
+                innerAlertValues={{
+                    title: '로그아웃 하시겠어요? ',
+                    rightText: '로그아웃',
+                    rightBtnPropFunc: logout,
+                }}
+            />
             <TabMenu img={'profileImg'} />
         </>
     );

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function DeleteAlert({
+function InnerAlert({
     title,
     rightText,
     closeModalPropFunc,
@@ -68,4 +68,4 @@ const Button = styled.button`
     cursor: pointer;
 `;
 
-export default DeleteAlert;
+export default InnerAlert;

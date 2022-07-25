@@ -28,7 +28,6 @@ function PageRouter() {
                 path="/post/62d9039917ae66658183d2c8"
                 element={<PostDetail />}
             />
-            <Route path="/profile" element={<TabMenu img={'profileImg'} />}>
             <Route path="/profile" element={<UserProfile />}>
                 <Route path="followers" element={<FollowersList />} />
                 <Route path="followings" element={<FollowingsList />} />

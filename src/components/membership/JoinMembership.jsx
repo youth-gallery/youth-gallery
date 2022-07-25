@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styles from './JoinMembership.module.css';
-import LoginInput from '../LoginInput';
 import Title from '../login/Title';
 
 function JoinMembership() {
@@ -18,9 +17,7 @@ function JoinMembership() {
                     나중에 언제든지 변경할 수 있습니다.
                 </span>
                 <div className={styles.joinMembership_uploadContainer}>
-                    {/* {file === null ? ( */}
                     <div className={styles.preview} style={backgroundstyle} />
-                    {/* ) : null} */}
 
                     <label
                         htmlFor="input_file"
@@ -35,7 +32,38 @@ function JoinMembership() {
                         }}
                     />
                 </div>
-                <LoginInput
+
+                <label htmlFor="input_userName">사용자 이름</label>
+                <input
+                    id="input_userName"
+                    type="text"
+                    placeholder="2~10자 이내여야 합니다."
+                    onChange={(e) => {
+                        e.target.value;
+                    }}
+                />
+
+                <label htmlFor="input_accountId">계정 ID</label>
+                <input
+                    id="input_accountId"
+                    type="text"
+                    placeholder="영문, 숫자, 특수문자(.),(_)만 사용 가능합니다."
+                    onChange={(e) => {
+                        e.target.value;
+                    }}
+                />
+
+                <label htmlFor="input_intro">소개</label>
+                <input
+                    id="input_intro"
+                    type="text"
+                    placeholder="자신과 전시할 작품에 대해 소개해주세요!"
+                    onChange={(e) => {
+                        e.target.value;
+                    }}
+                />
+
+                {/* <LoginInput
                     title={'사용자 이름'}
                     placeholder={'2~10자 이내여야 합니다.'}
                     type={'text'}
@@ -51,7 +79,7 @@ function JoinMembership() {
                     title={'소개'}
                     placeholder={'자신과 전시할 작품에 대해 소개해주세요!'}
                     type={'text'}
-                />
+                /> */}
                 <button className={styles.joinMembership_btn}>
                     <span className={styles.joinMembership_btnSpan}>
                         유스갤러리 시작하기

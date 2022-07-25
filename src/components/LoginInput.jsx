@@ -5,7 +5,7 @@ const InputBody = styled.section`
     background-color: #ffffff;
 `;
 
-const Span = styled.span`
+const Label = styled.label`
     display: block;
     color: var(--gray-color);
     font-size: 1.2rem;
@@ -33,8 +33,12 @@ function LoginInput({ title, placeholder, type }) {
     return (
         <>
             <InputBody>
-                <Span>{title}</Span>
-                <Input placeholder={placeholder} type={type}></Input>
+                <Label htmlFor="input_box">{title}</Label>
+                <Input
+                    placeholder={placeholder}
+                    type={type}
+                    id="input_box"
+                ></Input>
             </InputBody>
         </>
     );

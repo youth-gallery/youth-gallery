@@ -8,6 +8,17 @@
     padding-top: 40px;
 }
 
+.login_btn_active {
+    background-color: var(--logo-black);
+    color: white;
+    border-radius: 44px;
+    margin-top: 14px;
+    margin-bottom: 20px;
+    padding: 13px 0;
+    width: 100%;
+    cursor: pointer;
+}
+
 .login_btn {
     background-color: var(--btn-gray);
     color: white;
@@ -31,4 +42,30 @@
 
 .email_join_link {
     color: var(--gray-color);
+}
+
+label {
+    display: block;
+    color: var(--gray-color);
+    font-size: 1.2rem;
+}
+
+input {
+    min-height: 32px;
+    color: var(--logo-black);
+    font-size: 1.4rem;
+    width: 100%;
+    border: initial;
+    border-bottom: 1px solid var(--btn-gray);
+
+    margin-bottom: 16px;
+}
+
+input:focus {
+    outline: none;
+    border-bottom: 1px solid var(--logo-yellow);
+}
+input::placeholder {
+    font-size: 1.4rem;
+    color: var(--btn-gray);
 }

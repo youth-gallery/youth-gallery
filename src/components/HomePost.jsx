@@ -8,6 +8,7 @@ import axios from 'axios';
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
 
 const HomePostDiv = styled.div`
     display: flex;
@@ -151,13 +152,16 @@ const HomePost = ({ datas }) => {
     const url = 'https://mandarin.api.weniv.co.kr';
     const token =
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzE2MjM5ODJmZGNjNzEyZjQzMzk4YiIsImV4cCI6MTY2MjcwMTIyMiwiaWF0IjoxNjU3NTE3MjIyfQ.A75fUeLUj8TKdD1LVGGph-M1-coF8pr_oq8BY6R-k4k';
+    localStorage.setItem('token', token);
+    const getToken = localStorage.getItem('token');
+    const postId = '62d9039917ae66658183d2c8';
 
     async function useAxios(url = '', method = '') {
         try {
             axios(url, {
                 method: method,
                 headers: {
-                    'Authorization': `Bearer ${token}`,
+                    'Authorization': `Bearer ${getToken}`,
                     'Content-type': 'application/json',
                 },
             })
@@ -255,7 +259,13 @@ const HomePost = ({ datas }) => {
                                 {count}
                             </HeartBtn>
                         )}
-                        <CommentBtn>{datas.commentCount}</CommentBtn>
+                        {datas.id == '62d9039917ae66658183d2c8' ? (
+                            <Link to={`/post/${postId}`}>
+                                <CommentBtn>{datas.commentCount}</CommentBtn>
+                            </Link>
+                        ) : (
+                            <CommentBtn>{datas.commentCount}</CommentBtn>
+                        )}
                     </div>
                     <HomePostDate>
                         {`${postDate.getFullYear()}년 ${

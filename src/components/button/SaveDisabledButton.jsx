@@ -15,11 +15,11 @@ const Span = styled.span`
     font-size: 1.4rem;
 `;
 
-function SaveDisabledButton() {
+function SaveDisabledButton({ title }) {
     return (
         <>
             <SaveDisabledButtonBody>
-                <Span>저장</Span>
+                <Span>{title}</Span>
             </SaveDisabledButtonBody>
         </>
     );

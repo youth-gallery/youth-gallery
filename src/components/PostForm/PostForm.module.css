@@ -20,6 +20,7 @@
 .form_div .form_profile {
     width: 42px;
     height: 42px;
+    margin-top: 1rem;
     border-radius: 50%;
     position: absolute;
     top: 60px;

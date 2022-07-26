@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
-// import axios from 'axios';
 
 function Login() {
     const [loginId, setLoginId] = useState('');
@@ -25,6 +24,9 @@ function Login() {
         setLoginPw(e.target.value);
     };
 
+    // TODO! mount시 1회만 (첫 로딩시) 이메일-비밀번호 필수입력 문구 가려주기
+    useEffect(() => {}, []);
+
     // 로그인 이메일 유효성검사 로직
     const emailRegex =
         /* eslint-disable-next-line */
@@ -33,7 +35,7 @@ function Login() {
     // 로그인 버튼 클릭시
     // 1. 이메일 유효성 검사
     // 2. API 서버에 post요청으로 데이터 요청
-    // 3. 이메일 주소와 비밀번호 일치 여부 검사 => 불일치시 경고 문구 출력!
+    // 3. 이메일과 비밀번호 일치 여부 검사 => 불일치시 경고 문구 출력!
     const onClickLogin = async () => {
         emailRegex.test(loginId) ? setIsEmail(true) : setIsEmail(false);
 
@@ -47,12 +49,16 @@ function Login() {
                     },
                 }
             );
-            console.log(res.data);
+            console.log(res);
 
             // 로그인 성공시 로컬스토리지에 토큰 저장
             if (res.data.user?.token) {
                 localStorage.setItem('token', res.data.user.token);
-                loginConfirm(true);
+                localStorage.setItem(
+                    'refresh-token',
+                    res.data.user.refreshToken
+                );
+                setLoginConfirm(true);
                 setLoginMsg(''); // 경고문구 지워주기
             } else {
                 // 로그인 실패시
@@ -72,8 +78,6 @@ function Login() {
         !loginId || !loginPw ? setLoginConfirm(true) : null;
     }, [loginId, loginPw]);
 
-    console.log(loginId);
-    console.log(loginId.length);
     return (
         <>
             <section className={styles.login_body}>
@@ -81,19 +85,22 @@ function Login() {
                 <div className={styles.login_title}>
                     <label htmlFor="input_id">이메일</label>
                     <input
+                        className={styles.login_input_id}
                         id="input_id"
                         type="email"
                         onChange={handleLoginId}
                     />
-                    {loginId.length !== 0 ? (
+                    {loginId ? (
                         <div />
                     ) : (
                         <div className={styles.email_error}>
-                            이메일을 입력해주세요.{' '}
+                            *이메일을 입력해주세요.
                         </div>
                     )}
 
-                    <label htmlFor="input_pw">비밀번호</label>
+                    <label className={styles.input_label_pw} htmlFor="input_pw">
+                        비밀번호
+                    </label>
                     <input
                         className={styles.login_input_pw}
                         id="input_pw"
@@ -105,11 +112,11 @@ function Login() {
                     ) : (
                         <div className={styles.login_error}>{loginMsg}</div>
                     )}
-                    {loginPw.length !== 0 ? (
+                    {loginPw ? (
                         <div />
                     ) : (
                         <div className={styles.pw_error}>
-                            비밀번호를 입력해주세요.
+                            *비밀번호를 입력해주세요.
                         </div>
                     )}
                 </div>

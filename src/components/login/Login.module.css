@@ -8,6 +8,13 @@
     padding-top: 40px;
 }
 
+.login_error,
+.email_error,
+.pw_error {
+    color: var(--error-red);
+    font-size: 1.2rem;
+}
+
 .login_btn_active {
     background-color: var(--logo-black);
     color: white;
@@ -57,8 +64,11 @@ input {
     width: 100%;
     border: initial;
     border-bottom: 1px solid var(--btn-gray);
-
     margin-bottom: 16px;
+}
+
+.login_input_pw {
+    margin-bottom: 6px;
 }
 
 input:focus {

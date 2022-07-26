@@ -24,10 +24,7 @@ function PageRouter() {
             </Route>
             {/* 임시로 게시물 id 지정 
             나중에 /post/:id 로 넣으면됨*/}
-            <Route
-                path="/post/62d9039917ae66658183d2c8"
-                element={<PostDetail />}
-            />
+            <Route path="/post/:username/:post_id" element={<PostDetail />} />
             <Route path="/profile" element={<UserProfile />}>
                 <Route path="followers" element={<FollowersList />} />
                 <Route path="followings" element={<FollowingsList />} />

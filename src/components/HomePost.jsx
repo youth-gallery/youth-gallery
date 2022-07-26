@@ -146,7 +146,7 @@ const HomePost = ({ datas }) => {
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzE2MjM5ODJmZGNjNzEyZjQzMzk4YiIsImV4cCI6MTY2MjcwMTIyMiwiaWF0IjoxNjU3NTE3MjIyfQ.A75fUeLUj8TKdD1LVGGph-M1-coF8pr_oq8BY6R-k4k';
     localStorage.setItem('token', token);
     const getToken = localStorage.getItem('token');
-    const postId = '62d9039917ae66658183d2c8';
+    // const postId = '62d9039917ae66658183d2c8';
 
     async function useAxios(url = '', method = '') {
         try {
@@ -267,8 +267,10 @@ const HomePost = ({ datas }) => {
                                 {count}
                             </HeartBtn>
                         )}
-                        {datas.id == '62d9039917ae66658183d2c8' ? (
-                            <Link to={`/post/${postId}`}>
+                        {datas.id == datas.id ? (
+                            <Link
+                                to={`/post/${datas.author.username}/${datas.id}`}
+                            >
                                 <CommentBtn>{datas.commentCount}</CommentBtn>
                             </Link>
                         ) : (

@@ -17,6 +17,7 @@ const CommentForm = styled.form`
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
+    background-color: white;
 `;
 
 const CommnetInp = styled.input`
@@ -62,7 +63,7 @@ const CommentBtnActive = styled.button`
     cursor: pointer;
 `;
 
-const Comment = () => {
+const Comment = ({ postId, buttonHandleProp }) => {
     const [inp, setInp] = useState('');
     const [profileImg, setProfileImg] = useState();
 
@@ -98,7 +99,6 @@ const Comment = () => {
         e.preventDefault();
         const url = 'https://mandarin.api.weniv.co.kr';
         const getToken = localStorage.getItem('token');
-        const postId = '62d6321482fdcc712f4d5861';
 
         try {
             await axios.post(
@@ -134,7 +134,13 @@ const Comment = () => {
                 {inp.length > 0 ? (
                     <CommentBtnActive>등록</CommentBtnActive>
                 ) : (
-                    <CommentBtn>등록</CommentBtn>
+                    <CommentBtn
+                        onClick={() => {
+                            buttonHandleProp(true);
+                        }}
+                    >
+                        등록
+                    </CommentBtn>
                 )}
             </CommentForm>
         </Div>

@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
+// import { useRef } from 'react';
 import styled from 'styled-components';
-import moreIcon from '../assets/s-icon-more-vertical.png';
+// import moreIcon from '../assets/s-icon-more-vertical.png';
+import ButtonModal from './modal/ButtonModal';
+import ButtonModalActive from './modal/ButtonModalActive';
 // import heartIcon from '../assets/icon-heart.png';
 // import messageIcon from '../assets/icon-message-circle-1.png';
 
@@ -42,14 +45,14 @@ const HomePostSpan = styled.span`
     margin-left: 5px;
 `;
 
-const MoreIcon = styled.button`
-    width: 20px;
-    height: 20px;
-    margin-top: 4px;
-    background: url(${moreIcon}) no-repeat center / 18px 18px;
-    border: none;
-    cursor: pointer;
-`;
+// const MoreIcon = styled.button`
+//     width: 20px;
+//     height: 20px;
+//     margin-top: 4px;
+//     background: url(${moreIcon}) no-repeat center / 18px 18px;
+//     border: none;
+//     cursor: pointer;
+// `;
 
 // const HomePostTxt = styled.p`
 //     font-size: 14px;
@@ -85,7 +88,13 @@ const MoreIcon = styled.button`
 //     line-height: 1.2;
 // `;
 
-const HomePostOnlyTxt = ({ profileImg, name, time, children }) => {
+const HomePostOnlyTxt = ({
+    profileImg,
+    name,
+    time,
+    children,
+    postUserName,
+}) => {
     // 작성 시간 계산 함수. 나중에 util로 빼기
     const getTimeGap = (createTime) => {
         const today = new Date();
@@ -112,6 +121,30 @@ const HomePostOnlyTxt = ({ profileImg, name, time, children }) => {
         return `${Math.floor(betweenTimeDay / 365)}년 전`;
     };
 
+    //모달 함수
+    const [showModal, setShowModal] = useState(false);
+    const openModal = (propState, commentTarget) => {
+        console.log(propState);
+        setShowModal(propState);
+        setCommentValue(commentTarget);
+    };
+
+    const closeModal = (props) => {
+        setShowModal(props);
+    };
+
+    const reportPost = () => {
+        alert('신고하였습니다.');
+        setShowModal(false);
+    };
+
+    const deletePost = () => {
+        alert('삭제하였습니다.');
+        setShowModal(false);
+    };
+
+    const [commentValue, setCommentValue] = useState('');
+    console.log(commentValue);
     return (
         <>
             <HomePostDiv>
@@ -125,20 +158,38 @@ const HomePostOnlyTxt = ({ profileImg, name, time, children }) => {
                             <HomePostName>{name}</HomePostName>
                             <HomePostSpan> · {getTimeGap(time)}</HomePostSpan>
                         </Div>
-                        {/* 사용자 정보에 따라 이 부분 클릭시 다른 모달*/}
-                        <MoreIcon />
+                        <ButtonModal openModalProp={openModal} />
                     </FlexDiv>
-                    {/* <HomePostTxt>
-                        옷을 인생을 그러므로 없으면 것은 이상은 것은 우리의
-                        위하여, 뿐이다. 이상의 청춘의 뼈 따뜻한 그들의 그와
-                        약동하다. 대고, 못할 넣는 풍부하게 뛰노는 인생의 힘있다.
-                    </HomePostTxt>
-                    <HeartBtn>58</HeartBtn>
-                    <CommentBtn>12</CommentBtn>
-                    <HomePostDate>2020년 10월 21일</HomePostDate> */}
                     {children}
                 </Div>
             </HomePostDiv>
+            {name === postUserName ? (
+                <ButtonModalActive
+                    propState={showModal}
+                    propsCloseFunc={closeModal}
+                    postModalValues={{
+                        values: ['신고하기'],
+                    }}
+                    innerAlertValues={{
+                        title: '게시물을 신고할까요? ',
+                        rightText: '신고',
+                        rightBtnPropFunc: reportPost,
+                    }}
+                />
+            ) : (
+                <ButtonModalActive
+                    propState={showModal}
+                    propsCloseFunc={closeModal}
+                    postModalValues={{
+                        values: ['삭제'],
+                    }}
+                    innerAlertValues={{
+                        title: '댓글을 삭제할까요? ',
+                        rightText: '삭제',
+                        rightBtnPropFunc: deletePost,
+                    }}
+                />
+            )}
         </>
     );
 };

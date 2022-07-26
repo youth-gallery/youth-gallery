@@ -4,9 +4,11 @@ import TopUploadNav from '../../components/nav/TopUploadNav';
 import Nav from '../../components/nav/Nav';
 import styles from './PostUploadForm.module.css';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const PostUploadForm = () => {
     let imgUrlLists = [];
+    const navigate = useNavigate();
     const [state, setState] = useState(false);
     const [txt, setTxt] = useState('');
     const [showImgs, setShowImgs] = useState([]);
@@ -77,6 +79,7 @@ const PostUploadForm = () => {
 
     const createPost = async (e) => {
         e.preventDefault();
+
         const url = 'https://mandarin.api.weniv.co.kr';
         const token =
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyY2FkNjA3ODJmZGNjNzEyZjQzN2QyZCIsImV4cCI6MTY2MjcxMDYxOCwiaWF0IjoxNjU3NTI2NjE4fQ.w47m557FRqRQhF8PGM_VUxF10mFtDexYJIxqUasFQ7I';
@@ -100,12 +103,10 @@ const PostUploadForm = () => {
                     },
                 }
             );
+            navigate('/profile');
         } catch (error) {
             console.log(error);
         }
-        // 나중에 useNavigate() 추가하여 프로필 경로로 이동
-        // navigate('');
-        // console.log(imageUrlLists);
     };
 
     return (

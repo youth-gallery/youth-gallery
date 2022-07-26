@@ -6,45 +6,72 @@ import styles from './PostUploadForm.module.css';
 import axios from 'axios';
 
 const PostUploadForm = () => {
+    let imgUrlLists = [];
+    const [state, setState] = useState(false);
+    const [txt, setTxt] = useState('');
+    const [showImgs, setShowImgs] = useState([]);
+    const MAX_UPLOAD = 3;
+
     const inpRef = useRef();
     const onPicBtnClick = () => {
         inpRef.current.click();
     };
-    const [state, setState] = useState(false);
 
-    const [txt, setTxt] = useState('');
     const handleTxt = (event) => {
         setTxt(event.target.value);
     };
 
-    const MAX_UPLOAD = 3;
-    const [showImages, setShowImages] = useState([]);
-    const handleAddImages = (event) => {
-        const imageFiles = event.target.files;
-        let imageUrlLists = [...showImages];
-        for (let i = 0; i < imageFiles.length; i++) {
-            const currentImageUrl = URL.createObjectURL(imageFiles[i]);
-            imageUrlLists.push(currentImageUrl);
+    const uploadImg = async () => {
+        let formData = new FormData();
+        const imgFiles = inpRef.current.files;
+        for (let i = 0; i < imgFiles.length; i++) {
+            const file = imgFiles[i];
+            formData.append('image', file);
         }
+        const res = await axios({
+            method: 'post',
+            url: 'https://mandarin.api.weniv.co.kr/image/uploadfiles',
+            data: formData,
+        });
 
-        if (imageUrlLists.length > MAX_UPLOAD) {
-            imageUrlLists = imageUrlLists.slice(0, 3);
-            alert('이미지 업로드는 3개까지만 가능합니다.');
-        }
-        setShowImages(imageUrlLists);
+        console.log(res.data);
+        const imgUrls = res.data
+            .map((file) => 'https://mandarin.api.weniv.co.kr/' + file.filename)
+            .join();
+        console.log(imgUrls);
+        return imgUrls;
     };
 
+    const handleAddImages = (event) => {
+        if (event.target.files) {
+            const filesArray = Array.from(event.target.files).map((file) =>
+                URL.createObjectURL(file)
+            );
+            imgUrlLists.push(...filesArray);
+            setShowImgs((prevImgs) => prevImgs.concat(filesArray));
+        }
+        console.log(imgUrlLists);
+        const imgFiles = inpRef.current.files;
+        if (imgFiles.length > MAX_UPLOAD) {
+            alert('이미지 업로드는 3개까지만 가능합니다.');
+            imgUrlLists = imgUrlLists.slice(0, 3);
+            setShowImgs(imgUrlLists);
+        }
+        Array.from(event.target.files).map((file) => URL.revokeObjectURL(file));
+    };
+    console.log(showImgs);
+
     const handleDeleteImage = (id) => {
-        setShowImages(showImages.filter((_, index) => index !== id));
+        setShowImgs(showImgs.filter((_, index) => index !== id));
     };
 
     useEffect(() => {
-        if (txt.length > 0 || showImages.length > 0) {
+        if (txt.length > 0 || showImgs.length > 0) {
             setState(true);
         } else {
             setState(false);
         }
-    }, [txt, showImages]);
+    }, [txt, showImgs]);
 
     // 임시로 token과 사용자를 설정하였습니다. 로그인 기능 완성후 수정 예정
 
@@ -56,14 +83,14 @@ const PostUploadForm = () => {
         localStorage.setItem('token', token);
         const getToken = localStorage.getItem('token');
         console.log(getToken);
-
+        const res = uploadImg();
         try {
             await axios.post(
                 `${url}/post`,
                 {
                     post: {
                         content: `${txt}`,
-                        image: `${showImages.join(',')}`,
+                        image: await res,
                     },
                 },
                 {
@@ -78,6 +105,7 @@ const PostUploadForm = () => {
         }
         // 나중에 useNavigate() 추가하여 프로필 경로로 이동
         // navigate('');
+        // console.log(imageUrlLists);
     };
 
     return (
@@ -108,7 +136,7 @@ const PostUploadForm = () => {
                     />
                 </div>
                 <div className={styles.preview_pics}>
-                    {showImages.map((image, id) => (
+                    {showImgs.map((image, id) => (
                         <div key={id} className={styles.preview_div}>
                             <img
                                 src={image}

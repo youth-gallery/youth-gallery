@@ -17,7 +17,7 @@ const Span = styled.span`
 `;
 
 function FollowButton() {
-    const follow = () => {
+    const handleFollow = () => {
         // 0004 임시토큰
         const token =
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZDg1MzkxMTdhZTY2NjU4MTdlNjY3MyIsImV4cCI6MTY2MzkzMzg1NSwiaWF0IjoxNjU4NzQ5ODU1fQ.pDSDuGNU51d1C8TI2_-wcADNOSqKkf_lJL3oMBB0clo';
@@ -41,7 +41,7 @@ function FollowButton() {
     };
     return (
         <>
-            <FollowButtonBody onClick={follow}>
+            <FollowButtonBody onClick={handleFollow}>
                 <Span>팔로우</Span>
             </FollowButtonBody>
         </>

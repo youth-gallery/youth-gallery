@@ -89,6 +89,7 @@ const HomePostSpan = styled.span`
 const HomePostOnlyTxt = ({
     profileImg,
     name,
+    accountname,
     time,
     children,
     postUserName,
@@ -145,6 +146,9 @@ const HomePostOnlyTxt = ({
     console.log(postUserName);
     const [commentValue, setCommentValue] = useState('');
     console.log(commentValue);
+
+  const myAccountName = ''; //추후에 로그인 동작시 accountname 불러와서 저장
+  
     return (
         <>
             <HomePostDiv>
@@ -163,20 +167,7 @@ const HomePostOnlyTxt = ({
                     {children}
                 </Div>
             </HomePostDiv>
-            {name === postUserName ? (
-                <ButtonModalActive
-                    propState={showModal}
-                    propsCloseFunc={closeModal}
-                    postModalValues={{
-                        values: ['신고하기'],
-                    }}
-                    innerAlertValues={{
-                        title: '게시물을 신고할까요? ',
-                        rightText: '신고',
-                        rightBtnPropFunc: reportPost,
-                    }}
-                />
-            ) : (
+            {accountname === myAccountName ? (
                 <ButtonModalActive
                     propState={showModal}
                     propsCloseFunc={closeModal}
@@ -187,6 +178,19 @@ const HomePostOnlyTxt = ({
                         title: '댓글을 삭제할까요? ',
                         rightText: '삭제',
                         rightBtnPropFunc: deletePost,
+                    }}
+                />
+            ) : (
+                <ButtonModalActive
+                    propState={showModal}
+                    propsCloseFunc={closeModal}
+                    postModalValues={{
+                        values: ['신고하기'],
+                    }}
+                    innerAlertValues={{
+                        title: '게시물을 신고할까요? ',
+                        rightText: '신고',
+                        rightBtnPropFunc: reportPost,
                     }}
                 />
             )}

@@ -41,6 +41,7 @@ const CommentList = ({ postId }) => {
                         <HomePostOnlyTxt
                             profileImg={comment?.author?.image}
                             name={comment?.author?.username}
+                            accountname={comment?.author?.accountname}
                             key={comment?.id}
                             time={comment?.createdAt}
                             postUserName={postUserName}

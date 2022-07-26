@@ -13,11 +13,11 @@
 }
 
 .product_section {
-    width: 100%;
+    max-width: 400px;
     border-top: 0.5px solid #dbdbdb;
     border-bottom: 0.5px solid #dbdbdb;
     padding: 20px 0 20px 21px;
-    margin-bottom: 6px;
+    margin: 0 auto 6px auto;
 }
 
 .product_section .title {
@@ -29,7 +29,7 @@
 .product_section .item_warp {
     display: flex;
     flex-wrap: nowrap;
-    overflow: scroll;
+    overflow-x: scroll;
 }
 
 .post_section {

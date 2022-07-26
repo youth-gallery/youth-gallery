@@ -24,9 +24,6 @@ function Login() {
         setLoginPw(e.target.value);
     };
 
-    // TODO! mount시 1회만 (첫 로딩시) 이메일-비밀번호 필수입력 문구 가려주기
-    useEffect(() => {}, []);
-
     // 로그인 이메일 유효성검사 로직
     const emailRegex =
         /* eslint-disable-next-line */
@@ -76,6 +73,12 @@ function Login() {
 
         // 이메일, 비밀번호 input박스가 둘 중에 하나라도 비었을 때는 loginConfirm경고문구 지워주기
         !loginId || !loginPw ? setLoginConfirm(true) : null;
+
+        // TODO! mount시 1회만 (첫 로딩시) 이메일-비밀번호 필수입력 문구 가려주기
+        return () => {
+            setIsActive(false);
+            setLoginConfirm(true);
+        };
     }, [loginId, loginPw]);
 
     return (

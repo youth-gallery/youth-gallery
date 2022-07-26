@@ -1,10 +1,12 @@
 .all_warpper {
     min-width: 390px;
     display: flex;
+    background-color: #fff;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 30px 0 26px;
+    border-bottom: 0.5px solid #dbdbdb;
 }
 
 .all_warpper .top_warpper {

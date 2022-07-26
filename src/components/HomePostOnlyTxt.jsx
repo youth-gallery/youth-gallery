@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-// import { useRef } from 'react';
 import styled from 'styled-components';
-// import moreIcon from '../assets/s-icon-more-vertical.png';
 import ButtonModal from './modal/ButtonModal';
 import ButtonModalActive from './modal/ButtonModalActive';
 // import heartIcon from '../assets/icon-heart.png';
@@ -143,6 +141,8 @@ const HomePostOnlyTxt = ({
         setShowModal(false);
     };
 
+    console.log(name);
+    console.log(postUserName);
     const [commentValue, setCommentValue] = useState('');
     console.log(commentValue);
     return (

@@ -5,12 +5,9 @@ import axios from 'axios';
 // 프로필, name, 시간 :
 // comment content
 
-const CommentList = () => {
-    // 로그인 기능 구현 전이라 임시로 토큰과 게시글 설정
+const CommentList = ({ postId }) => {
     const [commentList, setCommentList] = useState([]);
-    // 포스트 아이디만 바꿈. 토큰 그대로
-    const postUserName = location.pathname.split('/')[2];
-    const postId = location.pathname.split('/')[3];
+    const postUserName = decodeURI(location.pathname).split('/')[2];
 
     useEffect(() => {
         async function renderComments() {
@@ -29,7 +26,6 @@ const CommentList = () => {
                     },
                 });
                 setCommentList(res.data.comments);
-                // console.log(res.data.comments);
             } catch (error) {
                 console.log(error);
             }

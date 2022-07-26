@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import logoutDot from '../../assets/icon-more-vertical.png';
 
@@ -11,13 +11,12 @@ const SelectButton = styled.button`
 `;
 
 function ButtonModal({ openModalProp }) {
-    let commentTarget = useRef('');
     const openModal = () => {
-        openModalProp(true, commentTarget);
+        openModalProp(true);
     };
     return (
         <>
-            <SelectButton onClick={openModal} ref={commentTarget} />
+            <SelectButton onClick={openModal}/>
         </>
     );
 }

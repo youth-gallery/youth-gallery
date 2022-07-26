@@ -12,12 +12,13 @@ import Search from './Search';
 import PostDetail from './postDetail/PostDetail';
 import UserProfile from './userprofile/UserProfile';
 import PostUpload from './postUpload/PostUpload';
+import News from './news/News';
 
 function PageRouter() {
     return (
         <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/news" element={<TabMenu img={'newsImg'} />} />
+            <Route path="/news" element={<News />} />
             <Route path="/post">
                 <Route path="upload" element={<PostUpload />} />
                 <Route path="edit" element={<TabMenu img={'uploadImg'} />} />

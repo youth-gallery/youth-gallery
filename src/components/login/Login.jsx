@@ -2,7 +2,7 @@
 import React from 'react';
 import styles from './Login.module.css';
 import Title from './Title';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
@@ -14,6 +14,8 @@ function Login() {
     const [isEmail, setIsEmail] = useState(false);
     const [loginConfirm, setLoginConfirm] = useState(false);
     const [loginMsg, setLoginMsg] = useState('');
+
+    const navigate = useNavigate();
     console.log(isEmail);
 
     const handleLoginId = (e) => {
@@ -57,6 +59,7 @@ function Login() {
                 );
                 setLoginConfirm(true);
                 setLoginMsg(''); // 경고문구 지워주기
+                navigate('/'); // 로그인 성공시 홈 피드로 이동시켜주기
             } else {
                 // 로그인 실패시
                 setLoginConfirm(false); // loginConfirm을 false로 바꿔줌 (경고문구 보여줄 div태그 보여줌 유무)

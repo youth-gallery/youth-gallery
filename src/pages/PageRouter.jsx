@@ -13,6 +13,7 @@ import PostDetail from './postDetail/PostDetail';
 import UserProfile from './userprofile/UserProfile';
 import PostUpload from './postUpload/PostUpload';
 import News from './news/News';
+import Splash from '../components/login/Splash';
 
 function PageRouter() {
     return (
@@ -35,6 +36,7 @@ function PageRouter() {
             </Route>
             <Route path="/search" element={<Search />} />
             {/* 나중에 페이지 만들면 수정해야함 */}
+            <Route path="/splash" element={<Splash />} />
             <Route path="/login" element={<Login />} />
             <Route path="/join" element={<EmailJoin />} />
             <Route path="/notFound" element={<NotFound />} />

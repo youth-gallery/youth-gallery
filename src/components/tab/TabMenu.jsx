@@ -91,7 +91,7 @@ const menuRendering = (img) => {
     return result;
 };
 
-function TapMenu({ img }) {
+function TabMenu({ img }) {
     return (
         <>
             <Outlet></Outlet>
@@ -102,4 +102,4 @@ function TapMenu({ img }) {
     );
 }
 
-export default TapMenu;
+export default TabMenu;

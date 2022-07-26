@@ -1,0 +1,16 @@
+.newscard_box {
+    margin-bottom: 5rem;
+}
+
+.newscard_box .newscard_img {
+    display: block;
+    width: 40rem;
+    height: 30rem;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+}
+
+.newscard_box .newscard_content {
+    font-size: 2rem;
+    font-weight: 700;
+}

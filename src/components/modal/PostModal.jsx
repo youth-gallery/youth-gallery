@@ -2,13 +2,21 @@ import React from 'react';
 import styles from './PostModal.module.css';
 import { useNavigate } from 'react-router-dom';
 
-function PostModal({ values }) {
+function PostModal({ values, propFunc }) {
     const navigate = useNavigate();
 
-    const setButton = (value, navigate) => {
+    const setButton = (value, navigate, propFunc) => {
         switch (value) {
+            case '설정 및 개인정보':
+                //설정 및 개인정보 페이지 이동
+                break;
+            case '로그아웃':
+                //로그아웃 모달 열기
+                propFunc(true);
+                break;
             case '삭제':
                 //삭제 모달 띄우기
+                propFunc(true);
                 break;
             case '수정':
                 //수정 페이지로 이동
@@ -16,6 +24,7 @@ function PostModal({ values }) {
                 break;
             case '신고하기':
                 //신고 모달 띄우기
+                propFunc(true);
                 break;
             case '웹사이트에서 상품보기':
                 //웹사이트 상품 페이지로 이동
@@ -33,7 +42,7 @@ function PostModal({ values }) {
                         <button
                             className={styles.modal_listBtn}
                             onClick={() => {
-                                setButton(value, navigate);
+                                setButton(value, navigate, propFunc);
                             }}
                         >
                             {value}

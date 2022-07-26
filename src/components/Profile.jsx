@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './Profile.module.css';
+// import FollowButton from './button/FollowButton';
 
 function Profile({ profileData }) {
     return (
@@ -23,20 +24,30 @@ function Profile({ profileData }) {
             <p className={styles.user_id}>{`@${profileData.accountname}`}</p>
             <p className={styles.user_intro}>{profileData.intro}</p>
             <ul className={styles.button_warp}>
-                <li>
+                {/* <li>
                     <button
-                        className={styles.circle_button}
+                        className={`${styles.circle_button} ${styles.chat_button}`}
                         type="button"
                     ></button>
                 </li>
-                <li>
-                    {/* 추후 버튼 컴포넌트로 수정할 코드 */}
-                    <div>팔로우</div>
+                <li className={styles.follow_button_warp}>
+                // isfollow= true -> follow , isfollow=false -> unfollow
+                    <FollowButton />
                 </li>
                 <li>
                     <button
                         className={`${styles.circle_button} ${styles.shared}`}
                     ></button>
+                </li> */}
+                <li>
+                    <button className={styles.edit_profile_button}>
+                        프로필 수정
+                    </button>
+                </li>
+                <li>
+                    <button className={styles.add_product_button}>
+                        상품 등록
+                    </button>
                 </li>
             </ul>
         </div>

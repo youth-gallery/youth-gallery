@@ -1,0 +1,84 @@
+.ir {
+    position: absolute;
+    clip: rect(0 0 0 0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+}
+
+.add_product_section .input_section {
+    display: flex;
+    flex-direction: column;
+    padding: 30px 34px 0;
+}
+
+.input_section .add_image_title {
+    font-size: 1.2rem;
+    line-height: 1.16666;
+    margin-bottom: 18px;
+    color: var(--gray-color);
+}
+
+.input_section .upload_img_section {
+    width: 100%;
+    max-width: 322px;
+    height: 204px;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    border: 0.5px solid #dbdbdb;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    margin: 0 auto 30px auto;
+}
+
+.image_upload_button {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-size: cover;
+    background-image: url('../../assets/upload-file.png');
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+}
+
+#image_upload_input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.input_section .input_title {
+    font-size: 1.2rem;
+    line-height: 1.25;
+    color: var(--gray-color);
+    margin-bottom: 10px;
+}
+
+.input_section .product_input {
+    /* 리셋에 추가할 부분 */
+    font-family: inherit;
+    /*  */
+    width: 100%;
+    font-size: 1.4rem;
+    line-height: 1;
+    border-bottom: 0.5px solid #dbdbdb;
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+}
+
+.input_section .product_input::placeholder {
+    color: #dbdbdb;
+}
+
+.input_section .product_input:last-child {
+    margin-bottom: 0;
+}

@@ -75,6 +75,30 @@
     background-position: center;
 }
 
+.button_warp .chat_button,
+.button_warp .follow_button_warp {
+    margin-right: 10px;
+}
+
+.button_warp .follow_button_warp {
+    width: 120px;
+}
+
 .button_warp .circle_button.shared {
     background-image: url(../assets/icon-share.png);
+}
+.button_warp .edit_profile_button,
+.button_warp .add_product_button {
+    border: 1px solid #dbdbdb;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.button_warp .edit_profile_button {
+    padding: 8px 26px;
+    margin-right: 12px;
+}
+
+.button_warp .add_product_button {
+    padding: 8px 22px;
 }

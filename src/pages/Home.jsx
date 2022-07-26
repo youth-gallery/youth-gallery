@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import HomePost from '../components/HomePost';
-// import HomePostOnlyTxt from '../components/HomePostOnlyTxt';
 import axios from 'axios';
-import TopBasicNav from '../components/nav/TopBasicNav';
-import TabMenu from '../components/tab/TapMenu';
+import TabMenu from '../components/tab/TabMenu';
+import Nav from '../components/nav/Nav';
+import TopMainNav from '../components/nav/TopMainNav';
 
 const Div = styled.div`
     display: flex;
@@ -20,13 +20,15 @@ function Home() {
     const url = 'https://mandarin.api.weniv.co.kr';
     const token =
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzE2MjM5ODJmZGNjNzEyZjQzMzk4YiIsImV4cCI6MTY2MjcwMTIyMiwiaWF0IjoxNjU3NTE3MjIyfQ.A75fUeLUj8TKdD1LVGGph-M1-coF8pr_oq8BY6R-k4k';
+    localStorage.setItem('token', token);
+    const getToken = localStorage.getItem('token');
 
     useEffect(() => {
         axios({
             method: 'GET',
             url: url + `/post/feed`,
             headers: {
-                'Authorization': `Bearer ${token}`,
+                'Authorization': `Bearer ${getToken}`,
                 'Content-type': 'application/json',
             },
         })
@@ -36,13 +38,14 @@ function Home() {
     console.log(posts);
     return (
         <>
-            <TopBasicNav title={'youth-gallery 홈'} />
+            <Nav>
+                <TopMainNav title={'youth-gallery 홈'} />
+            </Nav>
             <Div>
                 {posts.data &&
                     posts.data.posts.map((post) => (
                         <HomePost key={post.id} datas={post} />
                     ))}
-                {/* <HomePostOnlyTxt /> */}
             </Div>
             <TabMenu img={'homeImg'} />
         </>

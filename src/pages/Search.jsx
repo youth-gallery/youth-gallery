@@ -1,7 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import TopSearchNav from './nav/TopSearchNav';
+import TopSearchNav from '../components/nav/TopSearchNav';
 import axios from 'axios';
-import UserSearch from './UserSearch';
+import UserSearch from '../components/UserSearch';
+import Nav from '../components/nav/Nav';
+import TabMenu from '../components/tab/TabMenu';
+import styled from 'styled-components';
+
+const Ul = styled.ul`
+    margin: 60px 16px;
+`;
+
+const Li = styled.li`
+    padding-top: 16px;
+`;
 
 function Search() {
     const [keyword, setKeyword] = useState('');
@@ -19,43 +30,35 @@ function Search() {
                 'Authorization': `Bearer ${token}`,
                 'Content-type': 'application/json',
             },
-            data: [
-                {
-                    _id: String,
-                    username: String,
-                    accountname: String,
-                    following: [],
-                    follower: [],
-                    followerCount: Number,
-                    followingCount: Number,
-                },
-            ],
         })
             .then((response) => setUsers(response))
-            .then(console.log(users));
     }, [keyword]);
 
     const inputOnChange = (value) => {
         setKeyword(value);
-        console.log(keyword);
     };
     return (
         <>
-            <TopSearchNav propFunc={inputOnChange} />
-            <ul>
-                {users.data &&
+            <Nav>
+                <TopSearchNav propFunc={inputOnChange} />
+            </Nav>
+            <Ul>
+                {users.data && users.data.length ? (
                     users.data.map((user) => (
-                        <li key={user._id}>
-                            {/* {user.username} ({user.accountname}) */}
+                        <Li key={user._id}>
                             <UserSearch
                                 userImg={user.image}
                                 username={user.username}
                                 accountname={user.accountname}
+                                keyword={keyword}
                             />
-                        </li>
-                    ))}
-            </ul>
-            <ul></ul>
+                        </Li>
+                    ))
+                ) : (
+                    <p>검색할 수 있는 계정이 없습니다.</p>
+                )}
+            </Ul>
+            <TabMenu img={'homeImg'} />
         </>
     );
 }

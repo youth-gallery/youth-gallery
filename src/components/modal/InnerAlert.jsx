@@ -1,15 +1,32 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function DeleteAlert() {
+function InnerAlert({
+    title,
+    rightText,
+    closeModalPropFunc,
+    rightBtnPropFunc,
+}) {
+    const closeModal = () => {
+        closeModalPropFunc(false);
+    };
+    const rightBtnOnClick = () => {
+        rightBtnPropFunc(true);
+    };
     return (
         <Article>
-            <Message>상품을 삭제할까요?</Message>
+            <Message>{title}</Message>
             <ButtonWarp>
-                <Button color="#000" border="1px solid #DBDBDB">
+                <Button
+                    color="#000"
+                    border="1px solid #DBDBDB"
+                    onClick={closeModal}
+                >
                     취소
                 </Button>
-                <Button color="#EA4335">삭제</Button>
+                <Button color="#EA4335" onClick={rightBtnOnClick}>
+                    {rightText}
+                </Button>
             </ButtonWarp>
         </Article>
     );
@@ -20,6 +37,11 @@ const Article = styled.article`
     border-radius: 10px;
     background-color: #fff;
     overflow: hidden;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 30;
 `;
 
 const Message = styled.p`
@@ -43,6 +65,7 @@ const Button = styled.button`
     border: none; // 아직 reset.css 없어서 넣은 부분
     border-right: ${(props) => props.border};
     padding: 0;
+    cursor: pointer;
 `;
 
-export default DeleteAlert;
+export default InnerAlert;

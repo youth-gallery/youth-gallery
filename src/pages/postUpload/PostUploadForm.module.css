@@ -1,8 +1,8 @@
 .uploadform_txt {
     width: 40%;
     height: 150px;
-    margin-top: 20px;
-    margin-left: 70px;
+    margin-top: 7rem;
+    margin-left: 7rem;
     border: none;
     /* 나중에 rem 단위로 고쳐야함 */
     font-size: 14px;

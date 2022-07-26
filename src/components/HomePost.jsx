@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import moreIcon from '../assets/s-icon-more-vertical.png';
 import heartIcon from '../assets/icon-heart.png';
 import heartIconFill from '../assets/icon-heartFill.png';
 import messageIcon from '../assets/icon-message-circle-1.png';
@@ -8,6 +7,9 @@ import axios from 'axios';
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
+import ButtonModalActive from './modal/ButtonModalActive';
+import ButtonModal from './modal/ButtonModal';
 
 const HomePostDiv = styled.div`
     display: flex;
@@ -48,15 +50,6 @@ const HomePostId = styled.span`
     font-size: 12px;
     line-height: 1.2;
     color: #767676;
-`;
-
-const MoreIcon = styled.button`
-    width: 20px;
-    height: 20px;
-    margin-top: 4px;
-    background: url(${moreIcon}) no-repeat center / 18px 18px;
-    border: none;
-    cursor: pointer;
 `;
 
 const HomePostTxt = styled.p`
@@ -151,13 +144,16 @@ const HomePost = ({ datas }) => {
     const url = 'https://mandarin.api.weniv.co.kr';
     const token =
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzE2MjM5ODJmZGNjNzEyZjQzMzk4YiIsImV4cCI6MTY2MjcwMTIyMiwiaWF0IjoxNjU3NTE3MjIyfQ.A75fUeLUj8TKdD1LVGGph-M1-coF8pr_oq8BY6R-k4k';
+    localStorage.setItem('token', token);
+    const getToken = localStorage.getItem('token');
+    const postId = '62d9039917ae66658183d2c8';
 
     async function useAxios(url = '', method = '') {
         try {
             axios(url, {
                 method: method,
                 headers: {
-                    'Authorization': `Bearer ${token}`,
+                    'Authorization': `Bearer ${getToken}`,
                     'Content-type': 'application/json',
                 },
             })
@@ -193,6 +189,22 @@ const HomePost = ({ datas }) => {
         }
     };
     const postDate = new Date(datas.updatedAt);
+
+    //모달 함수
+    const [showModal, setShowModal] = useState(false);
+    const openModal = (propState) => {
+        console.log(propState);
+        setShowModal(propState);
+    };
+
+    const closeModal = (props) => {
+        setShowModal(props);
+    };
+
+    const reportPost = () => {
+        alert('신고하였습니다.');
+        setShowModal(false);
+    };
     return (
         <>
             <HomePostDiv>
@@ -206,7 +218,7 @@ const HomePost = ({ datas }) => {
                                 </HomePostName>
                                 <HomePostId>{datas.author.intro}</HomePostId>
                             </FlexDivInner>
-                            <MoreIcon />
+                            <ButtonModal openModalProp={openModal} />
                         </FlexDiv>
                     </div>
 
@@ -255,7 +267,13 @@ const HomePost = ({ datas }) => {
                                 {count}
                             </HeartBtn>
                         )}
-                        <CommentBtn>{datas.commentCount}</CommentBtn>
+                        {datas.id == '62d9039917ae66658183d2c8' ? (
+                            <Link to={`/post/${postId}`}>
+                                <CommentBtn>{datas.commentCount}</CommentBtn>
+                            </Link>
+                        ) : (
+                            <CommentBtn>{datas.commentCount}</CommentBtn>
+                        )}
                     </div>
                     <HomePostDate>
                         {`${postDate.getFullYear()}년 ${
@@ -264,6 +282,18 @@ const HomePost = ({ datas }) => {
                     </HomePostDate>
                 </div>
             </HomePostDiv>
+            <ButtonModalActive
+                propState={showModal}
+                propsCloseFunc={closeModal}
+                postModalValues={{
+                    values: ['신고하기'],
+                }}
+                innerAlertValues={{
+                    title: '게시물을 신고할까요? ',
+                    rightText: '신고',
+                    rightBtnPropFunc: reportPost,
+                }}
+            />
         </>
     );
 };

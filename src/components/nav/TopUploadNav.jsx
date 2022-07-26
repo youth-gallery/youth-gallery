@@ -2,30 +2,22 @@ import styled from 'styled-components';
 import React from 'react';
 import iconArrowLeft from '../../assets/icon-arrow-left.png';
 import { useNavigate } from 'react-router-dom';
+import SaveButton from '../button/SaveButton';
+import SaveDisabledButton from '../button/SaveDisabledButton';
 
-const NavStyle = styled.section`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px 10px 5px 10px;
-    border-bottom: 1px solid #dbdbdb;
-`;
-
-const NavButton = styled.button`
-    //reset
-    border: initial;
-    background-color: initial;
-    cursor: pointer;
-`;
-
-const ArrowLeftButton = styled(NavButton)`
+const ArrowLeftButton = styled.button`
     width: 22px;
     height: 22px;
     background-image: url(${iconArrowLeft});
     background-size: cover;
+    cursor: pointer;
 `;
 
-function TopUploadNav(props) {
+const ButtonDiv = styled.div`
+    width: 90px;
+`;
+
+function TopUploadNav({ title, state }) {
     const navigate = useNavigate();
     const handleGoBack = () => {
         navigate(-1);
@@ -33,11 +25,14 @@ function TopUploadNav(props) {
 
     return (
         <>
-            <NavStyle className="nav">
-                <ArrowLeftButton name="back" onClick={handleGoBack} />
-                {/* 나중에 저장버튼 component 넣을 공간 */}
-                <NavButton>{props.value}</NavButton>
-            </NavStyle>
+            <ArrowLeftButton name="back" onClick={handleGoBack} />
+            <ButtonDiv>
+                {state ? (
+                    <SaveButton title={title} />
+                ) : (
+                    <SaveDisabledButton title={title} />
+                )}
+            </ButtonDiv>
         </>
     );
 }

@@ -19,23 +19,48 @@ function Login() {
 
     const handleLoginId = (e) => {
         setLoginId(e.target.value);
+
+        // 로그인 이메일 유효성검사 로직
+        const emailRegex =
+            /* eslint-disable-next-line */
+            /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+
+        // 이메일 유효성검사
+        emailRegex.test(loginId) ? setIsEmail(true) : setIsEmail(false);
     };
+
+    // 아름님 코드
+    //       const handleEmail = useCallback((event) => {
+    //     const emailRegex =
+    //       /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+    //     const currentEmail = event.target.value;
+    //     setEmail(currentEmail);
+
+    //     if (!emailRegex.test(currentEmail)) {
+    //       setEmailMsg("올바른 이메일 형식이 아닙니다");
+    //       setIsEmail(false);
+    //     } else {
+    //       setIsEmail(true);
+    //       setEmailMsg("");
+    //     }
+    //   }, []);
 
     const handleLoginPw = (e) => {
         setLoginPw(e.target.value);
     };
 
-    // 로그인 이메일 유효성검사 로직
-    const emailRegex =
-        /* eslint-disable-next-line */
-        /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
-
     // 로그인 버튼 클릭시
-    // 1. 이메일 유효성 검사
+    // 1. 이메일 유효성검사
     // 2. API 서버에 post요청으로 데이터 요청
     // 3. 이메일과 비밀번호 일치 여부 검사 => 불일치시 경고 문구 출력!
     const onClickLogin = async () => {
-        emailRegex.test(loginId) ? setIsEmail(true) : setIsEmail(false);
+        // // 로그인 이메일 유효성검사 로직
+        // const emailRegex =
+        //     /* eslint-disable-next-line */
+        //     /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+
+        // // 이메일 유효성검사
+        // emailRegex.test(loginId) ? setIsEmail(true) : setIsEmail(false);
 
         try {
             const res = await axios.post(
@@ -80,8 +105,8 @@ function Login() {
 
         // TODO! mount시 1회만 (첫 로딩시) 이메일-비밀번호 필수입력 문구 가려주기
         return () => {
-            setIsActive(false);
-            setLoginConfirm(true);
+            // setIsActive(false);
+            // setLoginConfirm(true);
         };
     }, [loginId, loginPw]);
 
@@ -93,6 +118,7 @@ function Login() {
                     <label htmlFor="input_id">이메일</label>
                     <input
                         className={styles.login_input_id}
+                        value={loginId}
                         id="input_id"
                         type="email"
                         onChange={handleLoginId}
@@ -110,6 +136,7 @@ function Login() {
                     </label>
                     <input
                         className={styles.login_input_pw}
+                        value={loginPw}
                         id="input_pw"
                         type="password"
                         onChange={handleLoginPw}

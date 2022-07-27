@@ -14,6 +14,7 @@ import UserProfile from './userprofile/UserProfile';
 import PostUpload from './postUpload/PostUpload';
 import News from './news/News';
 import Splash from '../components/login/Splash';
+import PostEdit from './postEdit/PostEdit';
 
 function PageRouter() {
     return (
@@ -22,12 +23,12 @@ function PageRouter() {
             <Route path="/news" element={<News />} />
             <Route path="/post">
                 <Route path="upload" element={<PostUpload />} />
-                <Route path="edit" element={<TabMenu img={'uploadImg'} />} />
+                <Route path="edit/:postId" element={<PostEdit />} />
             </Route>
             {/* 임시로 게시물 id 지정 
             나중에 /post/:id 로 넣으면됨*/}
             <Route path="/post/:username/:post_id" element={<PostDetail />} />
-            <Route path="/profile" element={<UserProfile />}>
+            <Route path="/profile/:accountname" element={<UserProfile />}>
                 <Route path="followers" element={<FollowersList />} />
                 <Route path="followings" element={<FollowingsList />} />
             </Route>

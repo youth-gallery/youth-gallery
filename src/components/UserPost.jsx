@@ -4,6 +4,8 @@ import heartIcon from '../assets/icon-heart.png';
 import messageIcon from '../assets/icon-message-circle-1.png';
 import ButtonModal from './modal/ButtonModal';
 import ButtonModalActive from './modal/ButtonModalActive';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const HomePostLi = styled.li`
     display: flex;
@@ -94,9 +96,30 @@ const UserPost = ({ postList, profileData, i }) => {
         setShowModal(props);
     };
 
-    const deletePost = () => {
-        alert('삭제하였습니다.');
-        setShowModal(false);
+    const deletePost = async () => {
+        const navigate = useNavigate();
+        const postId = postList[i].id;
+        const url = 'https://mandarin.api.weniv.co.kr';
+        const token =
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyY2JjNTJiODJmZGNjNzEyZjQzODgyOSIsImV4cCI6MTY2MjcxMjQ1MSwiaWF0IjoxNjU3NTI4NDUxfQ.bnhQqSrauikpfrLKP6OXl2HMdizZdeM1TclnNTr1OXk';
+        localStorage.setItem('token', token);
+        const getToken = localStorage.getItem('token');
+
+        try {
+            await axios.delete(`${url}/post/${postId}`, {
+                headers: {
+                    'Authorization': `Bearer ${getToken}`,
+                    'Content-type': 'application/json',
+                },
+            });
+            alert('삭제하였습니다.');
+            setShowModal(false);
+            navigate('/profile');
+        } catch (error) {
+            // 404 페이지 이동 추가하기
+            console.log(error);
+        }
+        console.log(postId);
     };
 
     return (

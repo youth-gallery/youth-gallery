@@ -13,6 +13,7 @@
 .pw_error {
     color: var(--error-red);
     font-size: 1.2rem;
+    margin-bottom: 16px;
 }
 
 .login_btn_active {
@@ -67,8 +68,13 @@ input {
     margin-bottom: 16px;
 }
 
+.login_input_id,
 .login_input_pw {
     margin-bottom: 6px;
+}
+
+.input_label_pw {
+    margin-top: 10px;
 }
 
 input:focus {

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import heartIcon from '../assets/icon-heart.png';
-import messageIcon from '../assets/icon-message-circle-1.png';
 import ButtonModal from './modal/ButtonModal';
 import ButtonModalActive from './modal/ButtonModalActive';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import PostHeartBtn from './PostForm/PostHeartBtn';
+import PostComment from './PostForm/PostComment';
+import PostImg from './PostForm/PostImg';
 
 const HomePostLi = styled.li`
     display: flex;
@@ -47,35 +48,9 @@ const HomePostId = styled.span`
 const HomePostTxt = styled.p`
     font-size: 1.4rem;
     line-height: 1.4;
-`;
-
-const HomePostImg = styled.img`
     width: 304px;
-    height: 228px;
-    object-fit: cover;
-    border-radius: 10px;
 `;
 
-const HeartBtn = styled.button`
-    width: 45px;
-    height: 20px;
-    background: url(${heartIcon}) no-repeat left / 18px 18px;
-    text-align: right;
-    border: none;
-    cursor: pointer;
-    color: #767676;
-`;
-
-const CommentBtn = styled.button`
-    width: 45px;
-    height: 20px;
-    margin: 7px 206px 15px 8px;
-    background: url(${messageIcon}) no-repeat left / 18px 18px;
-    text-align: right;
-    border: none;
-    cursor: pointer;
-    color: #767676;
-`;
 const HomePostDate = styled.span`
     display: block;
     margin-bottom: 4px;
@@ -85,6 +60,8 @@ const HomePostDate = styled.span`
 `;
 
 const UserPost = ({ postList, profileData, i }) => {
+    console.log(postList);
+
     const postDate = new Date(postList[i].updatedAt);
     const [showModal, setShowModal] = useState(false);
     const openModal = (propState) => {
@@ -100,9 +77,6 @@ const UserPost = ({ postList, profileData, i }) => {
         const navigate = useNavigate();
         const postId = postList[i].id;
         const url = 'https://mandarin.api.weniv.co.kr';
-        const token =
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyY2JjNTJiODJmZGNjNzEyZjQzODgyOSIsImV4cCI6MTY2MjcxMjQ1MSwiaWF0IjoxNjU3NTI4NDUxfQ.bnhQqSrauikpfrLKP6OXl2HMdizZdeM1TclnNTr1OXk';
-        localStorage.setItem('token', token);
         const getToken = localStorage.getItem('token');
 
         try {
@@ -116,7 +90,7 @@ const UserPost = ({ postList, profileData, i }) => {
             setShowModal(false);
             navigate('/profile');
         } catch (error) {
-            // 404 페이지 이동 추가하기
+            <Link to="/notFound" />;
             console.log(error);
         }
         console.log(postId);
@@ -130,7 +104,6 @@ const UserPost = ({ postList, profileData, i }) => {
                 </div>
                 <div>
                     <FlexDiv>
-                        {/* 클릭시 해당 사용자 피드 목록으로 이동하도록 후에 처리 */}
                         <UserWarp>
                             <HomePostName>{profileData.username}</HomePostName>
                             <HomePostId>{`@${profileData.accountname}`}</HomePostId>
@@ -138,9 +111,21 @@ const UserPost = ({ postList, profileData, i }) => {
                         <ButtonModal openModalProp={openModal} />
                     </FlexDiv>
                     <HomePostTxt>{postList[i].content}</HomePostTxt>
-                    <HomePostImg src={postList[i].image} alt="포스트 이미지" />
-                    <HeartBtn>{postList[i].heartCount}</HeartBtn>
-                    <CommentBtn>{postList[i].commentCount}</CommentBtn>
+                    <Link
+                        to={`/post/${profileData.username}/${postList[i].id}`}
+                    >
+                        <PostImg image={postList[i].image} />
+                    </Link>
+                    <PostHeartBtn
+                        datas_id={postList[i].id}
+                        hearted={postList[i].hearted}
+                        heartCount={postList[i].heartCount}
+                    />
+                    <PostComment
+                        datas_id={postList[i].id}
+                        username={postList[i].autho}
+                        commentCount={postList[i].commentCount}
+                    />
                     <HomePostDate>
                         {`${postDate.getFullYear()}년 ${
                             postDate.getMonth() + 1

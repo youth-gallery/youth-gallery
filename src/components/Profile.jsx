@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styles from './Profile.module.css';
 // import FollowButton from './button/FollowButton';
 
@@ -44,11 +45,13 @@ function Profile({ profileData }) {
                         프로필 수정
                     </button>
                 </li>
-                <li>
-                    <button className={styles.add_product_button}>
-                        상품 등록
-                    </button>
-                </li>
+                <Link to="/product">
+                    <li>
+                        <button className={styles.add_product_button}>
+                            상품 등록
+                        </button>
+                    </li>
+                </Link>
             </ul>
         </div>
     );

@@ -17,11 +17,16 @@ const ContentWrap = styled.li`
     width: fit-content;
     text-align: start;
     background-color: #fff;
+    margin-right: 10px;
+    &:last-child {
+        margin-right: 0;
+    }
 `;
 
 const ProductImg = styled.img`
     width: 140px;
     height: 90px;
+    object-fit: cover;
     border-radius: 8px;
     margin-bottom: 6px;
 `;

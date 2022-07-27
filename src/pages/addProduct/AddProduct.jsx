@@ -1,28 +1,33 @@
 import axios from 'axios';
-import { React, useState, useEffect } from 'react';
+import { React, useRef, useState, useEffect } from 'react';
 import Nav from '../../components/nav/Nav';
 import TopUploadNav from '../../components/nav/TopUploadNav';
 import styles from './AddProduct.module.css';
 
 const AddProduct = () => {
-    const [image, setImage] = useState('');
+    const [preview, setPreview] = useState('');
     const [name, setName] = useState('');
-    const [price, setPrice] = useState(Number);
+    const [price, setPrice] = useState(0);
     const [link, setLink] = useState('');
-
     const [state, setState] = useState(false);
+
+    const inpRef = useRef(null);
+    const onPicBtnClick = () => {
+        inpRef.current.click();
+    };
 
     // 현재 인라인으로 바꾸는 방법 밖에 생각나지 않아 인라인으로 구현.
     //  혹시 다른 방법 생각난다면 수정 예정.
     const backgroundstyle = {
-        backgroundImage: `url('${image}')`,
+        backgroundImage: `url('${preview}')`,
     };
+
     // 버튼 활성화
     useEffect(() => {
         if (
             name.length > 0 &&
             price.length > 0 &&
-            image.length > 0 &&
+            preview.length > 0 &&
             link.length > 0 &&
             price !== Number
         ) {
@@ -30,8 +35,28 @@ const AddProduct = () => {
         } else {
             setState(false);
         }
-    }, [name, price, image, link]);
+    }, [name, price, preview, link]);
 
+    // 이미지 데이터 보내기
+    const uploadImage = async () => {
+        let formData = new FormData();
+        const imgFile = inpRef.current.files;
+        const file = imgFile[0];
+        formData.append('image', file);
+        const res = await axios.post(
+            'https://mandarin.api.weniv.co.kr/image/uploadfile',
+            formData
+        );
+        const imgUrl = `https://mandarin.api.weniv.co.kr/${res.data.filename}`;
+        return imgUrl;
+    };
+
+    // 미리보기 이미지
+    const handleImageInput = (e) => {
+        setPreview(URL.createObjectURL(e.target.files[0]));
+    };
+
+    // 상품등록 데이터 전송
     const createProduct = async (e) => {
         e.preventDefault();
         // 추후에 로그인 기능 구현되면 삭제. 일회성 토큰
@@ -40,10 +65,9 @@ const AddProduct = () => {
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyY2JjNTJiODJmZGNjNzEyZjQzODgyOSIsImV4cCI6MTY2Mzg0ODQ1NSwiaWF0IjoxNjU4NjY0NDU1fQ.B0lhuOQectFJpxPqedzfuXTLceUzZUkNOGk-t6NWA1U';
         localStorage.setItem('token', token);
         const getToken = localStorage.getItem('token');
-        console.log(getToken);
-
+        const res = uploadImage();
         try {
-            axios.post(
+            await axios.post(
                 `${url}/product`,
                 {
                     product: {
@@ -54,7 +78,7 @@ const AddProduct = () => {
                                 .reduce((curr, acc) => curr + acc, '')
                         ),
                         link: link,
-                        itemImage: `${image}`,
+                        itemImage: await res,
                     },
                 },
                 {
@@ -70,7 +94,6 @@ const AddProduct = () => {
     };
     // 숫자에 , 찍어주는 함수
     const inputPriceFormat = (str) => {
-        console.log('s', str);
         const comma = (str) => {
             str = String(str);
             return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
@@ -105,13 +128,9 @@ const AddProduct = () => {
                             id={styles.image_upload_input}
                             type="file"
                             accept="image/*"
-                            onChange={(e) => {
-                                setImage(
-                                    URL.createObjectURL(e.target.files[0])
-                                );
-                                console.log(e.target.files);
-                                console.log(image);
-                            }}
+                            ref={inpRef}
+                            onChange={handleImageInput}
+                            onClick={onPicBtnClick}
                         ></input>
                     </section>
                 }
@@ -128,7 +147,6 @@ const AddProduct = () => {
                     placeholder="2~15자 이내여야 합니다."
                     onChange={(e) => {
                         setName(e.target.value);
-                        console.log(name);
                     }}
                 />
                 <label
@@ -145,7 +163,6 @@ const AddProduct = () => {
                     placeholder="숫자만 입력 가능합니다."
                     onChange={(e) => {
                         setPrice(inputPriceFormat(e.target.value));
-                        console.log(price);
                     }}
                 />
                 <label

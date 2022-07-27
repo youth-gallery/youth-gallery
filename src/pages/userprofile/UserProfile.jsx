@@ -86,7 +86,7 @@ function UserProfile() {
     };
 
     return (
-        <>
+        <section className={styles.user_profile_section}>
             <Nav>
                 <TopBasicNav
                     title={'youth-gallery 홈'}
@@ -96,13 +96,17 @@ function UserProfile() {
             <div className={styles.user_profile_wrap}>
                 <Profile profileData={profileData} />
                 <section className={styles.product_section}>
-                    <h2 className={styles.title}>판매 중인 상품</h2>
-                    <ul className={styles.item_warp}>
-                        {productList.map((_, i) => {
-                            // eslint-disable-next-line react/jsx-key
-                            return <Product productList={productList} i={i} />;
-                        })}
-                    </ul>
+                    <div className={styles.product_list_warp}>
+                        <h2 className={styles.title}>판매 중인 상품</h2>
+                        <ul className={styles.item_warp}>
+                            {productList.map((_, i) => {
+                                return (
+                                    // eslint-disable-next-line react/jsx-key
+                                    <Product productList={productList} i={i} />
+                                );
+                            })}
+                        </ul>
+                    </div>
                 </section>
                 <section className={styles.post_section}>
                     <h2 className={styles.ir}>작성한 게시글</h2>
@@ -123,7 +127,10 @@ function UserProfile() {
             <ButtonModalActive
                 propState={showModal}
                 propsCloseFunc={closeModal}
-                postModalValues={{ values: ['설정 및 개인정보', '로그아웃'] , type:'logout'}}
+                postModalValues={{
+                    values: ['설정 및 개인정보', '로그아웃'],
+                    type: 'logout',
+                }}
                 innerAlertValues={{
                     title: '로그아웃 하시겠어요? ',
                     rightText: '로그아웃',
@@ -131,7 +138,7 @@ function UserProfile() {
                 }}
             />
             <TabMenu img={'profileImg'} />
-        </>
+        </section>
     );
 }
 

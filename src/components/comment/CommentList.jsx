@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import HomePostOnlyTxt from '../HomePostOnlyTxt';
+import HomePostOnlyTxt from '../PostForm/HomePostOnlyTxt';
 import axios from 'axios';
 // import profile from '../../assets/basic-profile.png';
 // 프로필, name, 시간 :
 // comment content
 
-const CommentList = ({ postId }) => {
+const CommentList = ({ postId, postUserName }) => {
     const [commentList, setCommentList] = useState([]);
-    const postUserName = decodeURI(location.pathname).split('/')[2];
 
     useEffect(() => {
         async function renderComments() {

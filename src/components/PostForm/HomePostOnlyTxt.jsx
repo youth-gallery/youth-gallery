@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import ButtonModal from './modal/ButtonModal';
-import ButtonModalActive from './modal/ButtonModalActive';
-// import heartIcon from '../assets/icon-heart.png';
-// import messageIcon from '../assets/icon-message-circle-1.png';
+import ButtonModal from '../modal/ButtonModal';
+import ButtonModalActive from '../modal/ButtonModalActive';
+
+const CommentArea = styled.div`
+  margin: 16px 0;
+`
 
 const HomePostDiv = styled.div`
     display: flex;
@@ -42,49 +44,6 @@ const HomePostSpan = styled.span`
     color: #767676;
     margin-left: 5px;
 `;
-
-// const MoreIcon = styled.button`
-//     width: 20px;
-//     height: 20px;
-//     margin-top: 4px;
-//     background: url(${moreIcon}) no-repeat center / 18px 18px;
-//     border: none;
-//     cursor: pointer;
-// `;
-
-// const HomePostTxt = styled.p`
-//     font-size: 14px;
-//     line-height: 1.4;
-// `;
-
-// const HeartBtn = styled.button`
-//     width: 45px;
-//     height: 20px;
-//     background: url(${heartIcon}) no-repeat left / 18px 18px;
-//     text-align: right;
-//     border: none;
-//     cursor: pointer;
-//     color: #767676;
-// `;
-
-// const CommentBtn = styled.button`
-//     width: 45px;
-//     height: 20px;
-//     margin: 3px 206px 15px 8px;
-//     background: url(${messageIcon}) no-repeat left / 18px 18px;
-//     text-align: right;
-//     border: none;
-//     cursor: pointer;
-//     color: #767676;
-// `;
-
-// const HomePostDate = styled.span`
-//     display: block;
-//     margin-bottom: 4px;
-//     color: #767676;
-//     font-size: 10px;
-//     line-height: 1.2;
-// `;
 
 const HomePostOnlyTxt = ({
     profileImg,
@@ -147,10 +106,10 @@ const HomePostOnlyTxt = ({
     const [commentValue, setCommentValue] = useState('');
     console.log(commentValue);
 
-  const myAccountName = ''; //추후에 로그인 동작시 accountname 불러와서 저장
+  const myAccountName = localStorage.getItem('accountname'); //추후에 로그인 동작시 accountname 불러와서 저장
   
     return (
-        <>
+        <CommentArea>
             <HomePostDiv>
                 <div>
                     <HomePostProfile src={profileImg} />
@@ -194,7 +153,7 @@ const HomePostOnlyTxt = ({
                     }}
                 />
             )}
-        </>
+        </CommentArea>
     );
 };
 

@@ -2,11 +2,10 @@
 import React from 'react';
 import styles from './Login.module.css';
 import Title from './Title';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
-// import axios from 'axios';
 
 function Login() {
     const [loginId, setLoginId] = useState('');
@@ -15,6 +14,8 @@ function Login() {
     const [isEmail, setIsEmail] = useState(false);
     const [loginConfirm, setLoginConfirm] = useState(false);
     const [loginMsg, setLoginMsg] = useState('');
+
+    const navigate = useNavigate();
     console.log(isEmail);
 
     const handleLoginId = (e) => {
@@ -33,7 +34,7 @@ function Login() {
     // 로그인 버튼 클릭시
     // 1. 이메일 유효성 검사
     // 2. API 서버에 post요청으로 데이터 요청
-    // 3. 이메일 주소와 비밀번호 일치 여부 검사 => 불일치시 경고 문구 출력!
+    // 3. 이메일과 비밀번호 일치 여부 검사 => 불일치시 경고 문구 출력!
     const onClickLogin = async () => {
         emailRegex.test(loginId) ? setIsEmail(true) : setIsEmail(false);
 
@@ -47,13 +48,18 @@ function Login() {
                     },
                 }
             );
-            console.log(res.data);
+            console.log(res);
 
             // 로그인 성공시 로컬스토리지에 토큰 저장
             if (res.data.user?.token) {
                 localStorage.setItem('token', res.data.user.token);
-                loginConfirm(true);
+                localStorage.setItem(
+                    'refresh-token',
+                    res.data.user.refreshToken
+                );
+                setLoginConfirm(true);
                 setLoginMsg(''); // 경고문구 지워주기
+                navigate('/'); // 로그인 성공시 홈 피드로 이동시켜주기
             } else {
                 // 로그인 실패시
                 setLoginConfirm(false); // loginConfirm을 false로 바꿔줌 (경고문구 보여줄 div태그 보여줌 유무)
@@ -70,10 +76,14 @@ function Login() {
 
         // 이메일, 비밀번호 input박스가 둘 중에 하나라도 비었을 때는 loginConfirm경고문구 지워주기
         !loginId || !loginPw ? setLoginConfirm(true) : null;
+
+        // TODO! mount시 1회만 (첫 로딩시) 이메일-비밀번호 필수입력 문구 가려주기
+        return () => {
+            setIsActive(false);
+            setLoginConfirm(true);
+        };
     }, [loginId, loginPw]);
 
-    console.log(loginId);
-    console.log(loginId.length);
     return (
         <>
             <section className={styles.login_body}>
@@ -81,19 +91,22 @@ function Login() {
                 <div className={styles.login_title}>
                     <label htmlFor="input_id">이메일</label>
                     <input
+                        className={styles.login_input_id}
                         id="input_id"
                         type="email"
                         onChange={handleLoginId}
                     />
-                    {loginId.length !== 0 ? (
+                    {loginId ? (
                         <div />
                     ) : (
                         <div className={styles.email_error}>
-                            이메일을 입력해주세요.{' '}
+                            *이메일을 입력해주세요.
                         </div>
                     )}
 
-                    <label htmlFor="input_pw">비밀번호</label>
+                    <label className={styles.input_label_pw} htmlFor="input_pw">
+                        비밀번호
+                    </label>
                     <input
                         className={styles.login_input_pw}
                         id="input_pw"
@@ -105,11 +118,11 @@ function Login() {
                     ) : (
                         <div className={styles.login_error}>{loginMsg}</div>
                     )}
-                    {loginPw.length !== 0 ? (
+                    {loginPw ? (
                         <div />
                     ) : (
                         <div className={styles.pw_error}>
-                            비밀번호를 입력해주세요.
+                            *비밀번호를 입력해주세요.
                         </div>
                     )}
                 </div>

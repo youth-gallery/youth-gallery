@@ -165,7 +165,7 @@ function UserProfile() {
                     ) : (
                         <ul className={styles.post_album_warp}>
                             {postList.map((_, i) => {
-                                return postList[i].image === null ? null : (
+                                return postList[i].image === '' ? null : (
                                     <img
                                         src={postList[i].image}
                                         className={styles.post_album_item}

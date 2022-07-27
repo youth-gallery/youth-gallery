@@ -13,15 +13,15 @@ import ButtonModalActive from '../../components/modal/ButtonModalActive';
 
 function UserProfile() {
     const [profileData, setProfileData] = useState({});
-    const token =
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyY2JjNTJiODJmZGNjNzEyZjQzODgyOSIsImV4cCI6MTY2MjcxMjQ1MSwiaWF0IjoxNjU3NTI4NDUxfQ.bnhQqSrauikpfrLKP6OXl2HMdizZdeM1TclnNTr1OXk';
+    const getToken = localStorage.getItem('token');
+    const getAccountName = localStorage.getItem('accountname');
 
     // 사용자프로필
     useEffect(() => {
         axios
-            .get('https://mandarin.api.weniv.co.kr/profile/0002', {
+            .get(`https://mandarin.api.weniv.co.kr/profile/${getAccountName}`, {
                 headers: {
-                    'Authorization': `Bearer ${token}`,
+                    'Authorization': `Bearer ${getToken}`,
                     'Content-type': 'application/json',
                 },
             })
@@ -37,9 +37,9 @@ function UserProfile() {
     const [productList, setProductList] = useState([]);
     useEffect(() => {
         axios
-            .get('https://mandarin.api.weniv.co.kr/product/0002', {
+            .get(`https://mandarin.api.weniv.co.kr/product/${getAccountName}`, {
                 headers: {
-                    'Authorization': `Bearer ${token}`,
+                    'Authorization': `Bearer ${getToken}`,
                     'Content-type': 'application/json',
                 },
             })
@@ -55,12 +55,15 @@ function UserProfile() {
     const [postList, setPostList] = useState([]);
     useEffect(() => {
         axios
-            .get('https://mandarin.api.weniv.co.kr/post/0002/userpost', {
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-type': 'application/json',
-                },
-            })
+            .get(
+                `https://mandarin.api.weniv.co.kr/post/${getAccountName}/userpost`,
+                {
+                    headers: {
+                        'Authorization': `Bearer ${getToken}`,
+                        'Content-type': 'application/json',
+                    },
+                }
+            )
             .then((res) => {
                 setPostList(res.data.post);
             })

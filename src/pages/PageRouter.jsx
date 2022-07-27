@@ -14,6 +14,7 @@ import UserProfile from './userprofile/UserProfile';
 import PostUpload from './postUpload/PostUpload';
 import News from './news/News';
 import Splash from '../components/login/Splash';
+import AddProduct from './addProduct/AddProduct';
 
 function PageRouter() {
     return (
@@ -31,6 +32,7 @@ function PageRouter() {
                 <Route path="followers" element={<FollowersList />} />
                 <Route path="followings" element={<FollowingsList />} />
             </Route>
+            <Route path="/product" element={<AddProduct />} />
             <Route path="/search" element={<Search />} />
             {/* 나중에 페이지 만들면 수정해야함 */}
             <Route path="/splash" element={<Splash />} />

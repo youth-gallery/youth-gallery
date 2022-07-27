@@ -85,6 +85,20 @@ function UserProfile() {
         console.log('로그아웃');
     };
 
+    // 리스트형 앨범형 전환 버튼
+    const [listBtn, setListBtn] = useState(true);
+    const [albumBtn, setAlbumBtn] = useState(false);
+    const handleListBtn = () => {
+        setListBtn(true);
+        setAlbumBtn(false);
+    };
+
+    const handleAlbumBtn = () => {
+        setListBtn(false);
+        setAlbumBtn(true);
+        console.log(albumBtn);
+    };
+
     return (
         <section className={styles.user_profile_section}>
             <Nav>
@@ -109,19 +123,54 @@ function UserProfile() {
                     </div>
                 </section>
                 <section className={styles.post_section}>
-                    <h2 className={styles.ir}>작성한 게시글</h2>
-                    <ul className={styles.post_warp}>
-                        {postList.map((_, i) => {
-                            return (
-                                // eslint-disable-next-line react/jsx-key
-                                <UserPost
-                                    postList={postList}
-                                    i={i}
-                                    profileData={profileData}
-                                />
-                            );
-                        })}
+                    <ul className={styles.post_shape_button_warp}>
+                        <li>
+                            <button
+                                className={
+                                    listBtn === false
+                                        ? `${styles.list_button} ${styles.off}`
+                                        : styles.list_button
+                                }
+                                onClick={handleListBtn}
+                            ></button>
+                        </li>
+                        <li>
+                            <button
+                                className={
+                                    albumBtn === true
+                                        ? `${styles.album_button} ${styles.on}`
+                                        : styles.album_button
+                                }
+                                onClick={handleAlbumBtn}
+                            ></button>
+                        </li>
                     </ul>
+                    <h2 className={styles.ir}>작성한 게시글</h2>{' '}
+                    {listBtn === true ? (
+                        <ul className={styles.post_warp}>
+                            {postList.map((_, i) => {
+                                return (
+                                    // eslint-disable-next-line react/jsx-key
+                                    <UserPost
+                                        postList={postList}
+                                        i={i}
+                                        profileData={profileData}
+                                    />
+                                );
+                            })}
+                        </ul>
+                    ) : (
+                        <ul className={styles.post_album_warp}>
+                            {postList.map((_, i) => {
+                                return postList[i].image === null ? null : (
+                                    <img
+                                        src={postList[i].image}
+                                        className={styles.post_album_item}
+                                    />
+                                );
+                            })}
+                        </ul>
+                    )}
                 </section>
             </div>
             <ButtonModalActive

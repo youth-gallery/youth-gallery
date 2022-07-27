@@ -14,7 +14,6 @@ function Login() {
     const [isEmail, setIsEmail] = useState(false);
     const [loginConfirm, setLoginConfirm] = useState(false);
     const [loginMsg, setLoginMsg] = useState('');
-
     const navigate = useNavigate();
     console.log(isEmail);
 
@@ -50,13 +49,15 @@ function Login() {
             );
             console.log(res);
 
-            // 로그인 성공시 로컬스토리지에 토큰 저장
+            // 로그인 성공시 로컬스토리지에 토큰, 유저네임 저장
             if (res.data.user?.token) {
                 localStorage.setItem('token', res.data.user.token);
                 localStorage.setItem(
                     'refresh-token',
                     res.data.user.refreshToken
                 );
+                localStorage.setItem('accountname', res.data.user.accountname);
+
                 setLoginConfirm(true);
                 setLoginMsg(''); // 경고문구 지워주기
                 navigate('/'); // 로그인 성공시 홈 피드로 이동시켜주기

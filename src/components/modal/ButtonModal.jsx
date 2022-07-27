@@ -16,7 +16,7 @@ function ButtonModal({ openModalProp }) {
     };
     return (
         <>
-            <SelectButton onClick={openModal} />
+            <SelectButton onClick={openModal}/>
         </>
     );
 }

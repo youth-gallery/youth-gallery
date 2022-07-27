@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import HomePostOnlyTxt from '../HomePostOnlyTxt';
+import HomePostOnlyTxt from '../PostForm/HomePostOnlyTxt';
 import axios from 'axios';
 // import profile from '../../assets/basic-profile.png';
 // 프로필, name, 시간 :
 // comment content
 
-const CommentList = () => {
-    // 로그인 기능 구현 전이라 임시로 토큰과 게시글 설정
+const CommentList = ({ postId, postUserName }) => {
     const [commentList, setCommentList] = useState([]);
-    // 포스트 아이디만 바꿈. 토큰 그대로
-    const postId = '62d9039917ae66658183d2c8';
 
     useEffect(() => {
         async function renderComments() {
@@ -28,13 +25,12 @@ const CommentList = () => {
                     },
                 });
                 setCommentList(res.data.comments);
-                // console.log(res.data.comments);
             } catch (error) {
                 console.log(error);
             }
         }
         renderComments();
-    }, [commentList]);
+    }, [commentList]); //무한 렌더링이 발생해서 commentList일단 삭제하려고했으나 패이지 리로딩방법을 못찾아 다시 넣음
 
     return (
         <>
@@ -44,8 +40,10 @@ const CommentList = () => {
                         <HomePostOnlyTxt
                             profileImg={comment?.author?.image}
                             name={comment?.author?.username}
+                            accountname={comment?.author?.accountname}
                             key={comment?.id}
                             time={comment?.createdAt}
+                            postUserName={postUserName}
                         >
                             <div>{comment?.content}</div>
                         </HomePostOnlyTxt>

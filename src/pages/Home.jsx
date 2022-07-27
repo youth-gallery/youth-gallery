@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import HomePost from '../components/HomePost';
+import HomePost from '../components/PostForm/HomePost';
 import axios from 'axios';
 import TabMenu from '../components/tab/TabMenu';
 import Nav from '../components/nav/Nav';

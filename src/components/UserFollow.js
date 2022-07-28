@@ -6,8 +6,15 @@ import SearchCancelButton from './button/SearchCancelButton';
 
 function UserFollow({ followers, i }) {
     // const [followState] = useState(false);
+    const getAccountName = localStorage.getItem('accountname');
     return (
-        <Li>
+        <Li
+            to={
+                getAccountName === followers[i].accountname
+                    ? '/myprofile'
+                    : '/profile/' + followers[i].accountname
+            }
+        >
             <ProfileImg src={followers[i].image} />
             <UserInfoWarp>
                 <UserName>{followers[i].accountname}</UserName>

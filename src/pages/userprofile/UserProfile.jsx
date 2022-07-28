@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import styles from './UserProfile.module.css';
 import TopBasicNav from '../../components/nav/TopBasicNav';
-import Profile from '../../components/Profile';
+import UserInfo from '../../components/UserInfo';
 import Product from '../../components/Product';
 import UserPost from '../../components/UserPost';
 import TabMenu from '../../components/tab/TabMenu';
@@ -118,7 +118,7 @@ function UserProfile() {
                 />
             </Nav>
             <div className={styles.user_profile_wrap}>
-                <Profile profileData={profileData} />
+                <UserInfo profileData={profileData} />
                 <section className={styles.product_section}>
                     <div className={styles.product_list_warp}>
                         <h2 className={styles.title}>판매 중인 상품</h2>

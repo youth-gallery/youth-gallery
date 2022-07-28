@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styles from './Profile.module.css';
+import styles from './UserInfo.module.css';
 import FollowButton from './button/FollowButton';
 
-function Profile({ profileData }) {
+function UserInfo({ profileData }) {
     const getToken = localStorage.getItem('token');
     return (
         <div className={styles.all_warpper}>
@@ -64,4 +64,4 @@ function Profile({ profileData }) {
     );
 }
 
-export default Profile;
+export default UserInfo;

@@ -21,7 +21,7 @@
     background-color: #fff;
     border-top: 0.5px solid #dbdbdb;
     border-bottom: 0.5px solid #dbdbdb;
-    padding: 20px 0 20px 21px;
+    padding: 20px 0;
     margin: 6px auto;
 }
 
@@ -47,6 +47,60 @@
     background-color: #fff;
     flex-direction: column;
     align-items: center;
-    padding: 16px 0 30px;
     border-top: 0.5px solid #dbdbdb;
+    position: relative;
+}
+
+.post_section::after {
+    content: '';
+    width: 100%;
+    height: 0.5px;
+    background-color: #dbdbdb;
+    position: absolute;
+    top: 44px;
+}
+
+.post_section .post_shape_button_warp {
+    max-width: 390px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    height: 44px;
+    margin-bottom: 16px;
+}
+
+.post_shape_button_warp .list_button,
+.post_shape_button_warp .album_button {
+    width: 26px;
+    height: 26px;
+    background-image: url(../../assets/icon-post-list-on.png);
+    background-size: cover;
+    cursor: pointer;
+}
+
+.list_button.off {
+    background-image: url(../../assets/icon-post-list-off.png);
+}
+
+.post_shape_button_warp .album_button {
+    background-image: url(../../assets/icon-post-album-off.png);
+    margin-left: 16px;
+}
+
+.album_button.on {
+    background-image: url(../../assets/icon-post-album-on.png);
+}
+
+.post_album_warp {
+    max-width: 390px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    padding-bottom: 30px;
+}
+
+.post_album_item {
+    width: 114px;
+    height: 114px;
 }

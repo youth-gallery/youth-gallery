@@ -35,7 +35,7 @@ const NewsList = () => {
     }, []);
 
     return (
-        <section>
+        <section className={styles.news_section}>
             <h1 className={styles.news_title}>
                 매주 <span className={styles.title_span}>업데이트</span> 되는
                 <span className={styles.title_span}>미술계 소식</span>을

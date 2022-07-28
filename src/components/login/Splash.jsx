@@ -8,7 +8,7 @@ function Splash() {
         <>
             <div className={styles.splash_screen}>
                 <h1 className={styles.splash_logo}></h1>
-                <section>
+                <section className={styles.modal_section}>
                     <Modal>
                         <LoginModal />
                     </Modal>

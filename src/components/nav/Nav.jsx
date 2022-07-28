@@ -13,6 +13,9 @@ const NavStyle = styled.section`
     left: 0;
     right: 0;
     z-index: 10;
+    max-width: 450px;
+    margin: 0 auto;
+    box-sizing: border-box;
 `;
 
 function Nav(props) {

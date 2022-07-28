@@ -17,6 +17,9 @@ const NavStyle = styled.section`
     bottom: 0;
     left: 0;
     right: 0;
+    margin: 0 auto;
+    max-width: 450px;
+    box-sizing: border-box;
 `;
 
 const Ul = styled.ul`

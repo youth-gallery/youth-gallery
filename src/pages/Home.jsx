@@ -13,7 +13,7 @@ const Div = styled.div`
     flex-direction: column;
     align-items: center;
     height: 100%;
-    margin: 60px auto 60px;
+    padding: 60px 0;
 `;
 
 function Home() {

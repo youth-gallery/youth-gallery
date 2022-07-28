@@ -44,12 +44,17 @@ function UserProfile() {
     const [productList, setProductList] = useState([]);
     useEffect(() => {
         axios
-            .get(`https://mandarin.api.weniv.co.kr/product/${getAccountName}`, {
-                headers: {
-                    'Authorization': `Bearer ${getToken}`,
-                    'Content-type': 'application/json',
-                },
-            })
+            .get(
+                `https://mandarin.api.weniv.co.kr/product/${
+                    accountname ? accountname : getAccountName
+                }`,
+                {
+                    headers: {
+                        'Authorization': `Bearer ${getToken}`,
+                        'Content-type': 'application/json',
+                    },
+                }
+            )
             .then((res) => {
                 setProductList(res.data.product);
             })
@@ -63,7 +68,9 @@ function UserProfile() {
     useEffect(() => {
         axios
             .get(
-                `https://mandarin.api.weniv.co.kr/post/${getAccountName}/userpost`,
+                `https://mandarin.api.weniv.co.kr/post/${
+                    accountname ? accountname : getAccountName
+                }/userpost`,
                 {
                     headers: {
                         'Authorization': `Bearer ${getToken}`,

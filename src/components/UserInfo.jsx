@@ -1,10 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import styles from './UserInfo.module.css';
 import FollowButton from './button/FollowButton';
 
 function UserInfo({ profileData }) {
-    const getToken = localStorage.getItem('token');
+    const getAccountName = localStorage.getItem('accountname');
+    const { accountname } = useParams();
     return (
         <div className={styles.all_warpper}>
             <div className={styles.top_warpper}>
@@ -26,7 +27,7 @@ function UserInfo({ profileData }) {
             <p className={styles.user_id}>{`@${profileData.accountname}`}</p>
             <p className={styles.user_intro}>{profileData.intro}</p>
             <ul className={styles.button_warp}>
-                {profileData.accountname === getToken ? (
+                {accountname !== getAccountName ? (
                     <>
                         <li>
                             <button

@@ -50,9 +50,9 @@ function Login() {
     };
 
     // 로그인 버튼 클릭시
-    // 1. 이메일 유효성검사
-    // 2. API 서버에 post요청으로 데이터 요청
-    // 3. 이메일과 비밀번호 일치 여부 검사 => 불일치시 경고 문구 출력!
+    // 이메일 유효성검사
+    // API 서버에 post요청으로 데이터 요청
+    // 이메일과 비밀번호 일치 여부 검사 => 불일치시 경고 문구 출력!
     const onClickLogin = async () => {
         try {
             const res = await axios.post(

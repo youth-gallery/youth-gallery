@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import ButtonModal from '../modal/ButtonModal';
 import ButtonModalActive from '../modal/ButtonModalActive';
+// import { useParams, Link } from 'react-router-dom';
+// import axios from 'axios';
 
 const CommentArea = styled.div`
-  margin: 16px 0;
-`
+    margin: 16px 0;
+`;
 
 const HomePostDiv = styled.div`
     display: flex;
@@ -49,9 +51,11 @@ const HomePostOnlyTxt = ({
     profileImg,
     name,
     accountname,
+    comment_id,
     time,
     children,
     postUserName,
+    deleteComment,
 }) => {
     // 작성 시간 계산 함수. 나중에 util로 빼기
     const getTimeGap = (createTime) => {
@@ -96,20 +100,38 @@ const HomePostOnlyTxt = ({
         setShowModal(false);
     };
 
-    const deletePost = () => {
-        alert('삭제하였습니다.');
-        setShowModal(false);
-    };
+    // const deleteComment = async (curCommentId) => {
+    //     const { post_id } = useParams();
+    //     const url = 'https://mandarin.api.weniv.co.kr';
+    //     const getToken = localStorage.getItem('token');
 
+    //     try {
+    //         await axios.delete(
+    //             `${url}/post/${post_id}/comments/${curCommentId}/`,
+    //             {
+    //                 headers: {
+    //                     'Authorization': `Bearer ${getToken}`,
+    //                     'Content-type': 'application/json',
+    //                 },
+    //             }
+    //         );
+    //         alert('삭제하였습니다.');
+    //         setShowModal(false);
+    //     } catch (error) {
+    //         <Link to="/notFound" />;
+    //         console.log(error);
+    //     }
+    // };
+    console.log(comment_id);
     console.log(name);
     console.log(postUserName);
     const [commentValue, setCommentValue] = useState('');
     console.log(commentValue);
 
-  const myAccountName = localStorage.getItem('accountname'); //추후에 로그인 동작시 accountname 불러와서 저장
-  
+    const myAccountName = localStorage.getItem('accountname'); //추후에 로그인 동작시 accountname 불러와서 저장
+
     return (
-        <CommentArea>
+        <CommentArea setShowModal={setShowModal}>
             <HomePostDiv>
                 <div>
                     <HomePostProfile src={profileImg} />
@@ -125,8 +147,35 @@ const HomePostOnlyTxt = ({
                     </FlexDiv>
                     {children}
                 </Div>
+                {accountname === myAccountName ? (
+                    <ButtonModalActive
+                        propState={showModal}
+                        propsCloseFunc={closeModal}
+                        postModalValues={{
+                            values: ['삭제'],
+                        }}
+                        innerAlertValues={{
+                            title: '댓글을 삭제할까요? ',
+                            rightText: '삭제',
+                            rightBtnPropFunc: deleteComment(comment_id),
+                        }}
+                    />
+                ) : (
+                    <ButtonModalActive
+                        propState={showModal}
+                        propsCloseFunc={closeModal}
+                        postModalValues={{
+                            values: ['신고하기'],
+                        }}
+                        innerAlertValues={{
+                            title: '게시물을 신고할까요? ',
+                            rightText: '신고',
+                            rightBtnPropFunc: reportPost,
+                        }}
+                    />
+                )}
             </HomePostDiv>
-            {accountname === myAccountName ? (
+            {/* {accountname === myAccountName ? (
                 <ButtonModalActive
                     propState={showModal}
                     propsCloseFunc={closeModal}
@@ -136,7 +185,7 @@ const HomePostOnlyTxt = ({
                     innerAlertValues={{
                         title: '댓글을 삭제할까요? ',
                         rightText: '삭제',
-                        rightBtnPropFunc: deletePost,
+                        rightBtnPropFunc: deleteComment(curCommentId),
                     }}
                 />
             ) : (
@@ -152,7 +201,7 @@ const HomePostOnlyTxt = ({
                         rightBtnPropFunc: reportPost,
                     }}
                 />
-            )}
+            )} */}
         </CommentArea>
     );
 };

@@ -61,7 +61,6 @@ const Span = styled.span`
 `;
 
 const menuRendering = (img) => {
-  const getAccountName = localStorage.getItem('accountname');
     const result = [];
     const imgIcon = [
         { key: 'homeImg', value: homeImg },
@@ -71,7 +70,7 @@ const menuRendering = (img) => {
     ];
     const imgIconFill = [homeImgFill, newsImgFill, postImg, profileImgFill];
     const tabTitle = ['홈', '소식', '게시물 작성', '프로필'];
-    const link = ['/', '/news', '/post/upload', `/profile/${getAccountName}`];
+    const link = ['/', '/news', '/post/upload', `/myprofile`];
     for (let i = 0; i < 4; i++) {
         result.push(
             <StyledLink to={link[i]} key={i}>

@@ -8,8 +8,12 @@
     padding-top: 40px;
 }
 
+.join_input_email,
+.join_input_pw {
+    margin-bottom: 6px;
+}
+
 .join_error,
-.email_error,
 .pw_error {
     color: var(--error-red);
     font-size: 1.2rem;
@@ -40,45 +44,4 @@
 
 .join_span {
     font-size: 1.4rem;
-}
-
-.email_join {
-    font-size: 1.2rem;
-    display: flex;
-    justify-content: center;
-}
-
-.email_join_link {
-    color: var(--gray-color);
-}
-
-label {
-    display: block;
-    color: var(--gray-color);
-    font-size: 1.2rem;
-}
-
-input {
-    min-height: 32px;
-    color: var(--logo-black);
-    font-size: 1.4rem;
-    width: 100%;
-    border: initial;
-    border-bottom: 1px solid var(--btn-gray);
-
-    margin-bottom: 16px;
-}
-
-.join_input_email,
-.join_input_pw {
-    margin-bottom: 6px;
-}
-
-input:focus {
-    outline: none;
-    border-bottom: 1px solid var(--logo-yellow);
-}
-input::placeholder {
-    font-size: 1.4rem;
-    color: var(--btn-gray);
 }

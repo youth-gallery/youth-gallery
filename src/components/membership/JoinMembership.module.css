@@ -61,29 +61,3 @@
     color: white;
     font-size: 1.4rem;
 }
-
-label {
-    display: block;
-    color: var(--gray-color);
-    font-size: 1.2rem;
-}
-
-input {
-    min-height: 32px;
-    color: var(--logo-black);
-    font-size: 1.4rem;
-    width: 100%;
-    border: initial;
-    border-bottom: 1px solid var(--btn-gray);
-
-    margin-bottom: 16px;
-}
-
-input:focus {
-    outline: none;
-    border-bottom: 1px solid var(--logo-yellow);
-}
-input::placeholder {
-    font-size: 1.4rem;
-    color: var(--btn-gray);
-}

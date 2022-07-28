@@ -146,8 +146,6 @@ function EmailJoin() {
                     />
                     <div className={styles.join_error}>{emailMsg}</div>
 
-                    {/* <div className={styles.join_error}>{msg}</div> */}
-
                     <label htmlFor="input_pw">비밀번호</label>
                     <input
                         className={styles.join_input_pw}

@@ -10,21 +10,28 @@ import UserPost from '../../components/UserPost';
 import TabMenu from '../../components/tab/TabMenu';
 import Nav from '../../components/nav/Nav';
 import ButtonModalActive from '../../components/modal/ButtonModalActive';
+import { useParams } from 'react-router-dom';
 
 function UserProfile() {
     const [profileData, setProfileData] = useState({});
     const getToken = localStorage.getItem('token');
+    const { accountname } = useParams();
     const getAccountName = localStorage.getItem('accountname');
 
     // 사용자프로필
     useEffect(() => {
         axios
-            .get(`https://mandarin.api.weniv.co.kr/profile/${getAccountName}`, {
-                headers: {
-                    'Authorization': `Bearer ${getToken}`,
-                    'Content-type': 'application/json',
-                },
-            })
+            .get(
+                `https://mandarin.api.weniv.co.kr/profile/${
+                    accountname ? accountname : getAccountName
+                }`,
+                {
+                    headers: {
+                        'Authorization': `Bearer ${getToken}`,
+                        'Content-type': 'application/json',
+                    },
+                }
+            )
             .then((res) => {
                 setProfileData(res.data.profile);
             })

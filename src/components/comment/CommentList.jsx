@@ -11,9 +11,6 @@ const CommentList = ({ postId, postUserName }) => {
     useEffect(() => {
         async function renderComments() {
             const url = 'https://mandarin.api.weniv.co.kr';
-            const token =
-                'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZDU1NDNkODJmZGNjNzEyZjRjZjMyYiIsImV4cCI6MTY2MzQyMzY1NSwiaWF0IjoxNjU4MjM5NjU1fQ.Ic1go5YPFzLsfpS1UZJdfQePbGTDdubi8VEl_jmdd5A';
-            localStorage.setItem('token', token);
             const getToken = localStorage.getItem('token');
 
             try {

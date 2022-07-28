@@ -136,9 +136,11 @@ function EmailJoin() {
             <section className={styles.emailJoin_body}>
                 <Title title={'이메일로 회원가입'} />
                 <div className={styles.emailJoin_title} onBlur={joinConfirm}>
-                    <label htmlFor="input_id">이메일</label>
+                    <label className={styles.join_label} htmlFor="input_id">
+                        이메일
+                    </label>
                     <input
-                        className={styles.join_input_email}
+                        className={styles.join_input}
                         id="input_id"
                         type="email"
                         placeholder="이메일 주소를 입력해주세요."
@@ -146,9 +148,11 @@ function EmailJoin() {
                     />
                     <div className={styles.join_error}>{emailMsg}</div>
 
-                    <label htmlFor="input_pw">비밀번호</label>
+                    <label className={styles.join_label} htmlFor="input_pw">
+                        비밀번호
+                    </label>
                     <input
-                        className={styles.join_input_pw}
+                        className={styles.join_input}
                         id="input_pw"
                         type="password"
                         placeholder="비밀번호를 입력해주세요."

@@ -35,6 +35,7 @@ function Login() {
             setEmailMsg('*이메일을 입력해주세요.');
         } else {
             setEmailMsg('');
+            setLoginMsg('');
         }
     };
 
@@ -46,6 +47,7 @@ function Login() {
             setPwMsg('*비밀번호를 입력해주세요.');
         } else {
             setPwMsg('');
+            setLoginMsg('');
         }
     };
 
@@ -79,9 +81,13 @@ function Login() {
                 setLoginMsg(''); // 경고문구 지워주기
                 navigate('/'); // 로그인 성공시 홈 피드로 이동시켜주기
             } else {
-                // 로그인 실패시
-                setLoginConfirm(false); // loginConfirm을 false로 바꿔줌 (경고문구 보여줄 div태그 보여줌 유무)
-                setLoginMsg(`*${res.data.message}`);
+                if (loginId !== '' && loginPw !== '') {
+                    // 로그인 실패시
+                    setLoginConfirm(false); // loginConfirm을 false로 바꿔줌 (경고문구 보여줄 div태그 보여줌 유무)
+                    setLoginMsg(`*${res.data.message}`);
+                } else {
+                    setLoginMsg('');
+                }
             }
         } catch (error) {
             console.log(error);
@@ -98,20 +104,22 @@ function Login() {
             <section className={styles.login_body}>
                 <Title title={'로그인'} />
                 <div className={styles.login_title}>
-                    <label htmlFor="input_id">이메일</label>
+                    <label className={styles.login_label} htmlFor="input_id">
+                        이메일
+                    </label>
                     <input
-                        className={styles.login_input_id}
+                        className={styles.login_input}
                         id="input_id"
                         type="email"
                         onChange={handleLoginId}
                     />
                     <div className={styles.email_error}>{emailMsg}</div>
 
-                    <label className={styles.input_label_pw} htmlFor="input_pw">
+                    <label className={styles.login_label} htmlFor="input_pw">
                         비밀번호
                     </label>
                     <input
-                        className={styles.login_input_pw}
+                        className={styles.login_input}
                         id="input_pw"
                         type="password"
                         onChange={handleLoginPw}
@@ -119,7 +127,7 @@ function Login() {
                     {loginConfirm ? (
                         <div />
                     ) : (
-                        <div className={styles.login_error}>{loginMsg}</div>
+                        <div className={styles.email_error}>{loginMsg}</div>
                     )}
                     <div className={styles.pw_error}>{pwMsg}</div>
                 </div>

@@ -8,10 +8,10 @@
     padding-top: 40px;
 }
 
-.join_input_email,
+/* .join_input_email,
 .join_input_pw {
     margin-bottom: 6px;
-}
+} */
 
 .join_error,
 .pw_error {
@@ -44,4 +44,30 @@
 
 .join_span {
     font-size: 1.4rem;
+}
+
+.join_label {
+    display: block;
+    color: var(--gray-color);
+    font-size: 1.2rem;
+}
+
+.join_input {
+    min-height: 32px;
+    color: var(--logo-black);
+    font-size: 1.4rem;
+    width: 100%;
+    border: initial;
+    border-bottom: 1px solid var(--btn-gray);
+    /* margin-bottom: 16px; */
+    margin-bottom: 6px;
+}
+
+.join_input:focus {
+    outline: none;
+    border-bottom: 1px solid var(--logo-yellow);
+}
+.join_input::placeholder {
+    font-size: 1.4rem;
+    color: var(--btn-gray);
 }

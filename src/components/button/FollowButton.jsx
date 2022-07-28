@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React from 'react';
 import styled from 'styled-components';
+import { useParams } from 'react-router-dom';
+import { useState } from 'react';
 
 const FollowButtonBody = styled.button`
     background-color: var(--logo-yellow);
@@ -17,28 +19,31 @@ const Span = styled.span`
 `;
 
 function FollowButton() {
+    const { accountname } = useParams();
+    const [state, setState] = useState(false);
+
     const handleFollow = () => {
-        // 0004 임시토큰
-        const token =
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZDg1MzkxMTdhZTY2NjU4MTdlNjY3MyIsImV4cCI6MTY2MzkzMzg1NSwiaWF0IjoxNjU4NzQ5ODU1fQ.pDSDuGNU51d1C8TI2_-wcADNOSqKkf_lJL3oMBB0clo';
+        const getToken = localStorage.getItem('token');
         axios
             .post(
-                'https://mandarin.api.weniv.co.kr/profile/0002/follow',
+                `https://mandarin.api.weniv.co.kr/profile/${accountname}/follow`,
                 {},
                 {
                     headers: {
-                        'Authorization': `Bearer ${token}`,
+                        'Authorization': `Bearer ${getToken}`,
                         'Content-type': 'application/json',
                     },
                 }
             )
             .then((res) => {
-                console.log(res);
+                console.log(res.data.profile.isfollow);
+                setState(res.data.profile.isfollow);
             })
             .catch((error) => {
                 console.log(error);
             });
     };
+    console.log(state);
     return (
         <>
             <FollowButtonBody onClick={handleFollow}>

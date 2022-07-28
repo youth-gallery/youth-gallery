@@ -1,3 +1,8 @@
+.contents_section {
+    height: 100vh;
+    position: relative;
+}
+
 .uploadform_txt {
     width: 40%;
     height: 150px;
@@ -17,7 +22,7 @@
 }
 
 .uploadform_picture {
-    position: fixed;
+    position: absolute;
     right: 8px;
     bottom: 8px;
 }
@@ -58,7 +63,7 @@
     /* rem 단위로 고치기 */
     width: 30px;
     height: 30px;
-    position: absolute;
+    position: relative;
     top: 5px;
     right: 5px;
     background-image: url(../../assets/x.png);

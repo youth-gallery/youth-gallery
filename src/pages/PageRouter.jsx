@@ -2,7 +2,6 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import EmailJoin from '../components/join/EmailJoin';
 import Login from '../components/login/Login';
-import TabMenu from '../components/tab/TabMenu';
 import FollowersList from './FollowersList';
 import FollowingsList from './FollowingsList';
 import Home from './Home';
@@ -37,7 +36,7 @@ function PageRouter() {
             <Route path="/splash" element={<Splash />} />
             <Route path="/login" element={<Login />} />
             <Route path="/join" element={<EmailJoin />} />
-            <Route path="/notFound" element={<NotFound />} />
+            <Route path="/*" element={<NotFound />} />
             <Route path="/nonFollowing" element={<NonFollowing />} />
         </Routes>
     );

@@ -3,9 +3,10 @@ import styles from './JoinMembership.module.css';
 import Title from '../login/Title';
 import axios from 'axios';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function JoinMembership() {
-    const [userName] = useState('');
+    const [userName, setUserName] = useState('');
     const [accountId, setAccountId] = useState('');
     const [intro, setIntro] = useState('');
     const [userNameConfirm, setUserNameConfirm] = useState(false);
@@ -15,21 +16,16 @@ function JoinMembership() {
     const [accountIdMsg, setAccountIdMsg] = useState('');
     const [file, setFile] = useState('');
     const [isActive, setIsActive] = useState(false);
+    const navigate = useNavigate();
 
     console.log(file);
     const backgroundstyle = {
         backgroundImage: `url('${file}')`,
     };
-    console.log(userName);
-    console.log(userNameConfirm);
-    console.log(accountId);
-    console.log(accountIdConfirm);
-    console.log(accountIdRegexConfirm);
-    console.log(accountIdMsg);
-    console.log(intro);
 
     const handleUserName = (e) => {
         const userName = e.target.value;
+        setUserName(userName);
 
         // 사용자이름 유효성검사 (2~10자 이내만 통과)
         if (userName.length >= 2 && userName.length <= 10) {
@@ -65,7 +61,7 @@ function JoinMembership() {
         // 계정ID 유효성검사 통과한 경우 => 중복검사 체크함!
         if (accountIdRegexConfirm) {
             try {
-                const res = await axios.post(
+                let res = await axios.post(
                     'https://mandarin.api.weniv.co.kr/user/accountnamevalid',
                     {
                         user: {
@@ -73,17 +69,19 @@ function JoinMembership() {
                         },
                     }
                 );
-                console.log(res);
 
                 if (res.data.message === '사용 가능한 계정ID 입니다.') {
                     setAccountIdConfirm(true);
                     setAccountIdMsg(`*${res.data.message}`);
+                    console.log(accountIdConfirm);
                 } else if (res.data.message === '이미 가입된 계정ID 입니다.') {
                     setAccountIdConfirm(false);
                     setAccountIdMsg(`*${res.data.message}`);
                 } else {
                     setAccountIdConfirm(false);
                 }
+
+                // res = await
             } catch (error) {
                 console.log(error);
             }
@@ -100,14 +98,26 @@ function JoinMembership() {
 
     // 사용자이름, 계정ID 채워짐 & 유효성검사 통과시 => 시작하기 버튼 활성화
     useEffect(() => {
-        console.log(`userName ${userName}`);
-        console.log(`accountId ${accountId}`);
-        console.log(`userNameConfirm ${userNameConfirm}`);
-        console.log(`accountIdConfirm ${accountIdConfirm}`);
+        // console.log(`userName.length > 0 ${userName.length > 0}`);
+        // console.log(`accountId.length > 0 ${accountId.length > 0}`);
+        // console.log(`userNameConfirm ${userNameConfirm}`);
+        // console.log(`accountIdConfirm ${accountIdConfirm}`);
         setIsActive(
-            userName && accountId && userNameConfirm && accountIdConfirm
+            userName.length > 0 &&
+                accountId.length > 0 &&
+                userNameConfirm &&
+                accountIdConfirm &&
+                intro.length > 0
         );
     }, [userName, accountId, intro]);
+
+    // 유스갤러리 시작하기 버튼 클릭시 myprofile로 이동
+    const onClickMembership = () => {
+        // 버튼 활성화시 (사용자이름, 계정ID, 소개 조건 모두 통과시)
+        if (isActive) {
+            navigate('/myprofile');
+        }
+    };
 
     return (
         <>
@@ -183,6 +193,7 @@ function JoinMembership() {
                             ? styles.membership_btn_active
                             : styles.membership_btn
                     }
+                    onClick={onClickMembership}
                 >
                     {/* className={styles.joinMembership_btn}> */}
                     <span className={styles.joinMembership_btnSpan}>

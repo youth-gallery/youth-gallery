@@ -71,24 +71,42 @@ function JoinMembership() {
                     />
                 </div>
 
-                <label htmlFor="input_userName">사용자 이름</label>
+                <label
+                    className={styles.membership_label}
+                    htmlFor="input_userName"
+                >
+                    사용자 이름
+                </label>
                 <input
+                    className={styles.membership_input}
                     id="input_userName"
                     type="text"
                     placeholder="2~10자 이내여야 합니다."
                     onChange={handleUserName}
                 />
 
-                <label htmlFor="input_accountId">계정 ID</label>
+                <label
+                    className={styles.membership_label}
+                    htmlFor="input_accountId"
+                >
+                    계정 ID
+                </label>
                 <input
+                    className={styles.membership_input}
                     id="input_accountId"
                     type="text"
                     placeholder="영문, 숫자, 특수문자(.),(_)만 사용 가능합니다."
                     onChange={handleAccountId}
                 />
 
-                <label htmlFor="input_intro">소개</label>
+                <label
+                    className={styles.membership_label}
+                    htmlFor="input_intro"
+                >
+                    소개
+                </label>
                 <input
+                    className={styles.membership_input}
                     id="input_intro"
                     type="text"
                     placeholder="자신과 판매할 작품에 대해 소개해주세요!"

@@ -15,11 +15,15 @@ function UserSearch({ userImg, username, accountname, keyword }) {
             <>{item}</>
         );
     };
+
+    const handleImgError = (e) => {
+        e.target.src = basicProfileImg;
+    };
     return (
         // 추후에 아이디 프로필 페이지로 연결
         <StyledLink to={'/profile/' + accountname}>
             <Div>
-                <ProfileImg src={userImg || basicProfileImg} />
+                <ProfileImg src={userImg} onError={handleImgError} />
                 <UserInfoWarp>
                     <UserName>
                         <ColoredItem

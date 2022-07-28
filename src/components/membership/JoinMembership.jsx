@@ -1,15 +1,21 @@
 import React, { useState } from 'react';
 import styles from './JoinMembership.module.css';
 import Title from '../login/Title';
+import axios from 'axios';
+import { useEffect } from 'react';
 
 function JoinMembership() {
     const [userName] = useState('');
-    const [accountId] = useState('');
-    // const [intro, setIntro] = useState('');
+    const [accountId, setAccountId] = useState('');
+    const [intro, setIntro] = useState('');
     const [userNameConfirm, setUserNameConfirm] = useState(false);
+    const [userNameMsg, setUserNameMsg] = useState('');
+    const [accountIdRegexConfirm, setAccountIdRegexConfirm] = useState(false);
     const [accountIdConfirm, setAccountIdConfirm] = useState(false);
     const [accountIdMsg, setAccountIdMsg] = useState('');
     const [file, setFile] = useState('');
+    const [isActive, setIsActive] = useState(false);
+
     console.log(file);
     const backgroundstyle = {
         backgroundImage: `url('${file}')`,
@@ -18,34 +24,90 @@ function JoinMembership() {
     console.log(userNameConfirm);
     console.log(accountId);
     console.log(accountIdConfirm);
+    console.log(accountIdRegexConfirm);
     console.log(accountIdMsg);
+    console.log(intro);
 
     const handleUserName = (e) => {
         const userName = e.target.value;
 
         // 사용자이름 유효성검사 (2~10자 이내만 통과)
-        userName.length >= 2 && userName.length <= 10
-            ? setUserNameConfirm(true)
-            : setUserNameConfirm(false);
+        if (userName.length >= 2 && userName.length <= 10) {
+            setUserNameConfirm(true);
+            setUserNameMsg('');
+        } else {
+            setUserNameConfirm(false);
+            setUserNameMsg('*2~10자 이내여야 합니다.');
+            if (userName === '') {
+                setUserNameConfirm(false);
+                setUserNameMsg('');
+            }
+        }
     };
 
     const handleAccountId = (e) => {
         const accountId = e.target.value;
+        setAccountId(accountId);
 
         // 계정ID 유효성검사
         const regex = /^[_A-Za-z0-9.]*$/;
         if (regex.test(accountId)) {
-            setAccountIdConfirm(true);
+            setAccountIdRegexConfirm(true);
             setAccountIdMsg('');
         } else {
-            setAccountIdConfirm(false);
-            setAccountIdMsg('영문, 숫자, 밑줄, 마침표만 사용할 수 있습니다.');
+            setAccountIdRegexConfirm(false);
+            setAccountIdMsg('*영문, 숫자, 밑줄, 마침표만 사용할 수 있습니다.');
         }
     };
 
-    const handleIntro = (e) => {
-        e.target.value;
+    // 포커스 잃으면 계정ID 중복검사
+    const checkAccountId = async () => {
+        // 계정ID 유효성검사 통과한 경우 => 중복검사 체크함!
+        if (accountIdRegexConfirm) {
+            try {
+                const res = await axios.post(
+                    'https://mandarin.api.weniv.co.kr/user/accountnamevalid',
+                    {
+                        user: {
+                            accountname: accountId,
+                        },
+                    }
+                );
+                console.log(res);
+
+                if (res.data.message === '사용 가능한 계정ID 입니다.') {
+                    setAccountIdConfirm(true);
+                    setAccountIdMsg(`*${res.data.message}`);
+                } else if (res.data.message === '이미 가입된 계정ID 입니다.') {
+                    setAccountIdConfirm(false);
+                    setAccountIdMsg(`*${res.data.message}`);
+                } else {
+                    setAccountIdConfirm(false);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        } else {
+            return;
+        }
     };
+
+    // 소개
+    const handleIntro = (e) => {
+        const intro = e.target.value;
+        setIntro(intro);
+    };
+
+    // 사용자이름, 계정ID 채워짐 & 유효성검사 통과시 => 시작하기 버튼 활성화
+    useEffect(() => {
+        console.log(`userName ${userName}`);
+        console.log(`accountId ${accountId}`);
+        console.log(`userNameConfirm ${userNameConfirm}`);
+        console.log(`accountIdConfirm ${accountIdConfirm}`);
+        setIsActive(
+            userName && accountId && userNameConfirm && accountIdConfirm
+        );
+    }, [userName, accountId, intro]);
 
     return (
         <>
@@ -84,6 +146,7 @@ function JoinMembership() {
                     placeholder="2~10자 이내여야 합니다."
                     onChange={handleUserName}
                 />
+                <div className={styles.membership_error}>{userNameMsg}</div>
 
                 <label
                     className={styles.membership_label}
@@ -97,7 +160,9 @@ function JoinMembership() {
                     type="text"
                     placeholder="영문, 숫자, 특수문자(.),(_)만 사용 가능합니다."
                     onChange={handleAccountId}
+                    onBlur={checkAccountId}
                 />
+                <div className={styles.membership_error}>{accountIdMsg}</div>
 
                 <label
                     className={styles.membership_label}
@@ -112,7 +177,14 @@ function JoinMembership() {
                     placeholder="자신과 판매할 작품에 대해 소개해주세요!"
                     onChange={handleIntro}
                 />
-                <button className={styles.joinMembership_btn}>
+                <button
+                    className={
+                        isActive
+                            ? styles.membership_btn_active
+                            : styles.membership_btn
+                    }
+                >
+                    {/* className={styles.joinMembership_btn}> */}
                     <span className={styles.joinMembership_btnSpan}>
                         유스갤러리 시작하기
                     </span>

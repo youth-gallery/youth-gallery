@@ -13,11 +13,38 @@ function EmailJoin() {
     const [isEmail, setIsEmail] = useState(false);
     const [joinEmailConfirm, setJoinEmailConfirm] = useState(false);
     const [joinPwConfirm, setJoinPwConfirm] = useState(false);
-    const [msg, setMsg] = useState('');
+    // const [msg, setMsg] = useState('');
+    const [emailMsg, setEmailMsg] = useState('');
+    const [pwMsg, setPwMsg] = useState('');
     const navigate = useNavigate();
 
     const handleJoinId = (e) => {
-        setJoinId(e.target.value);
+        const joinId = e.target.value;
+        setJoinId(joinId);
+
+        const emailRegex =
+            /* eslint-disable-next-line */
+            /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+        // /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+        // emailRegex.test(joinId) ? setIsEmail(true) : setIsEmail(false);
+
+        // 이메일 유효성검사 => 경고문구 출력
+        if (emailRegex.test(joinId)) {
+            setIsEmail(true);
+            setEmailMsg('');
+        } else if (joinId != '') {
+            setIsEmail(false);
+            setEmailMsg('*잘못된 이메일 형식입니다.');
+        } else {
+            setEmailMsg('');
+        }
+
+        // // 이메일 미입력시 경고문구
+        // if (joinId.length === 0 && joinId == '') {
+        //     setEmailMsg('*이메일을 입력해주세요.');
+        // } else {
+        //     setEmailMsg('');
+        // }
     };
 
     const handleJoinPw = (e) => {
@@ -28,16 +55,19 @@ function EmailJoin() {
         console.log(`joinPw.length ${joinPw.length}`);
 
         // 비밀번호 유효성검사 (6자리 이상일 때만 통과)
-        joinPw.length >= 6 ? setJoinPwConfirm(true) : setJoinPwConfirm(false);
+        if (!(joinPw.length >= 6)) {
+            setJoinPwConfirm(false);
+            setPwMsg('*비밀번호는 6자 이상이어야 합니다.');
+        } else if (joinPw != '') {
+            setJoinPwConfirm(true);
+        } else {
+            setPwMsg('');
+        }
     };
 
     // 포커스 잃으면 유효성검사 진행 => TODO: 첫로딩시 경고문구 지워주기!
     const joinConfirm = async () => {
-        // 이메일 주소 유효성검사
-        const emailRegex =
-            /* eslint-disable-next-line */
-            /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
-        emailRegex.test(joinId) ? setIsEmail(true) : setIsEmail(false);
+        // 이메일주소 유효성검사
 
         console.log(`isEmail ${isEmail}`);
         console.log(`joinPwConfirm ${joinPwConfirm}`);
@@ -46,7 +76,26 @@ function EmailJoin() {
                 isEmail && joinEmailConfirm && joinPwConfirm
             }`
         );
+    };
 
+    useEffect(() => {
+        // 이메일 유효성검사, 중복검사, 비밀번호 유효성검사 모두 통과 => 다음 버튼 활성화
+        setIsActive(isEmail && joinEmailConfirm && joinPwConfirm);
+
+        console.log(`isEmail ${isEmail}`);
+        console.log(`joinEmailConfirm ${joinEmailConfirm}`);
+        console.log(`joinPwConfirm ${joinPwConfirm}`);
+        console.log(
+            `isEmail && joinEmailConfirm && joinPwConfirm ${
+                isEmail && joinEmailConfirm && joinPwConfirm
+            }`
+        );
+        // setMsg('');
+
+        return () => {};
+    }, [joinId, joinPw]);
+
+    const onClickJoin = async () => {
         // 다음 버튼 클릭시
         // 이메일 중복검사 => 미통과시 경고문구 출력!
         try {
@@ -60,33 +109,27 @@ function EmailJoin() {
             );
             console.log(res);
 
-            if (res.data.message === '사용 가능한 이메일 입니다.') {
+            const message = res.data.message;
+            if (
+                message === '사용 가능한 이메일 입니다.' &&
+                joinPwConfirm === true
+            ) {
                 setJoinEmailConfirm(true);
-            } else if (res.data.message === '이미 가입된 이메일 주소 입니다.') {
+            } else if (message === '이미 가입된 이메일 주소 입니다.') {
                 setJoinEmailConfirm(false);
-                setMsg(`*${res.data.message}`);
+                setEmailMsg(`*${message}`);
             } else {
                 setJoinEmailConfirm(false);
+            }
+
+            // 이메일, 비밀번호 유효성검사 통과시 프로필설정 페이지로 이동
+            if (joinEmailConfirm && joinPwConfirm) {
+                navigate('/membership');
             }
         } catch (error) {
             console.log(error);
         }
     };
-
-    useEffect(() => {
-        // 이메일 유효성검사, 중복검사, 비밀번호 유효성검사 모두 통과 => 다음 버튼 활성화
-        console.log(`isEmail ${isEmail}`);
-        console.log(`joinEmailConfirm ${joinEmailConfirm}`);
-        console.log(`joinPwConfirm ${joinPwConfirm}`);
-        console.log(
-            `isEmail && joinEmailConfirm && joinPwConfirm ${
-                isEmail && joinEmailConfirm && joinPwConfirm
-            }`
-        );
-        setIsActive(isEmail && joinEmailConfirm && joinPwConfirm);
-        navigate('/membership');
-        return () => {};
-    }, [joinId, joinPw]);
 
     return (
         <>
@@ -101,19 +144,9 @@ function EmailJoin() {
                         placeholder="이메일 주소를 입력해주세요."
                         onChange={handleJoinId}
                     />
-                    {isEmail ? (
-                        <div />
-                    ) : (
-                        <div className={styles.join_error}>
-                            *잘못된 이메일 형식입니다.
-                        </div>
-                    )}
+                    <div className={styles.join_error}>{emailMsg}</div>
 
-                    {joinEmailConfirm ? (
-                        <div className={styles.join_error}>{msg}</div>
-                    ) : (
-                        <div />
-                    )}
+                    {/* <div className={styles.join_error}>{msg}</div> */}
 
                     <label htmlFor="input_pw">비밀번호</label>
                     <input
@@ -123,19 +156,13 @@ function EmailJoin() {
                         placeholder="비밀번호를 입력해주세요."
                         onChange={handleJoinPw}
                     />
-                    {joinPwConfirm ? (
-                        <div />
-                    ) : (
-                        <div className={styles.pw_error}>
-                            *비밀번호는 6자 이상이어야 합니다.
-                        </div>
-                    )}
+                    <div className={styles.pw_error}>{pwMsg}</div>
                 </div>
                 <button
                     className={
                         isActive ? styles.join_btn_active : styles.join_btn
                     }
-                    // onClick={onClickJoin}
+                    onClick={onClickJoin}
                 >
                     <span className={styles.join_span}>다음</span>
                 </button>

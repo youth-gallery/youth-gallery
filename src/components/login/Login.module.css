@@ -13,7 +13,7 @@
     margin-bottom: 6px;
 }
 
-.login_error,
+/* .login_error, */
 .email_error,
 .pw_error {
     color: var(--error-red);
@@ -59,4 +59,30 @@
 
 .email_join_link {
     color: var(--gray-color);
+}
+
+.login_label {
+    display: block;
+    color: var(--gray-color);
+    font-size: 1.2rem;
+}
+
+.login_input {
+    min-height: 32px;
+    color: var(--logo-black);
+    font-size: 1.4rem;
+    width: 100%;
+    border: initial;
+    border-bottom: 1px solid var(--btn-gray);
+    /* margin-bottom: 16px; */
+    margin-bottom: 6px;
+}
+
+.login_input:focus {
+    outline: none;
+    border-bottom: 1px solid var(--logo-yellow);
+}
+.login_input::placeholder {
+    font-size: 1.4rem;
+    color: var(--btn-gray);
 }

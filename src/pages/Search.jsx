@@ -8,7 +8,9 @@ import styled from 'styled-components';
 import Loding from '../components/loding/Loding';
 
 const Ul = styled.ul`
-    margin: 60px 16px;
+    padding: 60px 0;
+    margin: 0 16px;
+    height: 100vh;
 `;
 
 const Li = styled.li`

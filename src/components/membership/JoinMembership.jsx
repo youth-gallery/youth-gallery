@@ -115,7 +115,7 @@ function JoinMembership() {
     const onClickMembership = () => {
         // 버튼 활성화시 (사용자이름, 계정ID, 소개 조건 모두 통과시)
         if (isActive) {
-            navigate('/myprofile');
+            navigate('/');
         }
     };
 

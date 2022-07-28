@@ -13,6 +13,7 @@ import UserProfile from './userprofile/UserProfile';
 import PostUpload from './postUpload/PostUpload';
 import News from './news/News';
 import Splash from '../components/login/Splash';
+import JoinMembership from '../components/membership/JoinMembership';
 import AddProduct from './addProduct/AddProduct';
 import PostEdit from './postEdit/PostEdit';
 
@@ -39,6 +40,8 @@ function PageRouter() {
             <Route path="/splash" element={<Splash />} />
             <Route path="/login" element={<Login />} />
             <Route path="/join" element={<EmailJoin />} />
+            <Route path="/membership" element={<JoinMembership />} />
+            <Route path="/notFound" element={<NotFound />} />
             <Route path="/*" element={<NotFound />} />
             <Route path="/nonFollowing" element={<NonFollowing />} />
         </Routes>

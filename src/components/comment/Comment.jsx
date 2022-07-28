@@ -73,14 +73,11 @@ const Comment = ({ postId, buttonHandleProp }) => {
 
     const renderProfile = async () => {
         const url = 'https://mandarin.api.weniv.co.kr';
-        const token =
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZDU1NDNkODJmZGNjNzEyZjRjZjMyYiIsImV4cCI6MTY2MzM5MzAxMSwiaWF0IjoxNjU4MjA5MDExfQ.QA5ERldGsJAbMg0uqfz1HrIWH_ziwq2g7uD3mGZ2atg';
-        const accountName = 'abc2id';
-        localStorage.setItem('token', token);
         const getToken = localStorage.getItem('token');
+        const getAccountname = localStorage.getItem('accountname');
 
         try {
-            const res = await axios.get(`${url}/profile/${accountName}`, {
+            const res = await axios.get(`${url}/profile/${getAccountname}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${getToken}`,

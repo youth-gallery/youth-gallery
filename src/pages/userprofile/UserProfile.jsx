@@ -10,21 +10,28 @@ import UserPost from '../../components/UserPost';
 import TabMenu from '../../components/tab/TabMenu';
 import Nav from '../../components/nav/Nav';
 import ButtonModalActive from '../../components/modal/ButtonModalActive';
+import { useParams } from 'react-router-dom';
 
 function UserProfile() {
     const [profileData, setProfileData] = useState({});
-    const token =
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyY2JjNTJiODJmZGNjNzEyZjQzODgyOSIsImV4cCI6MTY2MjcxMjQ1MSwiaWF0IjoxNjU3NTI4NDUxfQ.bnhQqSrauikpfrLKP6OXl2HMdizZdeM1TclnNTr1OXk';
+    const getToken = localStorage.getItem('token');
+    const { accountname } = useParams();
+    const getAccountName = localStorage.getItem('accountname');
 
     // 사용자프로필
     useEffect(() => {
         axios
-            .get('https://mandarin.api.weniv.co.kr/profile/0002', {
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-type': 'application/json',
-                },
-            })
+            .get(
+                `https://mandarin.api.weniv.co.kr/profile/${
+                    accountname ? accountname : getAccountName
+                }`,
+                {
+                    headers: {
+                        'Authorization': `Bearer ${getToken}`,
+                        'Content-type': 'application/json',
+                    },
+                }
+            )
             .then((res) => {
                 setProfileData(res.data.profile);
             })
@@ -37,9 +44,9 @@ function UserProfile() {
     const [productList, setProductList] = useState([]);
     useEffect(() => {
         axios
-            .get('https://mandarin.api.weniv.co.kr/product/0002', {
+            .get(`https://mandarin.api.weniv.co.kr/product/${getAccountName}`, {
                 headers: {
-                    'Authorization': `Bearer ${token}`,
+                    'Authorization': `Bearer ${getToken}`,
                     'Content-type': 'application/json',
                 },
             })
@@ -55,12 +62,15 @@ function UserProfile() {
     const [postList, setPostList] = useState([]);
     useEffect(() => {
         axios
-            .get('https://mandarin.api.weniv.co.kr/post/0002/userpost', {
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-type': 'application/json',
-                },
-            })
+            .get(
+                `https://mandarin.api.weniv.co.kr/post/${getAccountName}/userpost`,
+                {
+                    headers: {
+                        'Authorization': `Bearer ${getToken}`,
+                        'Content-type': 'application/json',
+                    },
+                }
+            )
             .then((res) => {
                 setPostList(res.data.post);
             })
@@ -83,6 +93,20 @@ function UserProfile() {
 
     const logout = () => {
         console.log('로그아웃');
+    };
+
+    // 리스트형 앨범형 전환 버튼
+    const [listBtn, setListBtn] = useState(true);
+    const [albumBtn, setAlbumBtn] = useState(false);
+    const handleListBtn = () => {
+        setListBtn(true);
+        setAlbumBtn(false);
+    };
+
+    const handleAlbumBtn = () => {
+        setListBtn(false);
+        setAlbumBtn(true);
+        console.log(albumBtn);
     };
 
     return (
@@ -109,19 +133,54 @@ function UserProfile() {
                     </div>
                 </section>
                 <section className={styles.post_section}>
-                    <h2 className={styles.ir}>작성한 게시글</h2>
-                    <ul className={styles.post_warp}>
-                        {postList.map((_, i) => {
-                            return (
-                                // eslint-disable-next-line react/jsx-key
-                                <UserPost
-                                    postList={postList}
-                                    i={i}
-                                    profileData={profileData}
-                                />
-                            );
-                        })}
+                    <ul className={styles.post_shape_button_warp}>
+                        <li>
+                            <button
+                                className={
+                                    listBtn === false
+                                        ? `${styles.list_button} ${styles.off}`
+                                        : styles.list_button
+                                }
+                                onClick={handleListBtn}
+                            ></button>
+                        </li>
+                        <li>
+                            <button
+                                className={
+                                    albumBtn === true
+                                        ? `${styles.album_button} ${styles.on}`
+                                        : styles.album_button
+                                }
+                                onClick={handleAlbumBtn}
+                            ></button>
+                        </li>
                     </ul>
+                    <h2 className={styles.ir}>작성한 게시글</h2>{' '}
+                    {listBtn === true ? (
+                        <ul className={styles.post_warp}>
+                            {postList.map((_, i) => {
+                                return (
+                                    // eslint-disable-next-line react/jsx-key
+                                    <UserPost
+                                        postList={postList}
+                                        i={i}
+                                        profileData={profileData}
+                                    />
+                                );
+                            })}
+                        </ul>
+                    ) : (
+                        <ul className={styles.post_album_warp}>
+                            {postList.map((_, i) => {
+                                return postList[i].image === '' ? null : (
+                                    <img
+                                        src={postList[i].image}
+                                        className={styles.post_album_item}
+                                    />
+                                );
+                            })}
+                        </ul>
+                    )}
                 </section>
             </div>
             <ButtonModalActive

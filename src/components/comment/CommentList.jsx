@@ -11,9 +11,6 @@ const CommentList = ({ postId, postUserName }) => {
     useEffect(() => {
         async function renderComments() {
             const url = 'https://mandarin.api.weniv.co.kr';
-            const token =
-                'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZDU1NDNkODJmZGNjNzEyZjRjZjMyYiIsImV4cCI6MTY2MzQyMzY1NSwiaWF0IjoxNjU4MjM5NjU1fQ.Ic1go5YPFzLsfpS1UZJdfQePbGTDdubi8VEl_jmdd5A';
-            localStorage.setItem('token', token);
             const getToken = localStorage.getItem('token');
 
             try {
@@ -31,7 +28,7 @@ const CommentList = ({ postId, postUserName }) => {
         }
         renderComments();
     }, [commentList]); //무한 렌더링이 발생해서 commentList일단 삭제하려고했으나 패이지 리로딩방법을 못찾아 다시 넣음
-
+    console.log(commentList);
     return (
         <>
             {commentList &&
@@ -44,6 +41,7 @@ const CommentList = ({ postId, postUserName }) => {
                             key={comment?.id}
                             time={comment?.createdAt}
                             postUserName={postUserName}
+                            commentId={comment.id}
                         >
                             <div>{comment?.content}</div>
                         </HomePostOnlyTxt>

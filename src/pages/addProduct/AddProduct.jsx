@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { React, useRef, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Nav from '../../components/nav/Nav';
 import TopUploadNav from '../../components/nav/TopUploadNav';
 import styles from './AddProduct.module.css';
@@ -10,6 +11,7 @@ const AddProduct = () => {
     const [price, setPrice] = useState(0);
     const [link, setLink] = useState('');
     const [state, setState] = useState(false);
+    const navigate = useNavigate();
 
     const inpRef = useRef(null);
     const onPicBtnClick = () => {
@@ -59,37 +61,38 @@ const AddProduct = () => {
     // 상품등록 데이터 전송
     const createProduct = async (e) => {
         e.preventDefault();
-        // 추후에 로그인 기능 구현되면 삭제. 일회성 토큰
-        const url = 'https://mandarin.api.weniv.co.kr';
-        const token =
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyY2JjNTJiODJmZGNjNzEyZjQzODgyOSIsImV4cCI6MTY2Mzg0ODQ1NSwiaWF0IjoxNjU4NjY0NDU1fQ.B0lhuOQectFJpxPqedzfuXTLceUzZUkNOGk-t6NWA1U';
-        localStorage.setItem('token', token);
-        const getToken = localStorage.getItem('token');
-        const res = uploadImage();
-        try {
-            await axios.post(
-                `${url}/product`,
-                {
-                    product: {
-                        itemName: name,
-                        price: parseInt(
-                            price
-                                .split(',')
-                                .reduce((curr, acc) => curr + acc, '')
-                        ),
-                        link: link,
-                        itemImage: await res,
+        if (state) {
+            const getAccountName = localStorage.getItem('accountname');
+            // 추후에 로그인 기능 구현되면 삭제. 일회성 토큰
+            const url = 'https://mandarin.api.weniv.co.kr';
+            const getToken = localStorage.getItem('token');
+            const res = uploadImage();
+            try {
+                await axios.post(
+                    `${url}/product`,
+                    {
+                        product: {
+                            itemName: name,
+                            price: parseInt(
+                                price
+                                    .split(',')
+                                    .reduce((curr, acc) => curr + acc, '')
+                            ),
+                            link: link,
+                            itemImage: await res,
+                        },
                     },
-                },
-                {
-                    headers: {
-                        'Authorization': `Bearer ${getToken}`,
-                        'Content-type': 'application/json',
-                    },
-                }
-            );
-        } catch (error) {
-            console.log(error);
+                    {
+                        headers: {
+                            'Authorization': `Bearer ${getToken}`,
+                            'Content-type': 'application/json',
+                        },
+                    }
+                );
+                navigate(`/profile/${getAccountName}`);
+            } catch (error) {
+                console.log(error);
+            }
         }
     };
     // 숫자에 , 찍어주는 함수

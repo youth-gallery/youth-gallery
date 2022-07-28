@@ -47,13 +47,24 @@
     background-size: 5vh;
 }
 
-.joinMembership_btn {
+.membership_btn {
     background-color: var(--btn-gray);
     border: initial;
     width: 100%;
     padding: 13px 0;
-    margin-top: 14px;
+    margin-top: 24px;
     border-radius: 44px;
+    cursor: pointer;
+}
+
+.membership_btn_active {
+    background-color: var(--logo-black);
+    color: white;
+    border-radius: 44px;
+    margin-top: 24px;
+    margin-bottom: 20px;
+    padding: 13px 0;
+    width: 100%;
     cursor: pointer;
 }
 
@@ -75,7 +86,7 @@
     width: 100%;
     border: initial;
     border-bottom: 1px solid var(--btn-gray);
-    margin-bottom: 16px;
+    margin-bottom: 6px;
 }
 
 .membership_input:focus {
@@ -85,4 +96,10 @@
 .membership_input::placeholder {
     font-size: 1.4rem;
     color: var(--btn-gray);
+}
+
+.membership_error {
+    color: var(--error-red);
+    font-size: 1.2rem;
+    margin-bottom: 16px;
 }

@@ -1,0 +1,69 @@
+.uploadform_txt {
+    width: 40%;
+    height: 150px;
+    margin-top: 7rem;
+    margin-left: 7rem;
+    border: none;
+    /* 나중에 rem 단위로 고쳐야함 */
+    font-size: 14px;
+}
+
+.uploadform_txt:focus {
+    outline: none;
+}
+
+.uploadform_txt::placeholder {
+    color: #c4c4c4;
+}
+
+.uploadform_picture {
+    position: fixed;
+    right: 8px;
+    bottom: 8px;
+}
+
+.uploadform_picture_btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    background: url('../../assets/icon-image.png') no-repeat center / 30px 30px;
+    /* var()로 고치기 */
+    background-color: #212121;
+    cursor: pointer;
+}
+
+.uploadform_picture_inp {
+    display: none;
+}
+
+.preview_pics {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 50px auto;
+}
+
+.preview_pics .preview_div {
+    position: relative;
+}
+
+.preview_div .preview_pic {
+    width: 304px;
+    height: 228px;
+    border-radius: 10px;
+}
+
+.preview_div .preview_xbtn {
+    /* rem 단위로 고치기 */
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-image: url(../../assets/x.png);
+    background-size: 100%;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}

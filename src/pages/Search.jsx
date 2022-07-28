@@ -19,19 +19,17 @@ function Search() {
 
     const [users, setUsers] = useState([]);
     const url = 'https://mandarin.api.weniv.co.kr';
-    const token =
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzE2MjM5ODJmZGNjNzEyZjQzMzk4YiIsImV4cCI6MTY2MjcwMTIyMiwiaWF0IjoxNjU3NTE3MjIyfQ.A75fUeLUj8TKdD1LVGGph-M1-coF8pr_oq8BY6R-k4k';
 
+    const getToken = localStorage.getItem('token');
     useEffect(() => {
         axios({
             method: 'GET',
             url: url + `/user/searchuser/?keyword=${keyword}`,
             headers: {
-                'Authorization': `Bearer ${token}`,
+                'Authorization': `Bearer ${getToken}`,
                 'Content-type': 'application/json',
             },
-        })
-            .then((response) => setUsers(response))
+        }).then((response) => setUsers(response));
     }, [keyword]);
 
     const inputOnChange = (value) => {

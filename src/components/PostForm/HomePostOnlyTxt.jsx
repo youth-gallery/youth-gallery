@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import useReport from '../../hooks/useReport';
 import ButtonModal from '../modal/ButtonModal';
 import ButtonModalActive from '../modal/ButtonModalActive';
 
 const CommentArea = styled.div`
-  margin: 16px 0;
-`
+    margin: 16px 0;
+`;
 
 const HomePostDiv = styled.div`
     display: flex;
@@ -51,7 +53,7 @@ const HomePostOnlyTxt = ({
     accountname,
     time,
     children,
-    postUserName,
+    commentId,
 }) => {
     // 작성 시간 계산 함수. 나중에 util로 빼기
     const getTimeGap = (createTime) => {
@@ -91,7 +93,9 @@ const HomePostOnlyTxt = ({
         setShowModal(props);
     };
 
+    const { post_id } = useParams();
     const reportPost = () => {
+        useReport(`/post/${post_id}/comments/${commentId}/report`);
         alert('신고하였습니다.');
         setShowModal(false);
     };
@@ -102,12 +106,12 @@ const HomePostOnlyTxt = ({
     };
 
     console.log(name);
-    console.log(postUserName);
+    console.log(commentId);
     const [commentValue, setCommentValue] = useState('');
     console.log(commentValue);
 
-  const myAccountName = localStorage.getItem('accountname'); //추후에 로그인 동작시 accountname 불러와서 저장
-  
+    const myAccountName = localStorage.getItem('accountname'); //추후에 로그인 동작시 accountname 불러와서 저장
+
     return (
         <CommentArea>
             <HomePostDiv>

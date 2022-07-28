@@ -28,7 +28,7 @@ const CommentList = ({ postId, postUserName }) => {
         }
         renderComments();
     }, [commentList]); //무한 렌더링이 발생해서 commentList일단 삭제하려고했으나 패이지 리로딩방법을 못찾아 다시 넣음
-
+    console.log(commentList);
     return (
         <>
             {commentList &&
@@ -41,6 +41,7 @@ const CommentList = ({ postId, postUserName }) => {
                             key={comment?.id}
                             time={comment?.createdAt}
                             postUserName={postUserName}
+                            commentId={comment.id}
                         >
                             <div>{comment?.content}</div>
                         </HomePostOnlyTxt>

@@ -61,36 +61,38 @@ const AddProduct = () => {
     // 상품등록 데이터 전송
     const createProduct = async (e) => {
         e.preventDefault();
-        const getAccountName = localStorage.getItem('accountname');
-        // 추후에 로그인 기능 구현되면 삭제. 일회성 토큰
-        const url = 'https://mandarin.api.weniv.co.kr';
-        const getToken = localStorage.getItem('token');
-        const res = uploadImage();
-        try {
-            await axios.post(
-                `${url}/product`,
-                {
-                    product: {
-                        itemName: name,
-                        price: parseInt(
-                            price
-                                .split(',')
-                                .reduce((curr, acc) => curr + acc, '')
-                        ),
-                        link: link,
-                        itemImage: await res,
+        if (state) {
+            const getAccountName = localStorage.getItem('accountname');
+            // 추후에 로그인 기능 구현되면 삭제. 일회성 토큰
+            const url = 'https://mandarin.api.weniv.co.kr';
+            const getToken = localStorage.getItem('token');
+            const res = uploadImage();
+            try {
+                await axios.post(
+                    `${url}/product`,
+                    {
+                        product: {
+                            itemName: name,
+                            price: parseInt(
+                                price
+                                    .split(',')
+                                    .reduce((curr, acc) => curr + acc, '')
+                            ),
+                            link: link,
+                            itemImage: await res,
+                        },
                     },
-                },
-                {
-                    headers: {
-                        'Authorization': `Bearer ${getToken}`,
-                        'Content-type': 'application/json',
-                    },
-                }
-            );
-            navigate(`/profile/${getAccountName}`);
-        } catch (error) {
-            console.log(error);
+                    {
+                        headers: {
+                            'Authorization': `Bearer ${getToken}`,
+                            'Content-type': 'application/json',
+                        },
+                    }
+                );
+                navigate(`/profile/${getAccountName}`);
+            } catch (error) {
+                console.log(error);
+            }
         }
     };
     // 숫자에 , 찍어주는 함수

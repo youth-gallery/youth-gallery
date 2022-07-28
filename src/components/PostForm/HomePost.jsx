@@ -6,7 +6,7 @@ import PostImg from './PostImg';
 import PostHeartBtn from './PostHeartBtn';
 import PostComment from './PostComment';
 import PostDate from './PostDate';
-import { Link } from 'react-router-dom';
+import useReport from '../../hooks/useReport';
 
 const HomePostDiv = styled.div`
     display: flex;
@@ -40,6 +40,7 @@ const HomePost = ({ datas }) => {
     };
 
     const reportPost = () => {
+        useReport(`/post/${datas.id}/report`);
         alert('신고하였습니다.');
         setShowModal(false);
     };
@@ -54,9 +55,7 @@ const HomePost = ({ datas }) => {
                         openModalProp={openModal}
                     />
                     <HomePostTxt>{datas.content}</HomePostTxt>
-                    <Link to={`/post/${datas.author.username}/${datas.id}`}>
-                        <PostImg image={datas.image} />
-                    </Link>
+                    <PostImg image={datas.image} />
                     <div>
                         <PostHeartBtn
                             datas_id={datas.id}

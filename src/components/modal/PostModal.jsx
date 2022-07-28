@@ -1,9 +1,10 @@
 import React from 'react';
 import styles from './PostModal.module.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function PostModal({ values, propFunc }) {
     const navigate = useNavigate();
+    const { postId } = useParams();
 
     const setButton = (value, navigate, propFunc) => {
         switch (value) {
@@ -20,7 +21,7 @@ function PostModal({ values, propFunc }) {
                 break;
             case '수정':
                 //수정 페이지로 이동
-                navigate('/edit');
+                navigate(`/edit/${postId}`);
                 break;
             case '신고하기':
                 //신고 모달 띄우기

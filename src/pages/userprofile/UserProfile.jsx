@@ -4,27 +4,34 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import styles from './UserProfile.module.css';
 import TopBasicNav from '../../components/nav/TopBasicNav';
-import Profile from '../../components/Profile';
+import UserInfo from '../../components/UserInfo';
 import Product from '../../components/Product';
 import UserPost from '../../components/UserPost';
 import TabMenu from '../../components/tab/TabMenu';
 import Nav from '../../components/nav/Nav';
 import ButtonModalActive from '../../components/modal/ButtonModalActive';
+import { useParams } from 'react-router-dom';
 
 function UserProfile() {
     const [profileData, setProfileData] = useState({});
     const getToken = localStorage.getItem('token');
+    const { accountname } = useParams();
     const getAccountName = localStorage.getItem('accountname');
 
     // 사용자프로필
     useEffect(() => {
         axios
-            .get(`https://mandarin.api.weniv.co.kr/profile/${getAccountName}`, {
-                headers: {
-                    'Authorization': `Bearer ${getToken}`,
-                    'Content-type': 'application/json',
-                },
-            })
+            .get(
+                `https://mandarin.api.weniv.co.kr/profile/${
+                    accountname ? accountname : getAccountName
+                }`,
+                {
+                    headers: {
+                        'Authorization': `Bearer ${getToken}`,
+                        'Content-type': 'application/json',
+                    },
+                }
+            )
             .then((res) => {
                 setProfileData(res.data.profile);
             })
@@ -37,12 +44,17 @@ function UserProfile() {
     const [productList, setProductList] = useState([]);
     useEffect(() => {
         axios
-            .get(`https://mandarin.api.weniv.co.kr/product/${getAccountName}`, {
-                headers: {
-                    'Authorization': `Bearer ${getToken}`,
-                    'Content-type': 'application/json',
-                },
-            })
+            .get(
+                `https://mandarin.api.weniv.co.kr/product/${
+                    accountname ? accountname : getAccountName
+                }`,
+                {
+                    headers: {
+                        'Authorization': `Bearer ${getToken}`,
+                        'Content-type': 'application/json',
+                    },
+                }
+            )
             .then((res) => {
                 setProductList(res.data.product);
             })
@@ -56,7 +68,9 @@ function UserProfile() {
     useEffect(() => {
         axios
             .get(
-                `https://mandarin.api.weniv.co.kr/post/${getAccountName}/userpost`,
+                `https://mandarin.api.weniv.co.kr/post/${
+                    accountname ? accountname : getAccountName
+                }/userpost`,
                 {
                     headers: {
                         'Authorization': `Bearer ${getToken}`,
@@ -111,7 +125,7 @@ function UserProfile() {
                 />
             </Nav>
             <div className={styles.user_profile_wrap}>
-                <Profile profileData={profileData} />
+                <UserInfo profileData={profileData} />
                 <section className={styles.product_section}>
                     <div className={styles.product_list_warp}>
                         <h2 className={styles.title}>판매 중인 상품</h2>

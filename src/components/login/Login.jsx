@@ -14,29 +14,46 @@ function Login() {
     const [isEmail, setIsEmail] = useState(false);
     const [loginConfirm, setLoginConfirm] = useState(false);
     const [loginMsg, setLoginMsg] = useState('');
+    const [emailMsg, setEmailMsg] = useState('');
+    const [pwMsg, setPwMsg] = useState('');
     const navigate = useNavigate();
     console.log(isEmail);
 
     const handleLoginId = (e) => {
-        setLoginId(e.target.value);
+        const loginId = e.target.value;
+        setLoginId(loginId);
+
+        // 로그인 이메일 유효성검사 로직
+        const emailRegex =
+            /* eslint-disable-next-line */
+            /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+
+        // 이메일 유효성검사
+        emailRegex.test(loginId) ? setIsEmail(true) : setIsEmail(false);
+
+        if (loginId.length === 0 && loginId == '') {
+            setEmailMsg('*이메일을 입력해주세요.');
+        } else {
+            setEmailMsg('');
+        }
     };
 
     const handleLoginPw = (e) => {
-        setLoginPw(e.target.value);
+        const loginPw = e.target.value;
+        setLoginPw(loginPw);
+
+        if (loginPw.length === 0 && loginPw == '') {
+            setPwMsg('*비밀번호를 입력해주세요.');
+        } else {
+            setPwMsg('');
+        }
     };
 
-    // 로그인 이메일 유효성검사 로직
-    const emailRegex =
-        /* eslint-disable-next-line */
-        /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
-
     // 로그인 버튼 클릭시
-    // 1. 이메일 유효성 검사
+    // 1. 이메일 유효성검사
     // 2. API 서버에 post요청으로 데이터 요청
     // 3. 이메일과 비밀번호 일치 여부 검사 => 불일치시 경고 문구 출력!
     const onClickLogin = async () => {
-        emailRegex.test(loginId) ? setIsEmail(true) : setIsEmail(false);
-
         try {
             const res = await axios.post(
                 'https://mandarin.api.weniv.co.kr/user/login/',
@@ -74,15 +91,6 @@ function Login() {
     useEffect(() => {
         // 이메일, 비밀번호 입력값이 있으면 로그인 버튼 활성화
         loginId && loginPw ? setIsActive(true) : setIsActive(false);
-
-        // 이메일, 비밀번호 input박스가 둘 중에 하나라도 비었을 때는 loginConfirm경고문구 지워주기
-        !loginId || !loginPw ? setLoginConfirm(true) : null;
-
-        // TODO! mount시 1회만 (첫 로딩시) 이메일-비밀번호 필수입력 문구 가려주기
-        return () => {
-            setIsActive(false);
-            setLoginConfirm(true);
-        };
     }, [loginId, loginPw]);
 
     return (
@@ -97,13 +105,7 @@ function Login() {
                         type="email"
                         onChange={handleLoginId}
                     />
-                    {loginId ? (
-                        <div />
-                    ) : (
-                        <div className={styles.email_error}>
-                            *이메일을 입력해주세요.
-                        </div>
-                    )}
+                    <div className={styles.email_error}>{emailMsg}</div>
 
                     <label className={styles.input_label_pw} htmlFor="input_pw">
                         비밀번호
@@ -119,13 +121,7 @@ function Login() {
                     ) : (
                         <div className={styles.login_error}>{loginMsg}</div>
                     )}
-                    {loginPw ? (
-                        <div />
-                    ) : (
-                        <div className={styles.pw_error}>
-                            *비밀번호를 입력해주세요.
-                        </div>
-                    )}
+                    <div className={styles.pw_error}>{pwMsg}</div>
                 </div>
                 <button
                     className={

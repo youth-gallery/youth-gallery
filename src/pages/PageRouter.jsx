@@ -13,6 +13,7 @@ import UserProfile from './userprofile/UserProfile';
 import PostUpload from './postUpload/PostUpload';
 import News from './news/News';
 import Splash from '../components/login/Splash';
+import JoinMembership from '../components/membership/JoinMembership';
 import AddProduct from './addProduct/AddProduct';
 import PostEdit from './postEdit/PostEdit';
 
@@ -28,6 +29,7 @@ function PageRouter() {
             {/* 임시로 게시물 id 지정 
             나중에 /post/:id 로 넣으면됨*/}
             <Route path="/post/:username/:post_id" element={<PostDetail />} />
+            <Route path="/myprofile" element={<UserProfile />} />
             <Route path="/profile/:accountname" element={<UserProfile />}>
                 <Route path="followers" element={<FollowersList />} />
                 <Route path="followings" element={<FollowingsList />} />
@@ -38,6 +40,8 @@ function PageRouter() {
             <Route path="/splash" element={<Splash />} />
             <Route path="/login" element={<Login />} />
             <Route path="/join" element={<EmailJoin />} />
+            <Route path="/membership" element={<JoinMembership />} />
+            <Route path="/notFound" element={<NotFound />} />
             <Route path="/*" element={<NotFound />} />
             <Route path="/nonFollowing" element={<NonFollowing />} />
         </Routes>

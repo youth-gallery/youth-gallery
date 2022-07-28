@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import useReport from '../../hooks/useReport';
 import ButtonModal from '../modal/ButtonModal';
 import ButtonModalActive from '../modal/ButtonModalActive';
 // import { useParams, Link } from 'react-router-dom';
@@ -56,6 +58,8 @@ const HomePostOnlyTxt = ({
     children,
     postUserName,
     deleteComment,
+    commentId,
+    d3f9bf0d7507fca69d96f39a918d2d22556c4218,
 }) => {
     // 작성 시간 계산 함수. 나중에 util로 빼기
     const getTimeGap = (createTime) => {
@@ -95,7 +99,9 @@ const HomePostOnlyTxt = ({
         setShowModal(props);
     };
 
+    const { post_id } = useParams();
     const reportPost = () => {
+        useReport(`/post/${post_id}/comments/${commentId}/report`);
         alert('신고하였습니다.');
         setShowModal(false);
     };
@@ -124,7 +130,7 @@ const HomePostOnlyTxt = ({
     // };
     console.log(comment_id);
     console.log(name);
-    console.log(postUserName);
+    console.log(commentId);
     const [commentValue, setCommentValue] = useState('');
     console.log(commentValue);
 

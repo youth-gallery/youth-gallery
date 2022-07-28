@@ -1,10 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import styles from './Profile.module.css';
+import { Link, useParams } from 'react-router-dom';
+import styles from './UserInfo.module.css';
 import FollowButton from './button/FollowButton';
 
-function Profile({ profileData }) {
-    const getToken = localStorage.getItem('token');
+function UserInfo({ profileData }) {
+    const getAccountName = localStorage.getItem('accountname');
+    const { accountname } = useParams();
     return (
         <div className={styles.all_warpper}>
             <div className={styles.top_warpper}>
@@ -26,7 +27,7 @@ function Profile({ profileData }) {
             <p className={styles.user_id}>{`@${profileData.accountname}`}</p>
             <p className={styles.user_intro}>{profileData.intro}</p>
             <ul className={styles.button_warp}>
-                {profileData.accountname === getToken ? (
+                {accountname !== getAccountName ? (
                     <>
                         <li>
                             <button
@@ -64,4 +65,4 @@ function Profile({ profileData }) {
     );
 }
 
-export default Profile;
+export default UserInfo;

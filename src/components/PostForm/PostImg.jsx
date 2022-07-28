@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import ImageNotFound from '../../assets/ImageNotFound.png'
 
 const ImgDiv = styled.div`
     width: 304px;
@@ -70,6 +71,9 @@ function PostImg({ image }) {
             console.log(image.split(',').length);
         }
     };
+    const handleImgError = (e) => {
+        e.target.src = ImageNotFound;
+    };
     return (
         <>
             {image && (
@@ -77,7 +81,11 @@ function PostImg({ image }) {
                     <HomePostImgLists imgIndex={index}>
                         {image.split(',').map((img, i) => (
                             <ImgLi key={i}>
-                                <HomePostImg src={img} alt="포스트 이미지" />
+                                <HomePostImg
+                                    src={img}
+                                    alt="포스트 이미지"
+                                    onError={handleImgError}
+                                />
                             </ImgLi>
                         ))}
                     </HomePostImgLists>

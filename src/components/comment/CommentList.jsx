@@ -1,33 +1,46 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import HomePostOnlyTxt from '../PostForm/HomePostOnlyTxt';
 import axios from 'axios';
+import { useParams, Link } from 'react-router-dom';
+import useComments from '../../hooks/useComments';
 // import profile from '../../assets/basic-profile.png';
 // 프로필, name, 시간 :
 // comment content
 
 const CommentList = ({ postId, postUserName }) => {
-    const [commentList, setCommentList] = useState([]);
+    const [commentList, renderComments] = useComments();
+    const { post_id } = useParams();
+    console.log(post_id);
 
     useEffect(() => {
-        async function renderComments() {
-            const url = 'https://mandarin.api.weniv.co.kr';
-            const getToken = localStorage.getItem('token');
+        renderComments(post_id);
+    }, []);
+    console.log(commentList);
 
-            try {
-                const res = await axios.get(`${url}/post/${postId}/comments`, {
-                    method: 'GET',
+    const deleteComment = async (commentId) => {
+        const url = 'https://mandarin.api.weniv.co.kr';
+        const getToken = localStorage.getItem('token');
+        console.log(`${url}/post/${post_id}/comments/${commentId}/`);
+
+        try {
+            await axios.delete(
+                `${url}/post/${post_id}/comments/${commentId}/`,
+                {
                     headers: {
                         'Authorization': `Bearer ${getToken}`,
                         'Content-type': 'application/json',
                     },
-                });
-                setCommentList(res.data.comments);
-            } catch (error) {
-                console.log(error);
-            }
+                }
+            );
+            alert('삭제하였습니다.');
+            renderComments(postId);
+            console.log(commentId);
+        } catch (error) {
+            <Link to="/notFound" />;
+            console.log(error);
         }
-        renderComments();
-    }, [commentList]); //무한 렌더링이 발생해서 commentList일단 삭제하려고했으나 패이지 리로딩방법을 못찾아 다시 넣음
+    };
+
     console.log(commentList);
     return (
         <>
@@ -42,6 +55,7 @@ const CommentList = ({ postId, postUserName }) => {
                             time={comment?.createdAt}
                             postUserName={postUserName}
                             commentId={comment.id}
+                            deleteComment={deleteComment}
                         >
                             <div>{comment?.content}</div>
                         </HomePostOnlyTxt>

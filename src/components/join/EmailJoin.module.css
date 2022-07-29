@@ -1,6 +1,7 @@
 .emailJoin_body {
     max-width: 80%;
     min-width: 322px;
+    min-height: 100vh;
     margin: 0 auto;
 }
 

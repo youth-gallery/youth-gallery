@@ -17,12 +17,12 @@ function UserInfo({ profileData, followState, getFollowState }) {
         profileData.followerCount
     );
     const [followingCount, setFollowingCount] = useState(
-        profileData.followerCount
+        profileData.followingCount
     );
 
     useEffect(() => {
         setFollowerCount(profileData.followerCount);
-        setFollowingCount(profileData.followerCount);
+        setFollowingCount(profileData.followingCount);
         setIsFollow(followState);
     }, [profileData]);
 

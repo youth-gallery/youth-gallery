@@ -30,10 +30,15 @@ function PageRouter() {
             나중에 /post/:id 로 넣으면됨*/}
             <Route path="/post/:username/:post_id" element={<PostDetail />} />
             <Route path="/:myprofile" element={<UserProfile />} />
-            <Route path="/profile/:accountname" element={<UserProfile />}>
-                <Route path="followers" element={<FollowersList />} />
-                <Route path="followings" element={<FollowingsList />} />
-            </Route>
+            <Route path="/profile/:accountname" element={<UserProfile />} />
+            <Route
+                path="/profile/:accountname/followers"
+                element={<FollowersList />}
+            />
+            <Route
+                path="/profile/:accountname/followings"
+                element={<FollowingsList />}
+            />
             <Route path="/product" element={<AddProduct />} />
             <Route path="/search" element={<Search />} />
             {/* 나중에 페이지 만들면 수정해야함 */}

@@ -170,11 +170,11 @@ function UserProfile() {
                         <ul className={styles.post_warp}>
                             {postList.map((_, i) => {
                                 return (
-                                    // eslint-disable-next-line react/jsx-key
                                     <UserPost
                                         postList={postList}
                                         i={i}
                                         profileData={profileData}
+                                        key={postList[i].id}
                                     />
                                 );
                             })}

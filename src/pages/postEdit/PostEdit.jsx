@@ -7,7 +7,7 @@ import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const PostEdit = () => {
-    const { postId } = useParams();
+    const { post_id } = useParams();
     const navigate = useNavigate();
     const [state, setState] = useState(false);
     const [txt, setTxt] = useState('');
@@ -17,8 +17,8 @@ const PostEdit = () => {
     const inpRef = useRef();
 
     useEffect(() => {
-        getPost(postId);
-    }, [postId]);
+        getPost(post_id);
+    }, [post_id]);
 
     const getPost = async () => {
         const url = 'https://mandarin.api.weniv.co.kr';
@@ -29,7 +29,7 @@ const PostEdit = () => {
         // 임시 포스트 아이디
 
         try {
-            const res = await axios.get(`${url}/post/${postId}`, {
+            const res = await axios.get(`${url}/post/${post_id}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${getToken}`,
@@ -37,8 +37,10 @@ const PostEdit = () => {
                 },
             });
             setTxt(res.data.post.content);
-            const images = res.data.post.image.split(',');
-            setShowImgs(images);
+            if (res.data.post.image) {
+                const images = res.data.post.image.split(',');
+                setShowImgs(images);
+            }
         } catch (error) {
             console.log(error);
         }
@@ -103,7 +105,7 @@ const PostEdit = () => {
         const res = showImgs.join();
         try {
             await axios.put(
-                `${url}/post/${postId}`,
+                `${url}/post/${post_id}`,
                 {
                     post: {
                         content: `${txt}`,

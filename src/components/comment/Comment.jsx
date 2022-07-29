@@ -18,6 +18,9 @@ const CommentForm = styled.form`
     left: 50%;
     transform: translateX(-50%);
     background-color: white;
+    width: 450px;
+    margin: 0 auto;
+    box-sizing: border-box;
 `;
 
 const CommnetInp = styled.input`

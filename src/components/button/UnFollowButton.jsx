@@ -1,7 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
 
 const UnFollowButtonBody = styled.button`
     background-color: #ffffff;
@@ -18,29 +16,9 @@ const Span = styled.span`
 `;
 
 function UnFollowButton() {
-    const { accountname } = useParams();
-    const handleUnfollow = () => {
-        const getToken = localStorage.getItem('token');
-        axios
-            .delete(
-                `https://mandarin.api.weniv.co.kr/profile/${accountname}/unfollow`,
-                {
-                    headers: {
-                        'Authorization': `Bearer ${getToken}`,
-                        'Content-type': 'application/json',
-                    },
-                }
-            )
-            .then((res) => {
-                console.log(res);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    };
     return (
         <>
-            <UnFollowButtonBody onClick={handleUnfollow}>
+            <UnFollowButtonBody>
                 <Span>언팔로우</Span>
             </UnFollowButtonBody>
         </>

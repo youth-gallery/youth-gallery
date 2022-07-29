@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 const UnFollowButtonBody = styled.button`
     background-color: #ffffff;
@@ -17,17 +18,19 @@ const Span = styled.span`
 `;
 
 function UnFollowButton() {
+    const { accountname } = useParams();
     const handleUnfollow = () => {
-        // 0004 임시토큰
-        const token =
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZDg1MzkxMTdhZTY2NjU4MTdlNjY3MyIsImV4cCI6MTY2MzkzMzg1NSwiaWF0IjoxNjU4NzQ5ODU1fQ.pDSDuGNU51d1C8TI2_-wcADNOSqKkf_lJL3oMBB0clo';
+        const getToken = localStorage.getItem('token');
         axios
-            .delete('https://mandarin.api.weniv.co.kr/profile/0002/unfollow', {
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-type': 'application/json',
-                },
-            })
+            .delete(
+                `https://mandarin.api.weniv.co.kr/profile/${accountname}/unfollow`,
+                {
+                    headers: {
+                        'Authorization': `Bearer ${getToken}`,
+                        'Content-type': 'application/json',
+                    },
+                }
+            )
             .then((res) => {
                 console.log(res);
             })

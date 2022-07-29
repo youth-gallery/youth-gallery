@@ -12,6 +12,8 @@ const BackgroundModal = styled.div`
     right: 0;
     bottom: 0;
     z-index: 30;
+    width: 450px;
+    margin: 0 auto;
 `;
 
 function ButtonModalActive({

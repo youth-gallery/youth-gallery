@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRef } from 'react';
 
-function JoinMembership() {
+function JoinMembership({ joinId, joinPw }) {
     const [userName, setUserName] = useState('');
     const [accountId, setAccountId] = useState('');
     const [intro, setIntro] = useState('');
@@ -128,19 +128,18 @@ function JoinMembership() {
         setIsActive(
             userName.length > 0 &&
                 accountId.length > 0 &&
-                intro.length > 0 &&
                 userNameConfirm &&
                 accountIdConfirm
         );
     }, [userName, accountId, intro]);
 
     // 유스갤러리 시작하기 버튼 클릭시 홈으로 이동
-    // const onClickMembership = () => {
-    //     // 버튼 활성화시 (사용자이름, 계정ID, 소개 조건 모두 통과시)
-    //     if (isActive) {
-    //         navigate('/');
-    //     }
-    // };
+    const onClickMembership = () => {
+        // 버튼 활성화시 (사용자이름, 계정ID, 소개 조건 모두 통과시)
+        if (isActive) {
+            // navigate('/');
+        }
+    };
 
     // 프로필설정 데이터 전송
     const sendMembership = async (e) => {
@@ -148,11 +147,13 @@ function JoinMembership() {
 
         const img = uploadImage();
         try {
-            await axios.post(
+            const res = await axios.post(
                 'https://mandarin.api.weniv.co.kr/user/',
                 {
                     user: {
                         username: userName,
+                        email: joinId,
+                        password: joinPw,
                         accountname: accountId,
                         intro: intro,
                         image: await img,
@@ -164,6 +165,8 @@ function JoinMembership() {
                     },
                 }
             );
+
+            console.log(res);
 
             // 버튼 활성화시 (사용자이름, 계정ID, 소개 조건 모두 통과시)
             if (isActive) {
@@ -249,10 +252,9 @@ function JoinMembership() {
                             ? styles.membership_btn_active
                             : styles.membership_btn
                     }
-                    // onClick={onClickMembership}
+                    onClick={onClickMembership}
                     type="submit"
                 >
-                    {/* className={styles.joinMembership_btn}> */}
                     <span className={styles.joinMembership_btnSpan}>
                         유스갤러리 시작하기
                     </span>

@@ -6,12 +6,14 @@ function InnerAlert({
     rightText,
     closeModalPropFunc,
     rightBtnPropFunc,
+    commentId,
 }) {
     const closeModal = () => {
         closeModalPropFunc(false);
     };
     const rightBtnOnClick = () => {
-        rightBtnPropFunc(true);
+        // rightBtnPropFunc(true);
+        rightBtnPropFunc(commentId);
     };
     return (
         <Article>

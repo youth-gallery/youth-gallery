@@ -24,7 +24,7 @@ function PageRouter() {
             <Route path="/news" element={<News />} />
             <Route path="/post">
                 <Route path="upload" element={<PostUpload />} />
-                <Route path="edit/:postId" element={<PostEdit />} />
+                <Route path="edit/:post_id" element={<PostEdit />} />
             </Route>
             {/* 임시로 게시물 id 지정 
             나중에 /post/:id 로 넣으면됨*/}

@@ -5,19 +5,24 @@ import { useEffect } from 'react';
 import styles from './FollowersList.module.css';
 import TopBasicNav from '../components/nav/TopBasicNav';
 import UserFollow from '../components/UserFollow';
+import { useParams } from 'react-router-dom';
+import Nav from '../components/nav/Nav';
 
 function FollowingsList() {
     const [followings, setFollowings] = useState([]);
-    const token =
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyY2JjNTJiODJmZGNjNzEyZjQzODgyOSIsImV4cCI6MTY2MjcxMjQ1MSwiaWF0IjoxNjU3NTI4NDUxfQ.bnhQqSrauikpfrLKP6OXl2HMdizZdeM1TclnNTr1OXk';
+    const getToken = localStorage.getItem('token');
+    const { accountname } = useParams();
     useEffect(() => {
         axios
-            .get('https://mandarin.api.weniv.co.kr/profile/0002/following', {
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-type': 'application/json',
-                },
-            })
+            .get(
+                `https://mandarin.api.weniv.co.kr/profile/${accountname}/following`,
+                {
+                    headers: {
+                        'Authorization': `Bearer ${getToken}`,
+                        'Content-type': 'application/json',
+                    },
+                }
+            )
             .then((res) => {
                 setFollowings(res.data);
             })
@@ -29,7 +34,9 @@ function FollowingsList() {
     const navTitle = 'Followings';
     return (
         <div className={styles.followers_page}>
-            <TopBasicNav styles={styles} navTitle={navTitle}></TopBasicNav>
+            <Nav>
+                <TopBasicNav styles={styles} navTitle={navTitle}></TopBasicNav>
+            </Nav>
             <ul className={styles.user_follow_warp}>
                 {followings &&
                     followings.map((_, i) => {

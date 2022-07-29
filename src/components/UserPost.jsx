@@ -60,6 +60,7 @@ const HomePostDate = styled.span`
 `;
 
 const UserPost = ({ postList, profileData, i }) => {
+    const navigate = useNavigate();
     console.log(postList);
 
     const postDate = new Date(postList[i].updatedAt);
@@ -74,7 +75,6 @@ const UserPost = ({ postList, profileData, i }) => {
     };
 
     const deletePost = async () => {
-        const navigate = useNavigate();
         const postId = postList[i].id;
         const url = 'https://mandarin.api.weniv.co.kr';
         const getToken = localStorage.getItem('token');
@@ -88,7 +88,7 @@ const UserPost = ({ postList, profileData, i }) => {
             });
             alert('삭제하였습니다.');
             setShowModal(false);
-            navigate('/profile');
+            navigate('/myprofile');
         } catch (error) {
             <Link to="/notFound" />;
             console.log(error);

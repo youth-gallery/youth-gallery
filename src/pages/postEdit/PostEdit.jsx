@@ -131,43 +131,47 @@ const PostEdit = () => {
                 <Nav>
                     <TopUploadNav title="업로드" state={state} />
                 </Nav>
-                <textarea
-                    className={styles.uploadform_txt}
-                    placeholder="게시글 입력하기..."
-                    value={txt}
-                    onChange={handleTxt}
-                />
-                <div className={styles.uploadform_picture}>
-                    <button
-                        type="button"
-                        className={styles.uploadform_picture_btn}
-                        onClick={onPicBtnClick}
-                    />
-                    <input
-                        type="file"
-                        multiple
-                        accept="image/*"
-                        ref={inpRef}
-                        onChange={handleAddImages}
-                        className={styles.uploadform_picture_inp}
-                    />
-                </div>
-                <div className={styles.preview_pics}>
-                    {showImgs.map((image, id) => (
-                        <div key={id} className={styles.preview_div}>
-                            <img
-                                src={image}
-                                alt={`${image}-${id}`}
-                                className={styles.preview_pic}
-                            />
+                <section className={styles.outer_section}>
+                    <div className={styles.inner_inner}>
+                        <textarea
+                            className={styles.uploadform_txt}
+                            placeholder="게시글 입력하기..."
+                            value={txt}
+                            onChange={handleTxt}
+                        />
+                        <div className={styles.uploadform_picture}>
                             <button
                                 type="button"
-                                className={styles.preview_xbtn}
-                                onClick={() => handleDeleteImage(id)}
+                                className={styles.uploadform_picture_btn}
+                                onClick={onPicBtnClick}
+                            />
+                            <input
+                                type="file"
+                                multiple
+                                accept="image/*"
+                                ref={inpRef}
+                                onChange={handleAddImages}
+                                className={styles.uploadform_picture_inp}
                             />
                         </div>
-                    ))}
-                </div>
+                        <div className={styles.preview_pics}>
+                            {showImgs.map((image, id) => (
+                                <div key={id} className={styles.preview_div}>
+                                    <img
+                                        src={image}
+                                        alt={`${image}-${id}`}
+                                        className={styles.preview_pic}
+                                    />
+                                    <button
+                                        type="button"
+                                        className={styles.preview_xbtn}
+                                        onClick={() => handleDeleteImage(id)}
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
             </PostForm>
         </>
     );

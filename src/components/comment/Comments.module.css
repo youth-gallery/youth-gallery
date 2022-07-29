@@ -1,0 +1,61 @@
+.comment_div {
+    position: relative;
+}
+
+.comment_form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 13px 16px 12px 16px;
+    border-top: 1px solid #dbdbdb;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    width: 450px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.comment_inp {
+    width: 90%;
+    border: none;
+    font-size: 14px;
+}
+
+.comment_inp:focus {
+    outline: none;
+}
+
+.comment_inp::placeholder {
+    color: var(--light-gray);
+}
+
+.comment_img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+}
+
+.comment_btn {
+    padding: 4px 15px;
+    background-color: var(--light-gray);
+    border: none;
+    border-radius: 15px;
+    margin-top: 4px;
+    word-break: keep-all;
+    cursor: pointer;
+}
+
+/* 댓글 입력시 아래 버튼 활성화 */
+
+.comment_active_btn {
+    padding: 4px 15px;
+    background-color: var(--logo-yellow);
+    border: none;
+    border-radius: 15px;
+    margin-top: 4px;
+    word-break: keep-all;
+    cursor: pointer;
+}

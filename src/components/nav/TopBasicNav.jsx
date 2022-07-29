@@ -39,9 +39,9 @@ function TopBasicNav({ title, openModalProp }) {
                 <ArrowLeftButton name="back" onClick={handleGoBack} />
                 <NavTitle>{title}</NavTitle>
             </Warpper>
-            {title === 'Followers' ? null : (
+            {location.pathname === '/myprofile' ? (
                 <ButtonModal openModalProp={openModalProp} />
-            )}
+            ) : null}
         </>
     );
 }

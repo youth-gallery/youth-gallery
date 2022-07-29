@@ -10,16 +10,21 @@ import UserPost from '../../components/UserPost';
 import TabMenu from '../../components/tab/TabMenu';
 import Nav from '../../components/nav/Nav';
 import ButtonModalActive from '../../components/modal/ButtonModalActive';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function UserProfile() {
-    const [profileData, setProfileData] = useState({});
-    const getToken = localStorage.getItem('token');
-    const { accountname } = useParams();
-    const getAccountName = localStorage.getItem('accountname');
+    const navigate = useNavigate();
 
-    // 사용자프로필
+    const getToken = localStorage.getItem('token');
+    const getAccountName = localStorage.getItem('accountname');
+    const { accountname } = useParams();
+    const [profileData, setProfileData] = useState([]);
+    const [productList, setProductList] = useState([]);
+    const [postList, setPostList] = useState([]);
+    const [followState, setFollowState] = useState(Boolean);
+
     useEffect(() => {
+        // 사용자프로필
         axios
             .get(
                 `https://mandarin.api.weniv.co.kr/profile/${
@@ -33,16 +38,15 @@ function UserProfile() {
                 }
             )
             .then((res) => {
-                setProfileData(res.data.profile);
+                const profile = res.data.profile;
+                setProfileData(profile);
+                setFollowState(profile.isfollow);
             })
             .then((error) => {
                 console.log(error);
             });
-    }, {});
+        // 상품리스트
 
-    // 상품리스트
-    const [productList, setProductList] = useState([]);
-    useEffect(() => {
         axios
             .get(
                 `https://mandarin.api.weniv.co.kr/product/${
@@ -61,11 +65,7 @@ function UserProfile() {
             .then((error) => {
                 console.log(error);
             });
-    }, []);
-
-    // 게시글 목록
-    const [postList, setPostList] = useState([]);
-    useEffect(() => {
+        // 게시글 목록
         axios
             .get(
                 `https://mandarin.api.weniv.co.kr/post/${
@@ -84,8 +84,9 @@ function UserProfile() {
             .then((error) => {
                 console.log(error);
             });
+
+        console.log(postList);
     }, []);
-    console.log(postList);
 
     //모달 동작
     const [showModal, setShowModal] = useState(false);
@@ -100,6 +101,11 @@ function UserProfile() {
 
     const logout = () => {
         console.log('로그아웃');
+        // 현재 가지고 있는(사용자이름 포함) 로컬스토리지 안의 모든 데이터 삭제해줌 (clear)
+        localStorage.clear();
+
+        // 로그아웃 후 splash 화면으로 이동
+        navigate('/splash');
     };
 
     // 리스트형 앨범형 전환 버튼
@@ -125,7 +131,7 @@ function UserProfile() {
                 />
             </Nav>
             <div className={styles.user_profile_wrap}>
-                <UserInfo profileData={profileData} />
+                <UserInfo profileData={profileData} followState={followState} />
                 <section className={styles.product_section}>
                     <div className={styles.product_list_warp}>
                         <h2 className={styles.title}>판매 중인 상품</h2>

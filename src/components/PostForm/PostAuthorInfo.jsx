@@ -32,15 +32,15 @@ const HomePostId = styled.span`
 
 function PostAuthorInfo({ username, accountname, intro, openModalProp }) {
     return (
-        <Link to={`/profile/${accountname}`}>
-            <FlexDiv>
+        <FlexDiv>
+            <Link to={`/profile/${accountname}`}>
                 <FlexDivInner>
                     <HomePostName>{username}</HomePostName>
                     <HomePostId>{intro}</HomePostId>
                 </FlexDivInner>
-                <ButtonModal openModalProp={openModalProp} />
-            </FlexDiv>
-        </Link>
+            </Link>
+            <ButtonModal openModalProp={openModalProp} />
+        </FlexDiv>
     );
 }
 export default PostAuthorInfo;

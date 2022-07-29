@@ -8,12 +8,14 @@
     align-items: center;
     padding: 13px 16px 12px 16px;
     border-top: 1px solid #dbdbdb;
-    width: 98%;
     position: fixed;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
     background-color: white;
+    width: 450px;
+    margin: 0 auto;
+    box-sizing: border-box;
 }
 
 .comment_inp {
@@ -36,7 +38,7 @@
     border-radius: 50%;
 }
 
-.comment-btn {
+.comment_btn {
     padding: 4px 15px;
     background-color: var(--light-gray);
     border: none;

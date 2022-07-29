@@ -4,6 +4,7 @@ import Title from '../login/Title';
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useRef } from 'react';
 
 function JoinMembership() {
     const [userName, setUserName] = useState('');
@@ -17,10 +18,32 @@ function JoinMembership() {
     const [file, setFile] = useState('');
     const [isActive, setIsActive] = useState(false);
     const navigate = useNavigate();
+    const inpRef = useRef(null);
+    const onPicBtnClick = () => {
+        inpRef.current.click();
+    };
 
-    console.log(file);
     const backgroundstyle = {
         backgroundImage: `url('${file}')`,
+    };
+
+    // 이미지 미리보기 기능
+    const handlePreview = (e) => {
+        setFile(URL.createObjectURL(e.target.files[0]));
+    };
+
+    // 이미지 데이터 보내기
+    const uploadImage = async () => {
+        let formData = new FormData();
+        const imgFile = inpRef.current.files;
+        const file = imgFile[0];
+        formData.append('image', file);
+        const res = await axios.post(
+            'https://mandarin.api.weniv.co.kr/image/uploadfile',
+            formData
+        );
+        const imgUrl = `https://mandarin.api.weniv.co.kr/${res.data.filename}`;
+        return imgUrl;
     };
 
     const handleUserName = (e) => {
@@ -105,22 +128,54 @@ function JoinMembership() {
         setIsActive(
             userName.length > 0 &&
                 accountId.length > 0 &&
+                intro.length > 0 &&
                 userNameConfirm &&
-                accountIdConfirm &&
-                intro.length > 0
+                accountIdConfirm
         );
     }, [userName, accountId, intro]);
 
-    // 유스갤러리 시작하기 버튼 클릭시 myprofile로 이동
-    const onClickMembership = () => {
-        // 버튼 활성화시 (사용자이름, 계정ID, 소개 조건 모두 통과시)
-        if (isActive) {
-            navigate('/myprofile');
+    // 유스갤러리 시작하기 버튼 클릭시 홈으로 이동
+    // const onClickMembership = () => {
+    //     // 버튼 활성화시 (사용자이름, 계정ID, 소개 조건 모두 통과시)
+    //     if (isActive) {
+    //         navigate('/');
+    //     }
+    // };
+
+    // 프로필설정 데이터 전송
+    const sendMembership = async (e) => {
+        e.preventDefault();
+
+        const img = uploadImage();
+        try {
+            await axios.post(
+                'https://mandarin.api.weniv.co.kr/user/',
+                {
+                    user: {
+                        username: userName,
+                        accountname: accountId,
+                        intro: intro,
+                        image: await img,
+                    },
+                },
+                {
+                    headers: {
+                        'Content-type': 'application/json',
+                    },
+                }
+            );
+
+            // 버튼 활성화시 (사용자이름, 계정ID, 소개 조건 모두 통과시)
+            if (isActive) {
+                navigate('/');
+            }
+        } catch (error) {
+            console.log(error);
         }
     };
 
     return (
-        <>
+        <form onSubmit={sendMembership}>
             <section className={styles.joinMembership_body}>
                 <Title title={'프로필 설정'} />
                 <span className={styles.joinMembership_titleSpan}>
@@ -135,11 +190,12 @@ function JoinMembership() {
                     />
                     <input
                         type="file"
+                        accept="image/*"
                         id="input_file"
                         style={{ display: 'none' }}
-                        onChange={(e) => {
-                            setFile(URL.createObjectURL(e.target.files[0]));
-                        }}
+                        onChange={handlePreview}
+                        ref={inpRef}
+                        onClick={onPicBtnClick}
                     />
                 </div>
 
@@ -193,7 +249,8 @@ function JoinMembership() {
                             ? styles.membership_btn_active
                             : styles.membership_btn
                     }
-                    onClick={onClickMembership}
+                    // onClick={onClickMembership}
+                    type="submit"
                 >
                     {/* className={styles.joinMembership_btn}> */}
                     <span className={styles.joinMembership_btnSpan}>
@@ -201,7 +258,7 @@ function JoinMembership() {
                     </span>
                 </button>
             </section>
-        </>
+        </form>
     );
 }
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import CommentBox from '../../components/comment/CommentBox';
+import Comments from '../../components/comment/Comments';
 import axios from 'axios';
 import HomePost from '../../components/PostForm/HomePost';
 import { useParams } from 'react-router-dom';
@@ -52,7 +52,7 @@ const PostDetail = () => {
                         <HomePostArea>
                             <HomePost datas={posts.data.post} />
                         </HomePostArea>
-                        <CommentBox
+                        <Comments
                             postUserName={posts.data.post.author.username}
                         />
                     </>

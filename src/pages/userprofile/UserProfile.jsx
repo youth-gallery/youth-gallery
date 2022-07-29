@@ -132,8 +132,11 @@ function UserProfile() {
                         <ul className={styles.item_warp}>
                             {productList.map((_, i) => {
                                 return (
-                                    // eslint-disable-next-line react/jsx-key
-                                    <Product productList={productList} i={i} />
+                                    <Product
+                                        productList={productList}
+                                        i={i}
+                                        key={productList[i].id}
+                                    />
                                 );
                             })}
                         </ul>

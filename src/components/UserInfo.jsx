@@ -1,24 +1,35 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import styles from './UserInfo.module.css';
 import FollowButton from './button/FollowButton';
 import UnFollowButton from './button/UnFollowButton';
 import { useState } from 'react';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 
-function UserInfo({ profileData }) {
+function UserInfo({ profileData, followState, getFollowState }) {
+    const getToken = localStorage.getItem('token');
     const getAccountName = localStorage.getItem('accountname');
     const { accountname } = useParams();
     const { myprofile } = useParams();
-    const getToken = localStorage.getItem('token');
-    const [state, setState] = useState(profileData.isfollow);
+    const [isFollow, setIsFollow] = useState(followState);
+    const [followerCount, setFollowerCount] = useState(
+        profileData.followerCount
+    );
+    const [followingCount, setFollowingCount] = useState(
+        profileData.followerCount
+    );
+
     useEffect(() => {
-        setState(profileData.isfollow);
+        setFollowerCount(profileData.followerCount);
+        setFollowingCount(profileData.followerCount);
+        setIsFollow(followState);
     }, [profileData]);
 
+    console.log(profileData.followerCount);
+
     const handleButton = () => {
-        if (profileData.isfollow) {
+        if (isFollow) {
             axios
                 .delete(
                     `https://mandarin.api.weniv.co.kr/profile/${accountname}/unfollow`,
@@ -31,8 +42,12 @@ function UserInfo({ profileData }) {
                 )
                 .then((res) => {
                     console.log(res);
+                    const data = res.data.profile;
+                    setFollowerCount(data.followerCount);
+                    setFollowingCount(data.followingCount);
                     const isFollow = res.data.profile.isfollow;
-                    setState(isFollow);
+                    setIsFollow(isFollow);
+                    getFollowState(isFollow);
                 })
                 .catch((error) => {
                     console.log(error);
@@ -52,19 +67,24 @@ function UserInfo({ profileData }) {
                 .then((res) => {
                     console.log(res.data.profile.isfollow);
                     const isFollow = res.data.profile.isfollow;
-                    setState(isFollow);
+                    const data = res.data.profile;
+                    setFollowerCount(data.followerCount);
+                    setFollowingCount(data.followingCount);
+                    setIsFollow(isFollow);
+                    getFollowState(isFollow);
                 })
                 .catch((error) => {
                     console.log(error);
                 });
         }
-        console.log(state);
+        console.log(isFollow);
     };
+
     return (
         <div className={styles.all_warpper}>
             <div className={styles.top_warpper}>
                 <dl className={styles.num_warpper}>
-                    <dt className={styles.num}>{profileData.followerCount}</dt>
+                    <dt className={styles.num}>{followerCount}</dt>
                     <dd className={styles.num_title}>followers</dd>
                 </dl>
                 <img
@@ -73,7 +93,7 @@ function UserInfo({ profileData }) {
                     alt=""
                 />
                 <dl className={styles.num_warpper}>
-                    <dt className={styles.num}>{profileData.followingCount}</dt>
+                    <dt className={styles.num}>{followingCount}</dt>
                     <dd className={styles.num_title}>followings</dd>
                 </dl>
             </div>
@@ -108,7 +128,7 @@ function UserInfo({ profileData }) {
                             className={styles.follow_button_warp}
                             onClick={handleButton}
                         >
-                            {profileData.isfollow === false ? (
+                            {isFollow === false ? (
                                 <FollowButton />
                             ) : (
                                 <UnFollowButton />

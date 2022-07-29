@@ -13,13 +13,16 @@ import ButtonModalActive from '../../components/modal/ButtonModalActive';
 import { useParams } from 'react-router-dom';
 
 function UserProfile() {
-    const [profileData, setProfileData] = useState({});
     const getToken = localStorage.getItem('token');
-    const { accountname } = useParams();
     const getAccountName = localStorage.getItem('accountname');
+    const { accountname } = useParams();
+    const [profileData, setProfileData] = useState([]);
+    const [productList, setProductList] = useState([]);
+    const [postList, setPostList] = useState([]);
+    const [followState, setFollowState] = useState(Boolean);
 
-    // 사용자프로필
     useEffect(() => {
+        // 사용자프로필
         axios
             .get(
                 `https://mandarin.api.weniv.co.kr/profile/${
@@ -33,16 +36,15 @@ function UserProfile() {
                 }
             )
             .then((res) => {
-                setProfileData(res.data.profile);
+                const profile = res.data.profile;
+                setProfileData(profile);
+                setFollowState(profile.isfollow);
             })
             .then((error) => {
                 console.log(error);
             });
-    }, {});
+        // 상품리스트
 
-    // 상품리스트
-    const [productList, setProductList] = useState([]);
-    useEffect(() => {
         axios
             .get(
                 `https://mandarin.api.weniv.co.kr/product/${
@@ -61,11 +63,7 @@ function UserProfile() {
             .then((error) => {
                 console.log(error);
             });
-    }, []);
-
-    // 게시글 목록
-    const [postList, setPostList] = useState([]);
-    useEffect(() => {
+        // 게시글 목록
         axios
             .get(
                 `https://mandarin.api.weniv.co.kr/post/${
@@ -84,8 +82,9 @@ function UserProfile() {
             .then((error) => {
                 console.log(error);
             });
+
+        console.log(postList);
     }, []);
-    console.log(postList);
 
     //모달 동작
     const [showModal, setShowModal] = useState(false);
@@ -125,7 +124,7 @@ function UserProfile() {
                 />
             </Nav>
             <div className={styles.user_profile_wrap}>
-                <UserInfo profileData={profileData} />
+                <UserInfo profileData={profileData} followState={followState} />
                 <section className={styles.product_section}>
                     <div className={styles.product_list_warp}>
                         <h2 className={styles.title}>판매 중인 상품</h2>

@@ -1,3 +1,13 @@
+.outer_section {
+    min-height: 100vh;
+    background-color: white;
+}
+
+.inner_section {
+    height: 100%;
+    background-color: white;
+}
+
 .uploadform_txt {
     width: 40%;
     height: 150px;

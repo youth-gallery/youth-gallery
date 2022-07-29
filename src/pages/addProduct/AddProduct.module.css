@@ -10,7 +10,14 @@
 .add_product_section .input_section {
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
+    background-color: white;
+}
+
+.input_section .input_inner_section {
+    height: 100%;
     padding: 30px 34px 0;
+    background-color: white;
 }
 
 .input_section .add_image_title {

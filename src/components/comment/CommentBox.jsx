@@ -9,7 +9,7 @@ const CommentBox = ({ postUserName }) => {
     return (
         <>
             <CommentList postId={post_id} />
-        <Comment postId={post_id} postUserName={postUserName} />
+            <Comment postId={post_id} postUserName={postUserName} />
         </>
     );
 };

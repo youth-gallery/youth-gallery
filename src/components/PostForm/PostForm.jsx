@@ -9,11 +9,8 @@ const PostForm = (props) => {
     // 현재 로그인 기능이 없어 임시로 사용자와 토큰을 설정했습니다
     const renderProfile = async () => {
         const url = 'https://mandarin.api.weniv.co.kr';
-        const token =
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyY2FkNjA3ODJmZGNjNzEyZjQzN2QyZCIsImV4cCI6MTY2MjcxMDYxOCwiaWF0IjoxNjU3NTI2NjE4fQ.w47m557FRqRQhF8PGM_VUxF10mFtDexYJIxqUasFQ7I';
-        const accountName = 'fff';
-        localStorage.setItem('token', token);
         const getToken = localStorage.getItem('token');
+        const accountName = localStorage.getItem('accountname');
 
         try {
             const res = await axios.get(`${url}/profile/${accountName}`, {

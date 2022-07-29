@@ -202,7 +202,11 @@ function EmailJoin() {
                     </button>
                 </section>
             )}
-            {state ? <JoinMembership /> : <div />}
+            {state ? (
+                <JoinMembership joinId={joinId} joinPw={joinPw} />
+            ) : (
+                <div />
+            )}
         </>
     );
 }

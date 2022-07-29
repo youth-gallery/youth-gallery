@@ -1,6 +1,7 @@
-import React from "react";
-import styled from "styled-components";
-import ButtonModal from "../modal/ButtonModal";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import ButtonModal from '../modal/ButtonModal';
 const FlexDiv = styled.div`
     display: flex;
     height: 40px;
@@ -29,9 +30,9 @@ const HomePostId = styled.span`
     color: #767676;
 `;
 
-function PostAuthorInfo({ username, intro, openModalProp }) {
+function PostAuthorInfo({ username, accountname, intro, openModalProp }) {
     return (
-        <div>
+        <Link to={`/profile/${accountname}`}>
             <FlexDiv>
                 <FlexDivInner>
                     <HomePostName>{username}</HomePostName>
@@ -39,7 +40,7 @@ function PostAuthorInfo({ username, intro, openModalProp }) {
                 </FlexDivInner>
                 <ButtonModal openModalProp={openModalProp} />
             </FlexDiv>
-        </div>
+        </Link>
     );
 }
 export default PostAuthorInfo;

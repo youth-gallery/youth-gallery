@@ -62,6 +62,7 @@ const HomePostDate = styled.span`
 const UserPost = ({ postList, profileData, i }) => {
     const navigate = useNavigate();
     console.log(postList);
+    const post_id = postList[i].id;
 
     const postDate = new Date(postList[i].updatedAt);
     const [showModal, setShowModal] = useState(false);
@@ -75,12 +76,12 @@ const UserPost = ({ postList, profileData, i }) => {
     };
 
     const deletePost = async () => {
-        const postId = postList[i].id;
+        const post_id = postList[i].id;
         const url = 'https://mandarin.api.weniv.co.kr';
         const getToken = localStorage.getItem('token');
 
         try {
-            await axios.delete(`${url}/post/${postId}`, {
+            await axios.delete(`${url}/post/${post_id}`, {
                 headers: {
                     'Authorization': `Bearer ${getToken}`,
                     'Content-type': 'application/json',
@@ -93,7 +94,7 @@ const UserPost = ({ postList, profileData, i }) => {
             <Link to="/notFound" />;
             console.log(error);
         }
-        console.log(postId);
+        console.log(post_id);
     };
 
     return (
@@ -139,6 +140,7 @@ const UserPost = ({ postList, profileData, i }) => {
                 postModalValues={{
                     values: ['삭제', '수정'],
                 }}
+                post_id={post_id}
                 innerAlertValues={{
                     title: '게시물을 삭제할까요? ',
                     rightText: '삭제',

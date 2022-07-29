@@ -12,7 +12,11 @@ const Div = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-height: 100vh;
     height: 100%;
+`;
+
+const PaddingDiv = styled.div`
     padding: 60px 0;
 `;
 
@@ -51,15 +55,17 @@ function Home() {
                 <TopMainNav title={'youth-gallery 홈'} />
             </Nav>
             <Div>
-                {loading ? (
-                    <Loding />
-                ) : posts.data && posts.data.posts.length !== 0 ? (
-                    posts.data.posts.map((post) => (
-                        <HomePost key={post.id} datas={post} />
-                    ))
-                ) : (
-                    <NonFollowing />
-                )}
+                <PaddingDiv>
+                    {loading ? (
+                        <Loding />
+                    ) : posts.data && posts.data.posts.length !== 0 ? (
+                        posts.data.posts.map((post) => (
+                            <HomePost key={post.id} datas={post} />
+                        ))
+                    ) : (
+                        <NonFollowing />
+                    )}
+                </PaddingDiv>
             </Div>
             <TabMenu img={'homeImg'} />
         </>

@@ -10,9 +10,11 @@ import UserPost from '../../components/UserPost';
 import TabMenu from '../../components/tab/TabMenu';
 import Nav from '../../components/nav/Nav';
 import ButtonModalActive from '../../components/modal/ButtonModalActive';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function UserProfile() {
+    const navigate = useNavigate();
+
     const getToken = localStorage.getItem('token');
     const getAccountName = localStorage.getItem('accountname');
     const { accountname } = useParams();
@@ -99,6 +101,11 @@ function UserProfile() {
 
     const logout = () => {
         console.log('로그아웃');
+        // 현재 가지고 있는(사용자이름 포함) 로컬스토리지 안의 모든 데이터 삭제해줌 (clear)
+        localStorage.clear();
+
+        // 로그아웃 후 splash 화면으로 이동
+        navigate('/splash');
     };
 
     // 리스트형 앨범형 전환 버튼

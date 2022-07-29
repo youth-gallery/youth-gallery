@@ -1,8 +1,5 @@
-import axios from 'axios';
 import React from 'react';
 import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
-import { useState } from 'react';
 
 const FollowButtonBody = styled.button`
     background-color: var(--logo-yellow);
@@ -19,34 +16,9 @@ const Span = styled.span`
 `;
 
 function FollowButton() {
-    const { accountname } = useParams();
-    const [state, setState] = useState(false);
-
-    const handleFollow = () => {
-        const getToken = localStorage.getItem('token');
-        axios
-            .post(
-                `https://mandarin.api.weniv.co.kr/profile/${accountname}/follow`,
-                {},
-                {
-                    headers: {
-                        'Authorization': `Bearer ${getToken}`,
-                        'Content-type': 'application/json',
-                    },
-                }
-            )
-            .then((res) => {
-                console.log(res.data.profile.isfollow);
-                setState(res.data.profile.isfollow);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    };
-    console.log(state);
     return (
         <>
-            <FollowButtonBody onClick={handleFollow}>
+            <FollowButtonBody>
                 <Span>팔로우</Span>
             </FollowButtonBody>
         </>

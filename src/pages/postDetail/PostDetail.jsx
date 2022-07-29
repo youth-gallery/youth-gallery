@@ -7,8 +7,14 @@ import Nav from '../../components/nav/Nav';
 import TopBasicNav from '../../components/nav/TopBasicNav';
 import styled from 'styled-components';
 
+const Div = styled.div`
+    min-height: 100vh;
+    height: 100%;
+    background-color: white;
+`;
+
 const PageDetailArea = styled.div`
-    margin: 70px 0 90px;
+    padding: 70px 0 90px;
 `;
 
 const HomePostArea = styled.div`
@@ -36,20 +42,23 @@ const PostDetail = () => {
                 .catch((error) => console.log(error.message));
         }, []);
     return (
-        <PageDetailArea>
-            <Nav>
-                <TopBasicNav />
-            </Nav>
-            {posts.data && (
-                <>
-                    <HomePostArea>
-                        <HomePost datas={posts.data.post} />
-                    </HomePostArea>
-
-                    <CommentBox postUserName={posts.data.post.author.usename} />
-                </>
-            )}
-        </PageDetailArea>
+        <Div>
+            <PageDetailArea>
+                <Nav>
+                    <TopBasicNav />
+                </Nav>
+                {posts.data && (
+                    <>
+                        <HomePostArea>
+                            <HomePost datas={posts.data.post} />
+                        </HomePostArea>
+                        <CommentBox
+                            postUserName={posts.data.post.author.username}
+                        />
+                    </>
+                )}
+            </PageDetailArea>
+        </Div>
     );
 };
 

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import useReport from '../../hooks/useReport';
 import ButtonModal from '../modal/ButtonModal';
 import ButtonModalActive from '../modal/ButtonModalActive';
+import { useParams } from 'react-router-dom';
 
 const CommentArea = styled.div`
     margin: 16px 0;
@@ -51,9 +51,11 @@ const HomePostOnlyTxt = ({
     profileImg,
     name,
     accountname,
+    comment_id,
     time,
     children,
     commentId,
+    deleteComment,
 }) => {
     // 작성 시간 계산 함수. 나중에 util로 빼기
     const getTimeGap = (createTime) => {
@@ -94,17 +96,14 @@ const HomePostOnlyTxt = ({
     };
 
     const { post_id } = useParams();
+
     const reportPost = () => {
         useReport(`/post/${post_id}/comments/${commentId}/report`);
         alert('신고하였습니다.');
         setShowModal(false);
     };
 
-    const deletePost = () => {
-        alert('삭제하였습니다.');
-        setShowModal(false);
-    };
-
+    console.log(comment_id);
     console.log(name);
     console.log(commentId);
     const [commentValue, setCommentValue] = useState('');
@@ -113,7 +112,7 @@ const HomePostOnlyTxt = ({
     const myAccountName = localStorage.getItem('accountname'); //추후에 로그인 동작시 accountname 불러와서 저장
 
     return (
-        <CommentArea>
+        <CommentArea setShowModal={setShowModal}>
             <HomePostDiv>
                 <div>
                     <HomePostProfile src={profileImg} />
@@ -129,34 +128,35 @@ const HomePostOnlyTxt = ({
                     </FlexDiv>
                     {children}
                 </Div>
+                {accountname === myAccountName ? (
+                    <ButtonModalActive
+                        propState={showModal}
+                        propsCloseFunc={closeModal}
+                        postModalValues={{
+                            values: ['삭제'],
+                        }}
+                        innerAlertValues={{
+                            title: '댓글을 삭제할까요? ',
+                            rightText: '삭제',
+                            rightBtnPropFunc: deleteComment,
+                        }}
+                        commentId={commentId}
+                    />
+                ) : (
+                    <ButtonModalActive
+                        propState={showModal}
+                        propsCloseFunc={closeModal}
+                        postModalValues={{
+                            values: ['신고하기'],
+                        }}
+                        innerAlertValues={{
+                            title: '게시물을 신고할까요? ',
+                            rightText: '신고',
+                            rightBtnPropFunc: reportPost,
+                        }}
+                    />
+                )}
             </HomePostDiv>
-            {accountname === myAccountName ? (
-                <ButtonModalActive
-                    propState={showModal}
-                    propsCloseFunc={closeModal}
-                    postModalValues={{
-                        values: ['삭제'],
-                    }}
-                    innerAlertValues={{
-                        title: '댓글을 삭제할까요? ',
-                        rightText: '삭제',
-                        rightBtnPropFunc: deletePost,
-                    }}
-                />
-            ) : (
-                <ButtonModalActive
-                    propState={showModal}
-                    propsCloseFunc={closeModal}
-                    postModalValues={{
-                        values: ['신고하기'],
-                    }}
-                    innerAlertValues={{
-                        title: '게시물을 신고할까요? ',
-                        rightText: '신고',
-                        rightBtnPropFunc: reportPost,
-                    }}
-                />
-            )}
         </CommentArea>
     );
 };

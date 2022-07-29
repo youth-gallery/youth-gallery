@@ -21,6 +21,8 @@ function ButtonModalActive({
     propsCloseFunc,
     postModalValues,
     innerAlertValues,
+    commentId,
+    post_id,
 }) {
     const [showModal, setShowModal] = useState(false);
     const [showInnerModal, setShowInnerModal] = useState(false);
@@ -51,6 +53,7 @@ function ButtonModalActive({
                         <PostModal
                             values={postModalValues.values}
                             propFunc={openInnerModal}
+                            post_id={post_id}
                         />
                     </Modal>
                     {showInnerModal ? (
@@ -59,6 +62,8 @@ function ButtonModalActive({
                             rightText={innerAlertValues.rightText}
                             closeModalPropFunc={closeModal}
                             rightBtnPropFunc={innerAlertValues.rightBtnPropFunc}
+                            commentId={commentId}
+                            post_id={post_id}
                         />
                     ) : null}
                 </>

@@ -9,11 +9,8 @@ const NewsList = () => {
     useEffect(() => {
         async function getNews() {
             const url = 'https://mandarin.api.weniv.co.kr';
-            const token =
-                'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZDdiMDkwMTdhZTY2NjU4MTdjODJkOCIsImV4cCI6MTY2MzQ4NzEzNywiaWF0IjoxNjU4MzAzMTM3fQ.61cAggF_ueVIWK80RD14HqmDNNJn_N3maKssZ9LMfC8';
-            const accountName = 'admin_youth';
-            localStorage.setItem('token', token);
-            const getToken = localStorage.getItem('token');
+            const accountName = localStorage.get('accountname');
+            const getToken = localStorage.get('token');
 
             try {
                 const res = await axios.get(

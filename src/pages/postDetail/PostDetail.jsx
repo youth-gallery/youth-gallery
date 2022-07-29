@@ -28,11 +28,11 @@ const PostDetail = () => {
     let { post_id } = useParams();
     const [posts, setPosts] = useState([]);
 
-    post_id &&
-        useEffect(() => {
+    useEffect(() => {
+        post_id &&
             axios({
                 method: 'GET',
-                url: url + `/post/${post_id}`,
+                url: `${url}/post/${post_id}`,
                 headers: {
                     'Authorization': `Bearer ${getToken}`,
                     'Content-type': 'application/json',
@@ -40,7 +40,7 @@ const PostDetail = () => {
             })
                 .then((response) => setPosts(response))
                 .catch((error) => console.log(error.message));
-        }, []);
+    }, []);
     return (
         <Div>
             <PageDetailArea>

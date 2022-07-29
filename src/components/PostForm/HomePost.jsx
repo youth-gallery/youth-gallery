@@ -7,6 +7,7 @@ import PostHeartBtn from './PostHeartBtn';
 import PostComment from './PostComment';
 import PostDate from './PostDate';
 import useReport from '../../hooks/useReport';
+import { Link } from 'react-router-dom';
 
 const HomePostDiv = styled.div`
     display: flex;
@@ -44,13 +45,17 @@ const HomePost = ({ datas }) => {
         alert('신고하였습니다.');
         setShowModal(false);
     };
+    console.log(datas.author.accountname);
     return (
         <>
             <HomePostDiv>
-                <HomePostProfile src={datas.author.image} />
+                <Link to={`/profile/${datas.author.accountname}`}>
+                    <HomePostProfile src={datas.author.image} />
+                </Link>
                 <div>
                     <PostAuthorInfo
                         username={datas.author.username}
+                        accountname={datas.author.accountname}
                         intro={datas.author.intro}
                         openModalProp={openModal}
                     />

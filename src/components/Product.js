@@ -77,7 +77,17 @@ function Product({ productList, i }) {
                         rightBtnPropFunc: deleteProduct,
                     }}
                 />
-            ) : null}
+            ) : (
+                <ButtonModalActive
+                    propState={showModal}
+                    propsCloseFunc={closeModal}
+                    postModalValues={{
+                        values: ['웹사이트에서 상품보기'],
+                    }}
+                    // link={productList[i].link}
+                    // accountname = {productList[i].accountname}
+                />
+            )}
         </>
     );
 }

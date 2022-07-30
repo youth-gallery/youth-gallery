@@ -27,8 +27,7 @@ function PostModal({ values, propFunc, post_id }) {
                 propFunc(true);
                 break;
             case '웹사이트에서 상품보기':
-                //웹사이트 상품 페이지로 이동
-                navigate('/');
+                // 이동할 링크 어떻게 할지 고민
                 break;
             case '상품 수정':
                 navigate(`/edit/product/${post_id}`);

@@ -23,6 +23,7 @@ function ButtonModalActive({
     innerAlertValues,
     commentId,
     post_id,
+    link,
 }) {
     const [showModal, setShowModal] = useState(false);
     const [showInnerModal, setShowInnerModal] = useState(false);
@@ -54,6 +55,7 @@ function ButtonModalActive({
                             values={postModalValues.values}
                             propFunc={openInnerModal}
                             post_id={post_id}
+                            link={link}
                         />
                     </Modal>
                     {showInnerModal ? (

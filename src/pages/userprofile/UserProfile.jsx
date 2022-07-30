@@ -94,7 +94,7 @@ function UserProfile() {
             });
 
         console.log(postList);
-    }, []);
+    }, [location]);
 
     //모달 동작
     const [showModal, setShowModal] = useState(false);

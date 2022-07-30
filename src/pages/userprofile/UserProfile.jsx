@@ -22,7 +22,7 @@ function UserProfile() {
     const [productList, setProductList] = useState([]);
     const [postList, setPostList] = useState([]);
     const [followState, setFollowState] = useState(Boolean);
-
+    const { myprofile } = useParams();
     useEffect(() => {
         // 사용자프로필
         axios
@@ -209,7 +209,11 @@ function UserProfile() {
                     rightBtnPropFunc: logout,
                 }}
             />
-            <TabMenu img={'profileImg'} />
+            {myprofile ? (
+                <TabMenu img={'profileImg'} />
+            ) : (
+                <TabMenu img={'homeImg'} />
+            )}
         </section>
     );
 }

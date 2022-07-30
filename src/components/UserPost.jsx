@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import ButtonModal from './modal/ButtonModal';
 import ButtonModalActive from './modal/ButtonModalActive';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import PostHeartBtn from './PostForm/PostHeartBtn';
 import PostComment from './PostForm/PostComment';
 import PostImg from './PostForm/PostImg';
@@ -70,6 +70,7 @@ const UserPost = ({ postList, profileData, i }) => {
         console.log(propState);
         setShowModal(propState);
     };
+    const { myprofile } = useParams();
 
     const closeModal = (props) => {
         setShowModal(props);
@@ -95,6 +96,12 @@ const UserPost = ({ postList, profileData, i }) => {
             console.log(error);
         }
         console.log(post_id);
+    };
+
+    // 신고 그냥 기능은 없는...
+    const declaration = () => {
+        alert('신고되었습니다.');
+        setShowModal(false);
     };
 
     return (
@@ -130,19 +137,34 @@ const UserPost = ({ postList, profileData, i }) => {
                     </HomePostDate>
                 </div>
             </HomePostLi>
-            <ButtonModalActive
-                propState={showModal}
-                propsCloseFunc={closeModal}
-                postModalValues={{
-                    values: ['삭제', '수정'],
-                }}
-                post_id={post_id}
-                innerAlertValues={{
-                    title: '게시물을 삭제할까요? ',
-                    rightText: '삭제',
-                    rightBtnPropFunc: deletePost,
-                }}
-            />
+            {myprofile ? (
+                <ButtonModalActive
+                    propState={showModal}
+                    propsCloseFunc={closeModal}
+                    postModalValues={{
+                        values: ['삭제', '수정'],
+                    }}
+                    innerAlertValues={{
+                        title: '게시물을 삭제할까요? ',
+                        rightText: '삭제',
+                        rightBtnPropFunc: deletePost,
+                    }}
+                />
+            ) : (
+                <ButtonModalActive
+                    propState={showModal}
+                    propsCloseFunc={closeModal}
+                    postModalValues={{
+                        values: ['신고하기'],
+                    }}
+                    post_id={post_id}
+                    innerAlertValues={{
+                        title: '게시물을 신고할까요? ',
+                        rightText: '신고',
+                        rightBtnPropFunc: declaration,
+                    }}
+                />
+            )}
         </>
     );
 };

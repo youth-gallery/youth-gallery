@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import styles from './UserInfo.module.css';
 import FollowButton from './button/FollowButton';
@@ -11,7 +11,6 @@ function UserInfo({ profileData, followState, getFollowState }) {
     const getToken = localStorage.getItem('token');
     const getAccountName = localStorage.getItem('accountname');
     const { accountname } = useParams();
-    const { myprofile } = useParams();
     const [isFollow, setIsFollow] = useState(followState);
     const [followerCount, setFollowerCount] = useState(
         profileData.followerCount
@@ -21,6 +20,7 @@ function UserInfo({ profileData, followState, getFollowState }) {
     );
     const [viewProfile, setViewProfile] = useState(true);
     const navigate = useNavigate();
+    const location = useLocation();
 
     console.log(viewProfile);
 
@@ -134,7 +134,8 @@ function UserInfo({ profileData, followState, getFollowState }) {
                     >{`@${profileData.accountname}`}</p>
                     <p className={styles.user_intro}>{profileData.intro}</p>
                     <ul className={styles.button_warp}>
-                        {accountname === getAccountName || myprofile ? (
+                        {accountname === getAccountName ||
+                        location.pathname === '/myprofile' ? (
                             <>
                                 <li>
                                     <button

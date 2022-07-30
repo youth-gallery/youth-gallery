@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 import ButtonModalActive from './modal/ButtonModalActive';
 
 function Product({ productList, i }) {
-    const { myprofile } = useParams();
     const navigate = useNavigate();
     const [productId, setProductId] = useState(productList[i].id);
+    const location = useLocation();
 
     useEffect(() => {
         setProductId(productList[i].id);
@@ -63,7 +63,7 @@ function Product({ productList, i }) {
                     'ko-KR'
                 )}원`}</ProductPrice>
             </ContentWrap>
-            {myprofile ? (
+            {location.pathname === '/myprofile' ? (
                 <ButtonModalActive
                     propState={showModal}
                     propsCloseFunc={closeModal}

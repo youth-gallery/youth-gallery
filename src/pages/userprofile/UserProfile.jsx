@@ -10,7 +10,7 @@ import UserPost from '../../components/UserPost';
 import TabMenu from '../../components/tab/TabMenu';
 import Nav from '../../components/nav/Nav';
 import ButtonModalActive from '../../components/modal/ButtonModalActive';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 function UserProfile() {
     const navigate = useNavigate();
@@ -22,7 +22,8 @@ function UserProfile() {
     const [productList, setProductList] = useState([]);
     const [postList, setPostList] = useState([]);
     const [followState, setFollowState] = useState(Boolean);
-    const { myprofile } = useParams();
+    const location = useLocation();
+
     useEffect(() => {
         // 사용자프로필
         axios
@@ -209,7 +210,7 @@ function UserProfile() {
                     rightBtnPropFunc: logout,
                 }}
             />
-            {myprofile ? (
+            {location.pathname === '/myprofile' ? (
                 <TabMenu img={'profileImg'} />
             ) : (
                 <TabMenu img={'homeImg'} />

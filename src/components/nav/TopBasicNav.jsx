@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
 import iconArrowLeft from '../../assets/icon-arrow-left.png';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import ButtonModal from '../modal/ButtonModal';
 
 const Warpper = styled.div`
@@ -29,6 +29,7 @@ const ArrowLeftButton = styled.button`
 
 function TopBasicNav({ title, openModalProp }) {
     const navigate = useNavigate();
+    const location = useLocation();
     const handleGoBack = () => {
         navigate('/home');
     };

@@ -30,7 +30,7 @@ const ArrowLeftButton = styled.button`
 function TopBasicNav({ title, openModalProp }) {
     const navigate = useNavigate();
     const handleGoBack = () => {
-        navigate(-1);
+        navigate('/home');
     };
 
     return (

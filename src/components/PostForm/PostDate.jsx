@@ -10,8 +10,8 @@ const HomePostDate = styled.span`
     line-height: 1.2;
 `;
 
-function PostDate({ updatedAt }) {
-    const postDate = new Date(updatedAt);
+function PostDate({ createdAt }) {
+    const postDate = new Date(createdAt);
     return (
         <HomePostDate>
             {`${postDate.getFullYear()}년 ${

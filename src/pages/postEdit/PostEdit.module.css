@@ -1,4 +1,5 @@
 .outer_section {
+    max-width: 450px;
     min-height: 100vh;
     background-color: white;
 }
@@ -28,7 +29,7 @@
 }
 
 .uploadform_picture {
-    position: fixed;
+    /* position: fixed; */
     right: 8px;
     bottom: 8px;
 }
@@ -42,6 +43,9 @@
     /* var()로 고치기 */
     background-color: #212121;
     cursor: pointer;
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
 }
 
 .uploadform_picture_inp {

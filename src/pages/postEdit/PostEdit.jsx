@@ -129,7 +129,7 @@ const PostEdit = () => {
                     <TopUploadNav title="업로드" state={state} />
                 </Nav>
                 <section className={styles.outer_section}>
-                    <div className={styles.inner_inner}>
+                    <div className={styles.inner_section}>
                         <textarea
                             className={styles.uploadform_txt}
                             placeholder="게시글 입력하기..."

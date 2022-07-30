@@ -1,0 +1,107 @@
+.editProfile_body {
+    max-width: 80%;
+    min-width: 322px;
+    margin: 47px auto;
+    min-height: 100vh;
+}
+
+.editProfile_titleSpan {
+    display: flex;
+    justify-content: center;
+    color: var(--gray-color);
+    font-size: 1.4rem;
+    width: 100%;
+    padding: 12px 0;
+    margin: 0 auto;
+}
+
+.editProfile_uploadContainer {
+    position: relative;
+    background-image: url(../../assets/basic-profile-img-.png);
+    width: 100%;
+    height: 16vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 14vh;
+    margin: 10px 0;
+    padding-top: 45px;
+}
+
+.preview {
+    width: 16vh;
+    height: 16vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 16vh;
+    margin: 10px auto;
+    border-radius: 50%;
+}
+
+.editProfile_fileImg {
+    position: absolute;
+    bottom: 0;
+    left: 5vh;
+    background-image: url(../../assets/upload-file.png);
+    width: 100%;
+    height: 8vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 5vh;
+}
+
+.edit_btn {
+    background-color: var(--btn-gray);
+    border: initial;
+    width: 100%;
+    padding: 13px 0;
+    margin-top: 24px;
+    border-radius: 44px;
+    cursor: pointer;
+}
+
+.edit_btn_active {
+    background-color: var(--logo-black);
+    color: white;
+    border-radius: 44px;
+    margin-top: 24px;
+    margin-bottom: 20px;
+    padding: 13px 0;
+    width: 100%;
+    cursor: pointer;
+}
+
+.editProfile_btnSpan {
+    color: white;
+    font-size: 1.4rem;
+}
+
+.edit_label {
+    display: block;
+    color: var(--gray-color);
+    font-size: 1.2rem;
+}
+
+.edit_input {
+    min-height: 32px;
+    color: var(--logo-black);
+    font-size: 1.4rem;
+    width: 100%;
+    border: initial;
+    border-bottom: 1px solid var(--btn-gray);
+    margin-bottom: 6px;
+}
+
+.edit_input:focus {
+    outline: none;
+    border-bottom: 1px solid var(--logo-yellow);
+}
+.edit_input::placeholder {
+    font-size: 1.4rem;
+    color: var(--btn-gray);
+}
+
+.edit_error {
+    color: var(--error-red);
+    font-size: 1.2rem;
+    margin-bottom: 16px;
+}

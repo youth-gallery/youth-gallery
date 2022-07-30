@@ -30,6 +30,9 @@ function PostModal({ values, propFunc, post_id }) {
                 //웹사이트 상품 페이지로 이동
                 navigate('/');
                 break;
+            case '상품 수정':
+                navigate(`/edit/product/${post_id}`);
+                break;
             default:
                 console.log('error: value를 다시 확인해주세요.');
         }

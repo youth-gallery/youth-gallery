@@ -11,6 +11,7 @@
     border: none;
     /* 나중에 rem 단위로 고쳐야함 */
     font-size: 14px;
+    resize: none;
 }
 
 .uploadform_txt:focus {

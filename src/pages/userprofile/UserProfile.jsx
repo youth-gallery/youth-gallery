@@ -125,10 +125,7 @@ function UserProfile() {
     return (
         <section className={styles.user_profile_section}>
             <Nav>
-                <TopBasicNav
-                    title={'youth-gallery 홈'}
-                    openModalProp={openModal}
-                />
+                <TopBasicNav openModalProp={openModal} />
             </Nav>
             <div className={styles.user_profile_wrap}>
                 <UserInfo profileData={profileData} followState={followState} />

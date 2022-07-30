@@ -64,7 +64,7 @@
     /* rem 단위로 고치기 */
     width: 30px;
     height: 30px;
-    position: relative;
+    position: absolute;
     top: 5px;
     right: 5px;
     background-image: url(../../assets/x.png);

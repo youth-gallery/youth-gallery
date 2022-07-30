@@ -17,7 +17,7 @@ import JoinMembership from '../components/membership/JoinMembership';
 import AddProduct from './addProduct/AddProduct';
 import PostEdit from './postEdit/PostEdit';
 import ProductEdit from './productEdit/ProductEdit';
-import EditProfile from '../components/membership/EditProfile';
+import EditProfile from '../components/editProfile/EditProfile';
 
 function PageRouter() {
     return (
@@ -32,7 +32,7 @@ function PageRouter() {
             {/* 임시로 게시물 id 지정 
             나중에 /post/:id 로 넣으면됨*/}
             <Route path="/post/:username/:post_id" element={<PostDetail />} />
-            <Route path="/:myprofile" element={<UserProfile />} />
+            <Route path="/myprofile" element={<UserProfile />} />
             <Route path="/myprofile/edit" element={<EditProfile />} />
             <Route path="/edit/product/:product_id" element={<ProductEdit />} />
             <Route path="/profile/:accountname" element={<UserProfile />} />

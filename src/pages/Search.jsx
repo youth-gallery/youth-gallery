@@ -9,27 +9,6 @@ import NonSearch from '../components/search/NonSearch';
 import ShowSearch from '../components/search/ShowSearch';
 import RecommendSearch from '../components/search/RecomendSearch';
 
-const View = styled.div`
-    width: 450px;
-    height: 100%;
-    position: absolute;
-    border: 1px soli dred;
-    overflow: hidden;
-`;
-
-const ScrollBlind = styled.div`
-    width: 480px;
-    height: 100%;
-    overflow-y: scroll;
-    background-color: white;
-`;
-
-const Ul = styled.ul`
-    padding: 60px 0;
-    margin: 0 16px;
-    height: 100vh;
-`;
-
 function Search() {
     const [keyword, setKeyword] = useState(null);
     const [users, setUsers] = useState([]);
@@ -87,5 +66,26 @@ function Search() {
         </>
     );
 }
+
+const View = styled.div`
+    width: 450px;
+    height: 100%;
+    position: absolute;
+    border: 1px soli dred;
+    overflow: hidden;
+`;
+
+const ScrollBlind = styled.div`
+    width: 480px;
+    height: 100%;
+    overflow-y: scroll;
+    background-color: white;
+`;
+
+const Ul = styled.ul`
+    padding: 60px 0;
+    margin: 0 16px;
+    height: 100vh;
+`;
 
 export default Search;

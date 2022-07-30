@@ -144,6 +144,7 @@ const UserPost = ({ postList, profileData, i }) => {
                     postModalValues={{
                         values: ['삭제', '수정'],
                     }}
+                    post_id={post_id}
                     innerAlertValues={{
                         title: '게시물을 삭제할까요? ',
                         rightText: '삭제',

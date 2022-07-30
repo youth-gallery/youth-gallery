@@ -54,7 +54,6 @@ function Search() {
                                 <ShowSearch users={users} keyword={keyword} />
                             ) : keyword === null ? (
                                 <RecommendSearch />
-                                // <p>작가를 검색해보세요 :)</p>
                             ) : (
                                 <NonSearch />
                             )}

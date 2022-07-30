@@ -104,8 +104,8 @@ function UserProfile() {
         // 현재 가지고 있는(사용자이름 포함) 로컬스토리지 안의 모든 데이터 삭제해줌 (clear)
         localStorage.clear();
 
-        // 로그아웃 후 splash 화면으로 이동
-        navigate('/splash');
+        // 로그아웃 후 / 화면으로 이동
+        navigate('/');
     };
 
     // 리스트형 앨범형 전환 버튼

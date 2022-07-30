@@ -20,7 +20,8 @@ import PostEdit from './postEdit/PostEdit';
 function PageRouter() {
     return (
         <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/" element={<Splash />} />
             <Route path="/news" element={<News />} />
             <Route path="/post">
                 <Route path="upload" element={<PostUpload />} />
@@ -42,7 +43,6 @@ function PageRouter() {
             <Route path="/product" element={<AddProduct />} />
             <Route path="/search" element={<Search />} />
             {/* 나중에 페이지 만들면 수정해야함 */}
-            <Route path="/splash" element={<Splash />} />
             <Route path="/login" element={<Login />} />
             <Route path="/join" element={<EmailJoin />} />
             <Route path="/membership" element={<JoinMembership />} />

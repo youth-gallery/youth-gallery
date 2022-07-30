@@ -79,7 +79,7 @@ function Login() {
 
                 setLoginConfirm(true);
                 setLoginMsg(''); // 경고문구 지워주기
-                navigate('/'); // 로그인 성공시 홈 피드로 이동시켜주기
+                navigate('/home'); // 로그인 성공시 홈 피드로 이동시켜주기
             } else {
                 if (loginId !== '' && loginPw !== '') {
                     // 로그인 실패시

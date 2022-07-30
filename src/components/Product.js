@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 import ButtonModalActive from './modal/ButtonModalActive';
 
 function Product({ productList, i }) {
     const { myprofile } = useParams();
-    const post_id = productList[i].id;
+    const navigate = useNavigate();
+    const [productId, setProductId] = useState(productList[i].id);
+
+    useEffect(() => {
+        setProductId(productList[i].id);
+    }, [productId]);
 
     // 모달관련
     const [showModal, setShowModal] = useState(false);
@@ -34,7 +39,7 @@ function Product({ productList, i }) {
         const getToken = localStorage.getItem('token');
 
         try {
-            await axios.delete(`${url}/product/${post_id}`, {
+            await axios.delete(`${url}/product/${productId}`, {
                 headers: {
                     'Authorization': `Bearer ${getToken}`,
                     'Content-type': 'application/json',
@@ -42,11 +47,12 @@ function Product({ productList, i }) {
             });
             alert('삭제하였습니다.');
             setShowModal(false);
+            navigate('/myprofile');
         } catch (error) {
             <Link to="/notFound" />;
             console.log(error);
         }
-        console.log(post_id);
+        console.log(productId);
     };
     return (
         <>
@@ -62,9 +68,9 @@ function Product({ productList, i }) {
                     propState={showModal}
                     propsCloseFunc={closeModal}
                     postModalValues={{
-                        values: ['삭제', '수정'],
+                        values: ['삭제', '상품 수정'],
                     }}
-                    post_id={post_id}
+                    post_id={productId}
                     innerAlertValues={{
                         title: '상품을 삭제할까요? ',
                         rightText: '삭제',

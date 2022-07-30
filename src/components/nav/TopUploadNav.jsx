@@ -20,7 +20,7 @@ const ButtonDiv = styled.div`
 function TopUploadNav({ title, state }) {
     const navigate = useNavigate();
     const handleGoBack = () => {
-        navigate(-1);
+        navigate('/home');
     };
 
     return (

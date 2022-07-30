@@ -1,4 +1,4 @@
-import React, { useState, useReport } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import ButtonModal from './modal/ButtonModal';
 import ButtonModalActive from './modal/ButtonModalActive';
@@ -7,6 +7,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import PostHeartBtn from './PostForm/PostHeartBtn';
 import PostComment from './PostForm/PostComment';
 import PostImg from './PostForm/PostImg';
+import useReport from '../hooks/useReport';
 
 const HomePostLi = styled.li`
     display: flex;

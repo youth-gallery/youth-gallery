@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import ButtonModal from './modal/ButtonModal';
 import ButtonModalActive from './modal/ButtonModalActive';
 import axios from 'axios';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import PostHeartBtn from './PostForm/PostHeartBtn';
 import PostComment from './PostForm/PostComment';
 import PostImg from './PostForm/PostImg';
@@ -71,7 +71,7 @@ const UserPost = ({ postList, profileData, i }) => {
         console.log(propState);
         setShowModal(propState);
     };
-    const { myprofile } = useParams();
+    const location = useLocation();
 
     const closeModal = (props) => {
         setShowModal(props);
@@ -99,7 +99,6 @@ const UserPost = ({ postList, profileData, i }) => {
         console.log(post_id);
     };
 
-    // 신고 그냥 기능은 없는...
     const declaration = () => {
         const post_id = postList[i].id;
         useReport(`/post/${post_id}/report`);
@@ -140,7 +139,7 @@ const UserPost = ({ postList, profileData, i }) => {
                     </HomePostDate>
                 </div>
             </HomePostLi>
-            {myprofile ? (
+            {location.pathname === '/myprofile' ? (
                 <ButtonModalActive
                     propState={showModal}
                     propsCloseFunc={closeModal}

@@ -84,7 +84,7 @@ function JoinMembership({ joinId, joinPw }) {
         // 계정ID 유효성검사 통과한 경우 => 중복검사 체크함!
         if (accountIdRegexConfirm) {
             try {
-                let res = await axios.post(
+                const res = await axios.post(
                     'https://mandarin.api.weniv.co.kr/user/accountnamevalid',
                     {
                         user: {
@@ -103,8 +103,6 @@ function JoinMembership({ joinId, joinPw }) {
                 } else {
                     setAccountIdConfirm(false);
                 }
-
-                // res = await
             } catch (error) {
                 console.log(error);
             }

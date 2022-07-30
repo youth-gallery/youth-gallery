@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import styles from './UserInfo.module.css';
 import FollowButton from './button/FollowButton';
@@ -19,6 +19,10 @@ function UserInfo({ profileData, followState, getFollowState }) {
     const [followingCount, setFollowingCount] = useState(
         profileData.followingCount
     );
+    const [viewProfile, setViewProfile] = useState(true);
+    const navigate = useNavigate();
+
+    console.log(viewProfile);
 
     useEffect(() => {
         setFollowerCount(profileData.followerCount);
@@ -80,69 +84,107 @@ function UserInfo({ profileData, followState, getFollowState }) {
         console.log(isFollow);
     };
 
+    // 프로필수정 버튼 클릭시 동작 기능
+    const handleEditProfile = (e) => {
+        e.preventDefault();
+
+        navigate('/myprofile/edit');
+        setViewProfile(false);
+        console.log(`viewProfile ${viewProfile}`);
+        // const img = uploadImage();
+        // try {
+        //     const res = await axios.put(
+        //         'https://mandarin.api.weniv.co.kr/user/',
+        //         {
+        //             user: {
+        //                 username: userName,
+        //                 accountname: accountId,
+        //                 intro: intro,
+        //                 image: await img,
+        //             },
+        //         }
+        //     );
+        // } catch (error) {
+        //     console.log(error);
+        // }
+    };
+
     return (
-        <div className={styles.all_warpper}>
-            <div className={styles.top_warpper}>
-                <dl className={styles.num_warpper}>
-                    <dt className={styles.num}>{followerCount}</dt>
-                    <dd className={styles.num_title}>followers</dd>
-                </dl>
-                <img
-                    className={styles.profile_img}
-                    src={profileData.image}
-                    alt=""
-                />
-                <dl className={styles.num_warpper}>
-                    <dt className={styles.num}>{followingCount}</dt>
-                    <dd className={styles.num_title}>followings</dd>
-                </dl>
-            </div>
-            <p className={styles.user_name}>{profileData.username}</p>
-            <p className={styles.user_id}>{`@${profileData.accountname}`}</p>
-            <p className={styles.user_intro}>{profileData.intro}</p>
-            <ul className={styles.button_warp}>
-                {accountname === getAccountName || myprofile ? (
-                    <>
-                        <li>
-                            <button className={styles.edit_profile_button}>
-                                프로필 수정
-                            </button>
-                        </li>
-                        <Link to="/product">
-                            <li>
-                                <button className={styles.add_product_button}>
-                                    상품 등록
-                                </button>
-                            </li>
-                        </Link>
-                    </>
-                ) : (
-                    <>
-                        <li>
-                            <button
-                                className={`${styles.circle_button} ${styles.chat_button}`}
-                                type="button"
-                            ></button>
-                        </li>
-                        <li
-                            className={styles.follow_button_warp}
-                            onClick={handleButton}
-                        >
-                            {isFollow === false ? (
-                                <FollowButton />
-                            ) : (
-                                <UnFollowButton />
-                            )}
-                        </li>
-                        <li>
-                            <button
-                                className={`${styles.circle_button} ${styles.shared}`}
-                            ></button>
-                        </li>
-                    </>
-                )}
-            </ul>
-        </div>
+        <>
+            {viewProfile ? (
+                <div className={styles.all_warpper}>
+                    <div className={styles.top_warpper}>
+                        <dl className={styles.num_warpper}>
+                            <dt className={styles.num}>{followerCount}</dt>
+                            <dd className={styles.num_title}>followers</dd>
+                        </dl>
+                        <img
+                            className={styles.profile_img}
+                            src={profileData.image}
+                            alt=""
+                        />
+                        <dl className={styles.num_warpper}>
+                            <dt className={styles.num}>{followingCount}</dt>
+                            <dd className={styles.num_title}>followings</dd>
+                        </dl>
+                    </div>
+                    <p className={styles.user_name}>{profileData.username}</p>
+                    <p
+                        className={styles.user_id}
+                    >{`@${profileData.accountname}`}</p>
+                    <p className={styles.user_intro}>{profileData.intro}</p>
+                    <ul className={styles.button_warp}>
+                        {accountname === getAccountName || myprofile ? (
+                            <>
+                                <li>
+                                    <button
+                                        className={styles.edit_profile_button}
+                                        onClick={handleEditProfile}
+                                    >
+                                        프로필 수정
+                                    </button>
+                                </li>
+                                <Link to="/product">
+                                    <li>
+                                        <button
+                                            className={
+                                                styles.add_product_button
+                                            }
+                                        >
+                                            상품 등록
+                                        </button>
+                                    </li>
+                                </Link>
+                            </>
+                        ) : (
+                            <>
+                                <li>
+                                    <button
+                                        className={`${styles.circle_button} ${styles.chat_button}`}
+                                        type="button"
+                                    ></button>
+                                </li>
+                                <li
+                                    className={styles.follow_button_warp}
+                                    onClick={handleButton}
+                                >
+                                    {isFollow === false ? (
+                                        <FollowButton />
+                                    ) : (
+                                        <UnFollowButton />
+                                    )}
+                                </li>
+                                <li>
+                                    <button
+                                        className={`${styles.circle_button} ${styles.shared}`}
+                                    ></button>
+                                </li>
+                            </>
+                        )}
+                    </ul>
+                </div>
+            ) : null}
+        </>
     );
 }
 

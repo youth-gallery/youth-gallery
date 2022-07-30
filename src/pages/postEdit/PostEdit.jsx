@@ -22,9 +22,6 @@ const PostEdit = () => {
 
     const getPost = async () => {
         const url = 'https://mandarin.api.weniv.co.kr';
-        const token =
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyY2FkNjA3ODJmZGNjNzEyZjQzN2QyZCIsImV4cCI6MTY2MjcxMDYxOCwiaWF0IjoxNjU3NTI2NjE4fQ.w47m557FRqRQhF8PGM_VUxF10mFtDexYJIxqUasFQ7I';
-        localStorage.setItem('token', token);
         const getToken = localStorage.getItem('token');
         // 임시 포스트 아이디
 

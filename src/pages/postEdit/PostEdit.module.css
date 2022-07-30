@@ -9,10 +9,11 @@
 }
 
 .uploadform_txt {
-    width: 40%;
+    max-width: 350px;
     height: 150px;
     margin-top: 7rem;
     margin-left: 7rem;
+    resize: none;
     border: none;
     /* 나중에 rem 단위로 고쳐야함 */
     font-size: 14px;

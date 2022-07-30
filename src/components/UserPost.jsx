@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useReport } from 'react';
 import styled from 'styled-components';
 import ButtonModal from './modal/ButtonModal';
 import ButtonModalActive from './modal/ButtonModalActive';
@@ -100,6 +100,8 @@ const UserPost = ({ postList, profileData, i }) => {
 
     // 신고 그냥 기능은 없는...
     const declaration = () => {
+        const post_id = postList[i].id;
+        useReport(`/post/${post_id}/report`);
         alert('신고되었습니다.');
         setShowModal(false);
     };
@@ -144,6 +146,7 @@ const UserPost = ({ postList, profileData, i }) => {
                     postModalValues={{
                         values: ['삭제', '수정'],
                     }}
+                    post_id={post_id}
                     innerAlertValues={{
                         title: '게시물을 삭제할까요? ',
                         rightText: '삭제',

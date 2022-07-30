@@ -10,6 +10,7 @@ import UserPost from '../../components/UserPost';
 import TabMenu from '../../components/tab/TabMenu';
 import Nav from '../../components/nav/Nav';
 import ButtonModalActive from '../../components/modal/ButtonModalActive';
+import Loding from '../../components/loding/Loding';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 function UserProfile() {
@@ -23,6 +24,7 @@ function UserProfile() {
     const [postList, setPostList] = useState([]);
     const [followState, setFollowState] = useState(Boolean);
     const location = useLocation();
+    const [loading, setLoading] = useState(true);
 
     // 사용자 프로필링크라면 무조건 myprofile로 가게하기
     useEffect(() => {
@@ -33,6 +35,7 @@ function UserProfile() {
 
     useEffect(() => {
         // 사용자프로필
+        setLoading(true);
         axios
             .get(
                 `https://mandarin.api.weniv.co.kr/profile/${
@@ -88,6 +91,7 @@ function UserProfile() {
             )
             .then((res) => {
                 setPostList(res.data.post);
+                setLoading(false);
             })
             .then((error) => {
                 console.log(error);
@@ -135,75 +139,82 @@ function UserProfile() {
             <Nav>
                 <TopBasicNav openModalProp={openModal} />
             </Nav>
-            <div className={styles.user_profile_wrap}>
-                <UserInfo profileData={profileData} followState={followState} />
-                <section className={styles.product_section}>
-                    <div className={styles.product_list_warp}>
-                        <h2 className={styles.title}>판매 중인 상품</h2>
-                        <ul className={styles.item_warp}>
-                            {productList.map((_, i) => {
-                                return (
-                                    <Product
-                                        productList={productList}
-                                        i={i}
-                                        key={productList[i].id}
-                                    />
-                                );
-                            })}
+            {loading ? (
+                <Loding />
+            ) : (
+                <div className={styles.user_profile_wrap}>
+                    <UserInfo
+                        profileData={profileData}
+                        followState={followState}
+                    />
+                    <section className={styles.product_section}>
+                        <div className={styles.product_list_warp}>
+                            <h2 className={styles.title}>판매 중인 상품</h2>
+                            <ul className={styles.item_warp}>
+                                {productList.map((_, i) => {
+                                    return (
+                                        <Product
+                                            productList={productList}
+                                            i={i}
+                                            key={productList[i].id}
+                                        />
+                                    );
+                                })}
+                            </ul>
+                        </div>
+                    </section>
+                    <section className={styles.post_section}>
+                        <ul className={styles.post_shape_button_warp}>
+                            <li>
+                                <button
+                                    className={
+                                        listBtn === false
+                                            ? `${styles.list_button} ${styles.off}`
+                                            : styles.list_button
+                                    }
+                                    onClick={handleListBtn}
+                                ></button>
+                            </li>
+                            <li>
+                                <button
+                                    className={
+                                        albumBtn === true
+                                            ? `${styles.album_button} ${styles.on}`
+                                            : styles.album_button
+                                    }
+                                    onClick={handleAlbumBtn}
+                                ></button>
+                            </li>
                         </ul>
-                    </div>
-                </section>
-                <section className={styles.post_section}>
-                    <ul className={styles.post_shape_button_warp}>
-                        <li>
-                            <button
-                                className={
-                                    listBtn === false
-                                        ? `${styles.list_button} ${styles.off}`
-                                        : styles.list_button
-                                }
-                                onClick={handleListBtn}
-                            ></button>
-                        </li>
-                        <li>
-                            <button
-                                className={
-                                    albumBtn === true
-                                        ? `${styles.album_button} ${styles.on}`
-                                        : styles.album_button
-                                }
-                                onClick={handleAlbumBtn}
-                            ></button>
-                        </li>
-                    </ul>
-                    <h2 className={styles.ir}>작성한 게시글</h2>{' '}
-                    {listBtn === true ? (
-                        <ul className={styles.post_warp}>
-                            {postList.map((_, i) => {
-                                return (
-                                    <UserPost
-                                        postList={postList}
-                                        i={i}
-                                        profileData={profileData}
-                                        key={postList[i].id}
-                                    />
-                                );
-                            })}
-                        </ul>
-                    ) : (
-                        <ul className={styles.post_album_warp}>
-                            {postList.map((_, i) => {
-                                return postList[i].image === '' ? null : (
-                                    <img
-                                        src={postList[i].image}
-                                        className={styles.post_album_item}
-                                    />
-                                );
-                            })}
-                        </ul>
-                    )}
-                </section>
-            </div>
+                        <h2 className={styles.ir}>작성한 게시글</h2>{' '}
+                        {listBtn === true ? (
+                            <ul className={styles.post_warp}>
+                                {postList.map((_, i) => {
+                                    return (
+                                        <UserPost
+                                            postList={postList}
+                                            i={i}
+                                            profileData={profileData}
+                                            key={postList[i].id}
+                                        />
+                                    );
+                                })}
+                            </ul>
+                        ) : (
+                            <ul className={styles.post_album_warp}>
+                                {postList.map((_, i) => {
+                                    return postList[i].image === '' ? null : (
+                                        <img
+                                            src={postList[i].image}
+                                            className={styles.post_album_item}
+                                        />
+                                    );
+                                })}
+                            </ul>
+                        )}
+                    </section>
+                </div>
+            )}
             <ButtonModalActive
                 propState={showModal}
                 propsCloseFunc={closeModal}

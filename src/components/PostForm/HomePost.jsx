@@ -73,7 +73,7 @@ const HomePost = ({ datas }) => {
                             commentCount={datas.commentCount}
                         />
                     </div>
-                    <PostDate updatedAt={datas.updatedAt} />
+                    <PostDate createdAt={datas.createdAt} />
                 </div>
             </HomePostDiv>
             <ButtonModalActive

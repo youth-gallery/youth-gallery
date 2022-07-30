@@ -62,7 +62,6 @@ const AddProduct = () => {
     const createProduct = async (e) => {
         e.preventDefault();
         if (state) {
-            const getAccountName = localStorage.getItem('accountname');
             // 추후에 로그인 기능 구현되면 삭제. 일회성 토큰
             const url = 'https://mandarin.api.weniv.co.kr';
             const getToken = localStorage.getItem('token');
@@ -89,7 +88,7 @@ const AddProduct = () => {
                         },
                     }
                 );
-                navigate(`/profile/${getAccountName}`);
+                navigate('/myprofile');
             } catch (error) {
                 console.log(error);
             }

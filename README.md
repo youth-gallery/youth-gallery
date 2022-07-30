@@ -249,7 +249,8 @@
 -   2022.06.09 ~ 20022.08.01
 -   기획: 2022.06.09 ~ 20022.07.03
 -   1차 개발 일정  
-    <img width="900" alt="wbs" src="./README_img/WBS.png">
+    ![WBS](https://user-images.githubusercontent.com/67677374/181904267-4f4bcd4b-f024-4a8f-8a2a-c9088e59a70e.png)
+
 -   코드 수정 : 20022.07.22 ~
 
 ## 5. 역할 분담

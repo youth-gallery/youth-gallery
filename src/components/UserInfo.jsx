@@ -109,12 +109,23 @@ function UserInfo({ profileData, followState, getFollowState }) {
         // }
     };
 
+    const moveFollowers = () => {
+        navigate(`/profile/${profileData.accountname}/followers`);
+    };
+
+    const moveFollowings = () => {
+        navigate(`/profile/${profileData.accountname}/followings`);
+    };
+
     return (
         <>
             {viewProfile ? (
                 <div className={styles.all_warpper}>
                     <div className={styles.top_warpper}>
-                        <dl className={styles.num_warpper}>
+                        <dl
+                            className={styles.num_warpper}
+                            onClick={moveFollowers}
+                        >
                             <dt className={styles.num}>{followerCount}</dt>
                             <dd className={styles.num_title}>followers</dd>
                         </dl>
@@ -123,7 +134,10 @@ function UserInfo({ profileData, followState, getFollowState }) {
                             src={profileData.image}
                             alt=""
                         />
-                        <dl className={styles.num_warpper}>
+                        <dl
+                            className={styles.num_warpper}
+                            onClick={moveFollowings}
+                        >
                             <dt className={styles.num}>{followingCount}</dt>
                             <dd className={styles.num_title}>followings</dd>
                         </dl>

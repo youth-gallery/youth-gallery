@@ -75,8 +75,6 @@ const PostUploadForm = () => {
         }
     }, [txt, showImgs]);
 
-    // 임시로 token과 사용자를 설정하였습니다. 로그인 기능 완성후 수정 예정
-
     const createPost = async (e) => {
         e.preventDefault();
 

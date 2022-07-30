@@ -99,7 +99,7 @@ const PostUploadForm = () => {
                     },
                 }
             );
-            navigate('/profile');
+            navigate('/myprofile');
         } catch (error) {
             console.log(error);
         }

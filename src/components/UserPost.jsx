@@ -112,11 +112,7 @@ const UserPost = ({ postList, profileData, i }) => {
                         <ButtonModal openModalProp={openModal} />
                     </FlexDiv>
                     <HomePostTxt>{postList[i].content}</HomePostTxt>
-                    <Link
-                        to={`/post/${profileData.username}/${postList[i].id}`}
-                    >
-                        <PostImg image={postList[i].image} />
-                    </Link>
+                    <PostImg image={postList[i].image} />
                     <PostHeartBtn
                         datas_id={postList[i].id}
                         hearted={postList[i].hearted}

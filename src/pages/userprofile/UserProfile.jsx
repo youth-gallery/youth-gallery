@@ -24,6 +24,13 @@ function UserProfile() {
     const [followState, setFollowState] = useState(Boolean);
     const location = useLocation();
 
+    // 사용자 프로필링크라면 무조건 myprofile로 가게하기
+    useEffect(() => {
+        if (location.pathname === `/profile/${getAccountName}`) {
+            navigate('/myprofile');
+        }
+    }, [location]);
+
     useEffect(() => {
         // 사용자프로필
         axios

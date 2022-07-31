@@ -20,12 +20,13 @@ function UserFollow({ followers, i }) {
                 <UserName>{followers[i].accountname}</UserName>
                 <UserEmail>{followers[i].intro}</UserEmail>
             </UserInfoWarp>
-            {/* 버튼컴포넌트 추가 시 들어갈 자리 */}
-            {followers[i].isfalse === false ? (
-                <FollowButton />
-            ) : (
-                <SearchCancelButton />
-            )}
+            <ButtonWarp>
+                {followers[i].isfollow === false ? (
+                    <FollowButton />
+                ) : (
+                    <SearchCancelButton />
+                )}
+            </ButtonWarp>
         </Li>
     );
 }
@@ -49,8 +50,8 @@ const ProfileImg = styled.img`
 `;
 
 const UserInfoWarp = styled.div`
-    width: 100%;
     text-align: start;
+    flex-grow: 1;
 `;
 
 const UserName = styled.p`
@@ -65,6 +66,10 @@ const UserEmail = styled.span`
     line-height: 15.02px;
     color: #767676;
     margin: 0;
+`;
+
+const ButtonWarp = styled.div`
+    width: 56px;
 `;
 
 export default UserFollow;

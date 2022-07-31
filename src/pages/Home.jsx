@@ -72,12 +72,12 @@ const Div = styled.div`
 `;
 
 const PaddingDiv = styled.div`
-    padding: 60px 0;
+    padding: 55px 0;
 `;
 
 const View = styled.div`
     width: 440px;
-    height: 85vh;
+    height: 90vh;
     position: absolute;
     overflow: hidden;
     left: 0;

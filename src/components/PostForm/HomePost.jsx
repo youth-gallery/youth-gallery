@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 const HomePostDiv = styled.div`
     display: flex;
     width: 358px;
-    margin: 0 auto 25px;
+    margin: 10px auto 25px;
 `;
 
 const HomePostProfile = styled.img`

@@ -86,22 +86,6 @@ function UserInfo({ profileData, followState, getFollowState }) {
         e.preventDefault();
 
         navigate('/myprofile/edit');
-        // const img = uploadImage();
-        // try {
-        //     const res = await axios.put(
-        //         'https://mandarin.api.weniv.co.kr/user/',
-        //         {
-        //             user: {
-        //                 username: userName,
-        //                 accountname: accountId,
-        //                 intro: intro,
-        //                 image: await img,
-        //             },
-        //         }
-        //     );
-        // } catch (error) {
-        //     console.log(error);
-        // }
     };
 
     const moveFollowers = () => {

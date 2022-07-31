@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './PostModal.module.css';
 import { useNavigate } from 'react-router-dom';
 
-function PostModal({ values, propFunc, post_id }) {
+function PostModal({ values, propFunc, post_id, link }) {
     const navigate = useNavigate();
 
     const setButton = (value, navigate, propFunc) => {
@@ -27,7 +27,8 @@ function PostModal({ values, propFunc, post_id }) {
                 propFunc(true);
                 break;
             case '웹사이트에서 상품보기':
-                // 이동할 링크 어떻게 할지 고민
+                window.open(link, '_blank');
+                console.log(link);
                 break;
             case '상품 수정':
                 navigate(`/edit/product/${post_id}`);

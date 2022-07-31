@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 import ButtonModalActive from './modal/ButtonModalActive';
@@ -7,8 +7,7 @@ import ButtonModalActive from './modal/ButtonModalActive';
 function Product({ productList, i }) {
     const navigate = useNavigate();
     const [productId, setProductId] = useState(productList[i].id);
-    const location = useLocation();
-
+    const link = productList[i].link;
     useEffect(() => {
         setProductId(productList[i].id);
     }, [productId]);
@@ -84,8 +83,7 @@ function Product({ productList, i }) {
                     postModalValues={{
                         values: ['웹사이트에서 상품보기'],
                     }}
-                    // link={productList[i].link}
-                    // accountname = {productList[i].accountname}
+                    link={link}
                 />
             )}
         </>

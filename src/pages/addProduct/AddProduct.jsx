@@ -8,7 +8,7 @@ import styles from './AddProduct.module.css';
 const AddProduct = () => {
     const [preview, setPreview] = useState('');
     const [name, setName] = useState('');
-    const [price, setPrice] = useState(0);
+    const [price, setPrice] = useState('');
     const [link, setLink] = useState('');
     const [state, setState] = useState(false);
     const navigate = useNavigate();

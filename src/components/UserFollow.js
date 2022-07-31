@@ -1,12 +1,61 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import FollowButton from './button/FollowButton';
 import SearchCancelButton from './button/SearchCancelButton';
 // import basicProfileImg from '../assets/basic-profile-img-.png';
 
 function UserFollow({ followers, i }) {
-    // const [followState] = useState(false);
+    const [followState, setFollowState] = useState(followers[i].isfollow);
+    const getToken = localStorage.getItem('token');
     const getAccountName = localStorage.getItem('accountname');
+    const accountName = followers[i].accountname;
+
+    useEffect(() => {
+        setFollowState(followers[i].isfollow);
+    }, [followers]);
+    const handleButton = () => {
+        if (followState) {
+            axios
+                .delete(
+                    `https://mandarin.api.weniv.co.kr/profile/${accountName}/unfollow`,
+                    {
+                        headers: {
+                            'Authorization': `Bearer ${getToken}`,
+                            'Content-type': 'application/json',
+                        },
+                    }
+                )
+                .then((res) => {
+                    console.log(res);
+                    setFollowState(res.data.profile.isfollow);
+                    console.log(followState);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        } else {
+            axios
+                .post(
+                    `https://mandarin.api.weniv.co.kr/profile/${accountName}/follow`,
+                    {},
+                    {
+                        headers: {
+                            'Authorization': `Bearer ${getToken}`,
+                            'Content-type': 'application/json',
+                        },
+                    }
+                )
+                .then((res) => {
+                    console.log(res);
+                    setFollowState(res.data.profile.isfollow);
+                    console.log(followState);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        }
+    };
     return (
         <Li
             to={
@@ -20,13 +69,15 @@ function UserFollow({ followers, i }) {
                 <UserName>{followers[i].accountname}</UserName>
                 <UserEmail>{followers[i].intro}</UserEmail>
             </UserInfoWarp>
-            <ButtonWarp>
-                {followers[i].isfollow === false ? (
-                    <FollowButton />
-                ) : (
-                    <SearchCancelButton />
-                )}
-            </ButtonWarp>
+            {accountName === getAccountName ? null : (
+                <ButtonWarp onClick={handleButton}>
+                    {followState === false ? (
+                        <FollowButton />
+                    ) : (
+                        <SearchCancelButton />
+                    )}
+                </ButtonWarp>
+            )}
         </Li>
     );
 }

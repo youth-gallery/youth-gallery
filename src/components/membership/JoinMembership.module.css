@@ -104,3 +104,8 @@
     font-size: 1.2rem;
     margin-bottom: 16px;
 }
+.membership_success {
+    color: var(--success-green);
+    font-size: 1.2rem;
+    margin-bottom: 16px;
+}

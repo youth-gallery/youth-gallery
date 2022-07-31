@@ -28,15 +28,15 @@ function EditProfile() {
         backgroundImage: `url('${file}')`,
     };
 
-    useEffect(() => {
-        // setState(
-        //     userName.length > 0 &&
-        //         accountId.length > 0 &&
-        //         userNameConfirm &&
-        //         accountIdConfirm &&
-        //         file != ''
-        // );
-    }, []);
+    // useEffect(() => {
+    //     // setState(
+    //     //     userName.length > 0 &&
+    //     //         accountId.length > 0 &&
+    //     //         userNameConfirm &&
+    //     //         accountIdConfirm &&
+    //     //         file != ''
+    //     // );
+    // }, []);
 
     const token = localStorage.getItem('token');
     // 페이지 마운트시 실행 (기존 프로필 정보 불러오기)
@@ -200,6 +200,9 @@ function EditProfile() {
                 }
             );
             console.log(res);
+
+            // 로컬스토리지에 계정ID 바꿔주기
+            localStorage.setItem('accountname', accountId);
 
             // 버튼 활성화시 (사용자이름, 계정ID, 소개 조건 모두 통과시)
             if (state) {

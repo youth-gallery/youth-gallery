@@ -5,7 +5,7 @@ import { useParams, Link } from 'react-router-dom';
 import useComments from '../../hooks/useComments';
 import styles from './Comments.module.css';
 
-const Comments = ({ postUserName, buttonHandleProp }) => {
+const Comments = ({ postUserName, buttonHandleProp, setCommentPush }) => {
     const [commentList, renderComments] = useComments();
     const { post_id } = useParams();
     console.log(post_id);
@@ -23,6 +23,7 @@ const Comments = ({ postUserName, buttonHandleProp }) => {
         const url = 'https://mandarin.api.weniv.co.kr';
         const getToken = localStorage.getItem('token');
         console.log(`${url}/post/${post_id}/comments/${commentId}/`);
+        setCommentPush(true);
 
         try {
             await axios.delete(
@@ -69,6 +70,7 @@ const Comments = ({ postUserName, buttonHandleProp }) => {
     renderProfile();
 
     const createComment = async (e) => {
+        setCommentPush(true);
         e.preventDefault();
         const url = 'https://mandarin.api.weniv.co.kr';
         const getToken = localStorage.getItem('token');

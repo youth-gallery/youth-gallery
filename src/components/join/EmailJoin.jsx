@@ -148,7 +148,16 @@ function EmailJoin() {
                             placeholder="이메일 주소를 입력해주세요."
                             onChange={handleJoinId}
                         />
-                        <div className={styles.join_error}>{emailMsg}</div>
+                        {/* <div className={styles.join_error}>{emailMsg}</div> */}
+                        <div
+                            className={
+                                joinEmailConfirm
+                                    ? styles.join_success
+                                    : styles.join_error
+                            }
+                        >
+                            {emailMsg}
+                        </div>
 
                         <label className={styles.join_label} htmlFor="input_pw">
                             비밀번호

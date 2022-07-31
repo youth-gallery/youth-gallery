@@ -20,6 +20,11 @@
     font-size: 1.2rem;
     margin-bottom: 16px;
 }
+.join_success {
+    color: var(--success-green);
+    font-size: 1.2rem;
+    mask-border: 16px;
+}
 
 .join_btn {
     background-color: var(--btn-gray);

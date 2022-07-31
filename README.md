@@ -3,6 +3,11 @@
 ![배너_최종](https://user-images.githubusercontent.com/67677374/182035367-630267c3-940e-450e-9c4b-cbdbaa4ed3eb.png)
 
 배포 URL: https://youth-gallery.vercel.app/
+```
+test id: sabit1997@test.com
+test pw: abcdef
+```
+
 ## 1. 소개와 기능
 
 ### 1.1 프로젝트 소개

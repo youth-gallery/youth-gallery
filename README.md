@@ -441,6 +441,7 @@ test pw: abcdef
 
 ## 8. 핵심 코드
 ### 8-1. 커스텀 훅
+- 처음 페이지에 들어갔을 때, 댓글 작성시, 댓글 삭제시 총 3번 재렌더링
 ```
 import axios from 'axios';
 import { useState } from 'react';
@@ -471,6 +472,7 @@ const useComments = () => {
 export default useComments;
 ```
 ### 8-2. Report API
+- 홈피드 게시물 신고, 댓글 신고, 프로필 페이지에 있는 게시글 신고 총 3곳 신고 api
 ```
 import axios from 'axios';
 

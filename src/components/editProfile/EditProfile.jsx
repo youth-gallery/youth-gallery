@@ -4,7 +4,7 @@ import Nav from '../nav/Nav';
 import TopUploadNav from '../nav/TopUploadNav';
 import axios from 'axios';
 import { useEffect } from 'react';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useRef } from 'react';
 
 function EditProfile() {
@@ -18,8 +18,7 @@ function EditProfile() {
     const [accountIdConfirm, setAccountIdConfirm] = useState(false);
     const [accountIdMsg, setAccountIdMsg] = useState('');
     const [file, setFile] = useState('');
-    const [isActive, setIsActive] = useState(false);
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     const inpRef = useRef(null);
     const onPicBtnClick = () => {
         inpRef.current.click();
@@ -28,10 +27,15 @@ function EditProfile() {
     const backgroundstyle = {
         backgroundImage: `url('${file}')`,
     };
-    console.log(isActive);
 
     useEffect(() => {
-        setIsActive(false); //--> 요거땜시
+        // setState(
+        //     userName.length > 0 &&
+        //         accountId.length > 0 &&
+        //         userNameConfirm &&
+        //         accountIdConfirm &&
+        //         file != ''
+        // );
     }, []);
 
     const token = localStorage.getItem('token');
@@ -94,13 +98,6 @@ function EditProfile() {
                 setUserNameMsg('');
             }
         }
-
-        // 입력값이 변하면 저장버튼 활성화
-        if (userName.length > 0 && accountId.length > 0) {
-            setState(userNameConfirm);
-        } else {
-            setState(false);
-        }
     };
 
     const handleAccountId = (e) => {
@@ -153,28 +150,31 @@ function EditProfile() {
         const intro = e.target.value;
         setIntro(intro);
     };
+
     // 사용자이름, 계정ID 채워짐 & 유효성검사 통과시 => 저장 버튼 활성화
     useEffect(() => {
-        setState(
-            userName.length > 0 &&
-                accountId.length > 0 &&
-                userNameConfirm &&
-                accountIdConfirm
-        );
+        // setState(
+        //     userName.length > 0 &&
+        //         accountId.length > 0 &&
+        //         userNameConfirm &&
+        //         accountIdConfirm
+        // );
 
-        // if (userName.length > 0 && accountId.length > 0) {
-        //     setState(userNameConfirm || )
-        // }
+        if (userName.length > 0 && accountId.length > 0) {
+            if (userNameConfirm || accountIdConfirm) {
+                if (intro.length > 0) {
+                    setState(true);
+                } else {
+                    setState(false);
+                }
+                setState(true);
+            } else {
+                setState(false);
+            }
+        } else {
+            setState(false);
+        }
     }, [userName, accountId]);
-    console.log(`state ${state}`);
-
-    // 저장 버튼 클릭시 홈으로 이동
-    // const onClickMembership = () => {
-    //     // 버튼 활성화시 (사용자이름, 계정ID, 소개 조건 모두 통과시)
-    //     if (isActive) {
-    //         navigate('/myprofile');
-    //     }
-    // };
 
     // 프로필 수정 데이터 전송
     const sendEditProfile = async (e) => {
@@ -201,10 +201,10 @@ function EditProfile() {
             );
             console.log(res);
 
-            //     // 버튼 활성화시 (사용자이름, 계정ID, 소개 조건 모두 통과시)
-            //     if (isActive) {
-            //         navigate('/');
-            //     }
+            // 버튼 활성화시 (사용자이름, 계정ID, 소개 조건 모두 통과시)
+            if (state) {
+                navigate('/myprofile');
+            }
         } catch (error) {
             console.log(error);
         }

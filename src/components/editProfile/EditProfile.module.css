@@ -24,7 +24,7 @@
     background-position: center;
     background-size: 14vh;
     margin: 10px 0;
-    padding-top: 45px;
+    padding-top: 22px;
 }
 
 .preview {
@@ -33,7 +33,7 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: 16vh;
-    margin: 10px auto;
+    margin: 0 auto;
     border-radius: 50%;
 }
 
@@ -102,6 +102,11 @@
 
 .edit_error {
     color: var(--error-red);
+    font-size: 1.2rem;
+    margin-bottom: 16px;
+}
+.edit_success {
+    color: var(--success-green);
     font-size: 1.2rem;
     margin-bottom: 16px;
 }

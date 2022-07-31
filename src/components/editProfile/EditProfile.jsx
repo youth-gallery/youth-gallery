@@ -18,7 +18,7 @@ function EditProfile() {
     const [accountIdConfirm, setAccountIdConfirm] = useState(false);
     const [accountIdMsg, setAccountIdMsg] = useState('');
     const [file, setFile] = useState('');
-    // const [isActive, setIsActive] = useState(false);
+    const [isActive, setIsActive] = useState(false);
     // const navigate = useNavigate();
     const inpRef = useRef(null);
     const onPicBtnClick = () => {
@@ -28,6 +28,11 @@ function EditProfile() {
     const backgroundstyle = {
         backgroundImage: `url('${file}')`,
     };
+    console.log(isActive);
+
+    useEffect(() => {
+        setIsActive(false); //--> 요거땜시
+    }, []);
 
     const token = localStorage.getItem('token');
     // 페이지 마운트시 실행 (기존 프로필 정보 불러오기)
@@ -42,10 +47,11 @@ function EditProfile() {
                     },
                 });
 
-                setFile(res.data.user.image);
+                console.log(res);
                 setUserName(res.data.user.username);
                 setAccountId(res.data.user.accountname);
                 setIntro(res.data.user.intro);
+                setFile(res.data.user.image);
             } catch (error) {
                 console.log(error);
             }
@@ -58,21 +64,19 @@ function EditProfile() {
         setFile(URL.createObjectURL(e.target.files[0]));
     };
 
-    console.log(state);
-
     // 이미지 데이터 보내기
-    // const uploadImage = async () => {
-    //     let formData = new FormData();
-    //     const imgFile = inpRef.current.files;
-    //     const file = imgFile[0];
-    //     formData.append('image', file);
-    //     const res = await axios.post(
-    //         'https://mandarin.api.weniv.co.kr/image/uploadfile',
-    //         formData
-    //     );
-    //     const imgUrl = `https://mandarin.api.weniv.co.kr/${res.data.filename}`;
-    //     return imgUrl;
-    // };
+    const uploadImage = async () => {
+        let formData = new FormData();
+        const imgFile = inpRef.current.files;
+        const file = imgFile[0];
+        formData.append('image', file);
+        const res = await axios.post(
+            'https://mandarin.api.weniv.co.kr/image/uploadfile',
+            formData
+        );
+        const imgUrl = `https://mandarin.api.weniv.co.kr/${res.data.filename}`;
+        return imgUrl;
+    };
 
     const handleUserName = (e) => {
         const userName = e.target.value;
@@ -90,12 +94,18 @@ function EditProfile() {
                 setUserNameMsg('');
             }
         }
+
+        // 입력값이 변하면 저장버튼 활성화
+        if (userName.length > 0 && accountId.length > 0) {
+            setState(userNameConfirm);
+        } else {
+            setState(false);
+        }
     };
 
     const handleAccountId = (e) => {
         const accountId = e.target.value;
         setAccountId(accountId);
-
         // 계정ID 유효성검사
         const regex = /^[_A-Za-z0-9.]*$/;
         if (regex.test(accountId)) {
@@ -120,7 +130,6 @@ function EditProfile() {
                         },
                     }
                 );
-
                 if (res.data.message === '사용 가능한 계정ID 입니다.') {
                     setAccountIdConfirm(true);
                     setAccountIdMsg(`*${res.data.message}`);
@@ -144,7 +153,6 @@ function EditProfile() {
         const intro = e.target.value;
         setIntro(intro);
     };
-
     // 사용자이름, 계정ID 채워짐 & 유효성검사 통과시 => 저장 버튼 활성화
     useEffect(() => {
         setState(
@@ -153,56 +161,59 @@ function EditProfile() {
                 userNameConfirm &&
                 accountIdConfirm
         );
-    }, [userName, accountId, intro]);
 
-    // 유스갤러리 시작하기 버튼 클릭시 홈으로 이동
+        // if (userName.length > 0 && accountId.length > 0) {
+        //     setState(userNameConfirm || )
+        // }
+    }, [userName, accountId]);
+    console.log(`state ${state}`);
+
+    // 저장 버튼 클릭시 홈으로 이동
     // const onClickMembership = () => {
     //     // 버튼 활성화시 (사용자이름, 계정ID, 소개 조건 모두 통과시)
     //     if (isActive) {
-    //         // navigate('/');
+    //         navigate('/myprofile');
     //     }
     // };
 
-    // 프로필설정 데이터 전송
-    // const sendMembership = async (e) => {
-    //     e.preventDefault();
+    // 프로필 수정 데이터 전송
+    const sendEditProfile = async (e) => {
+        e.preventDefault();
 
-    //     const img = uploadImage();
-    //     try {
-    //         const res = await axios.post(
-    //             'https://mandarin.api.weniv.co.kr/user/',
-    //             {
-    //                 user: {
-    //                     username: userName,
-    //                     email: joinId,
-    //                     password: joinPw,
-    //                     accountname: accountId,
-    //                     intro: intro,
-    //                     image: await img,
-    //                 },
-    //             },
-    //             {
-    //                 headers: {
-    //                     'Content-type': 'application/json',
-    //                 },
-    //             }
-    //         );
+        const img = uploadImage();
+        try {
+            const res = await axios.put(
+                'https://mandarin.api.weniv.co.kr/user',
+                {
+                    user: {
+                        username: userName,
+                        accountname: accountId,
+                        intro: intro,
+                        image: await img,
+                    },
+                },
+                {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-type': 'application/json',
+                    },
+                }
+            );
+            console.log(res);
 
-    //         console.log(res);
-
-    //         // 버튼 활성화시 (사용자이름, 계정ID, 소개 조건 모두 통과시)
-    //         if (isActive) {
-    //             navigate('/');
-    //         }
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // };
+            //     // 버튼 활성화시 (사용자이름, 계정ID, 소개 조건 모두 통과시)
+            //     if (isActive) {
+            //         navigate('/');
+            //     }
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     return (
-        <>
+        <form onSubmit={sendEditProfile}>
             <Nav>
-                <TopUploadNav title={'저장'} />
+                <TopUploadNav title={'저장'} state={state} />
             </Nav>
             <section className={styles.editProfile_body}>
                 <div className={styles.editProfile_uploadContainer}>
@@ -248,7 +259,15 @@ function EditProfile() {
                     onChange={handleAccountId}
                     onBlur={checkAccountId}
                 />
-                <div className={styles.edit_error}>{accountIdMsg}</div>
+                <div
+                    className={
+                        accountIdConfirm
+                            ? styles.edit_success
+                            : styles.edit_error
+                    }
+                >
+                    {accountIdMsg}
+                </div>
 
                 <label className={styles.edit_label} htmlFor="input_intro">
                     소개
@@ -262,7 +281,7 @@ function EditProfile() {
                     onChange={handleIntro}
                 />
             </section>
-        </>
+        </form>
     );
 }
 

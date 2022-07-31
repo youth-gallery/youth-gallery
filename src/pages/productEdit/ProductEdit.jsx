@@ -8,7 +8,7 @@ import styles from '../addProduct/AddProduct.module.css';
 function ProductEdit() {
     const [image, setImage] = useState('');
     const [name, setName] = useState('');
-    const [price, setPrice] = useState(0);
+    const [price, setPrice] = useState('');
     const [link, setLink] = useState('');
     const [state, setState] = useState(false);
     const navigate = useNavigate();

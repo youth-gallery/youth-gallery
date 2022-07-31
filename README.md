@@ -76,7 +76,7 @@ test pw: abcdef
 -   형상관리 및 협업
     -   Git, GitHub, Notion, VSCode Live Share
 
-## 3. 기술스택과 선택 이유
+## 3. 기술스택과 개발 방법 선택 이유
 
 ### 3.1 기술스택
 
@@ -87,7 +87,7 @@ test pw: abcdef
 -   Design
     -   Figma
 
-### 3.2 선택 이유
+### 3.2 개발 방법 선택 이유
 
 -   브랜치 전략으로 `github-flow`를 선택한 이유?
     -   팀원 모두 git을 사용한 협업에 익숙한 편이 아니었고, 프로젝트 규모를 생각했을 때  

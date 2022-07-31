@@ -1,5 +1,6 @@
 # 🎨 youth-gallery(유스갤러리)
 
+![배너_최종](https://user-images.githubusercontent.com/67677374/182035367-630267c3-940e-450e-9c4b-cbdbaa4ed3eb.png)
 
 배포 URL: https://youth-gallery.vercel.app/
 ## 1. 소개와 기능

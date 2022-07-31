@@ -127,35 +127,6 @@ function EmailJoin() {
         console.log(`state ${state}`);
     };
 
-    // 회원가입 데이터 전송
-    // const sendJoin = async (e) => {
-    //     e.preventDefault();
-
-    //     try {
-    //         await axios.post(
-    //             'https://mandarin.api.weniv.co.kr/user/',
-    //             {
-    //                 user: {
-    //                     email: joinId,
-    //                     password: joinPw,
-    //                 },
-    //             },
-    //             {
-    //                 headers: {
-    //                     'Content-type': 'application/json',
-    //                 },
-    //             }
-    //         );
-
-    //         // 이메일, 비밀번호 유효성검사 통과시 프로필설정 페이지로 이동
-    //         if (joinEmailConfirm && joinPwConfirm) {
-    //             navigate('/membership');
-    //         }
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // };
-
     // 조건충족 => 다음버튼 클릭 => state값이 true일때
     // 회원가입 안보임 => 프로필설정 보임
     return (

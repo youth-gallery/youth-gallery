@@ -12,7 +12,7 @@ import PostDetail from './postDetail/PostDetail';
 import UserProfile from './userprofile/UserProfile';
 import PostUpload from './postUpload/PostUpload';
 import News from './news/News';
-import Splash from '../components/login/Splash';
+import Splash from '../components/splash/Splash';
 import JoinMembership from '../components/membership/JoinMembership';
 import AddProduct from './addProduct/AddProduct';
 import PostEdit from './postEdit/PostEdit';

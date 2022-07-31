@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 import messageIcon from '../../assets/icon-message-circle-1.png';
 import { Link } from 'react-router-dom';
 

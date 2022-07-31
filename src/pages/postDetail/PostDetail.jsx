@@ -27,6 +27,7 @@ const PostDetail = () => {
     const getToken = localStorage.getItem('token');
     let { post_id } = useParams();
     const [posts, setPosts] = useState([]);
+    const [commentPush, setCommentPush] = useState(false);
 
     useEffect(() => {
         post_id &&
@@ -38,9 +39,13 @@ const PostDetail = () => {
                     'Content-type': 'application/json',
                 },
             })
-                .then((response) => setPosts(response))
+                .then((response) => {
+                    setPosts(response);
+                    setCommentPush(false);
+                })
                 .catch((error) => console.log(error.message));
-    }, []);
+    }, [commentPush]);
+
     return (
         <Div>
             <PageDetailArea>
@@ -54,6 +59,7 @@ const PostDetail = () => {
                         </HomePostArea>
                         <Comments
                             postUserName={posts.data.post.author.username}
+                            setCommentPush={setCommentPush}
                         />
                     </>
                 )}

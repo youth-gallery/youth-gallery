@@ -12,6 +12,7 @@ import PostDetail from './postDetail/PostDetail';
 import UserProfile from './userprofile/UserProfile';
 import PostUpload from './postUpload/PostUpload';
 import News from './news/News';
+import SplashBase from '../components/splash/SplashBase';
 import Splash from '../components/splash/Splash';
 import JoinMembership from '../components/membership/JoinMembership';
 import AddProduct from './addProduct/AddProduct';
@@ -23,7 +24,8 @@ function PageRouter() {
     return (
         <Routes>
             <Route path="/home" element={<Home />} />
-            <Route path="/" element={<Splash />} />
+            <Route path="/" element={<SplashBase />} />
+            <Route path="/splash" element={<Splash />} />
             <Route path="/news" element={<News />} />
             <Route path="/post">
                 <Route path="upload" element={<PostUpload />} />

@@ -31,7 +31,7 @@ function TopBasicNav({ title, openModalProp }) {
     const navigate = useNavigate();
     const location = useLocation();
     const handleGoBack = () => {
-        navigate('/home');
+        navigate(-1);
     };
 
     return (

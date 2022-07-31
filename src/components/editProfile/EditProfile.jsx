@@ -29,6 +29,30 @@ function EditProfile() {
         backgroundImage: `url('${file}')`,
     };
 
+    const token = localStorage.getItem('token');
+    // 페이지 마운트시 실행 (기존 프로필 정보 불러오기)
+    useEffect(() => {
+        async function getUserInfo() {
+            const url = 'https://mandarin.api.weniv.co.kr';
+            try {
+                const res = await axios.get(`${url}/user/myinfo`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-type': 'application/json',
+                    },
+                });
+
+                setFile(res.data.user.image);
+                setUserName(res.data.user.username);
+                setAccountId(res.data.user.accountname);
+                setIntro(res.data.user.intro);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        getUserInfo();
+    }, []);
+
     // 이미지 미리보기 기능
     const handlePreview = (e) => {
         setFile(URL.createObjectURL(e.target.files[0]));
@@ -205,6 +229,7 @@ function EditProfile() {
                 <input
                     className={styles.edit_input}
                     id="input_userName"
+                    value={userName}
                     type="text"
                     placeholder="2~10자 이내여야 합니다."
                     onChange={handleUserName}
@@ -218,6 +243,7 @@ function EditProfile() {
                     className={styles.edit_input}
                     id="input_accountId"
                     type="text"
+                    value={accountId}
                     placeholder="영문, 숫자, 특수문자(.),(_)만 사용 가능합니다."
                     onChange={handleAccountId}
                     onBlur={checkAccountId}
@@ -231,6 +257,7 @@ function EditProfile() {
                     className={styles.edit_input}
                     id="input_intro"
                     type="text"
+                    value={intro}
                     placeholder="자신과 판매할 작품에 대해 소개해주세요!"
                     onChange={handleIntro}
                 />

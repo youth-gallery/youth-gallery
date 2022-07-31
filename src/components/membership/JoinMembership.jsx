@@ -229,7 +229,16 @@ function JoinMembership({ joinId, joinPw }) {
                     onChange={handleAccountId}
                     onBlur={checkAccountId}
                 />
-                <div className={styles.membership_error}>{accountIdMsg}</div>
+                <div
+                    className={
+                        accountIdConfirm
+                            ? styles.membership_success
+                            : styles.membership_error
+                    }
+                >
+                    {' '}
+                    {accountIdMsg}
+                </div>
 
                 <label
                     className={styles.membership_label}

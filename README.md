@@ -94,8 +94,8 @@ test pw: abcdef
         규칙이 단순한 github-flow를 사용하기로 함
     -   main 브랜치에는 코드 리뷰를 받은 배포될 파일만 merge시키고, 그 외에 브랜치명 등은 규칙을  
         정하지 않고 진행함
--   CSS 스타일링으로 `styled-component`, `CSS Module`을 선택한 이유?
-    -   작은 UI 컴포넌트는 css가 길지도 않고 간단하여 한 파일에서 작성하는게 좋다고 생각하여 `styled-component`를 사용함
+-   CSS 스타일링으로 `styled-components`, `CSS Module`을 선택한 이유?
+    -   작은 UI 컴포넌트는 css가 길지도 않고 간단하여 한 파일에서 작성하는게 좋다고 생각하여 `styled-components`를 사용함
     -   이후 보다 큰 단위의 페이지 작업으로 넘어가면서 코드의 양이 많아졌을 때 페이지 전환을 고려하여 렌더링 속도가 빠른 `CSS Module`을 사용함
 -   문서관리 툴로 `Notion`을 선택한 이유?
     -   팀원 모두에게 익숙한 툴임

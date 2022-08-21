@@ -109,6 +109,12 @@ test pw: abcdef
 ### 4.1 프로젝트 구조
 
 ```
+assets : 이미지 파일 집합
+components : 재사용 가능한 컴포넌트 집합
+pages : 유저가 보는 실제 콘텐츠
+style : 공통 스타일드 컴포넌트, reset.css, 프로젝트 컬러 상수화
+hooks : 재사용을 위한 커스텀 훅의 집합
+
 📦 youth-gallery
 ├─ .eslintrc.json
 ├─ .github
@@ -121,10 +127,6 @@ test pw: abcdef
 ├─ package-lock.json
 ├─ package.json
 ├─ public
-│  ├─ assets
-│  │  └─ favicon.svg
-│  ├─ index.html
-│  └─ robots.txt
 ├─ src
 │  ├─ App.js
 │  ├─ App.test.js
@@ -132,81 +134,24 @@ test pw: abcdef
 │  ├─ components
 │  │  ├─ LoginInput.jsx
 │  │  ├─ PostForm
-│  │  │  ├─ HomePost.jsx
-│  │  │  ├─ HomePostOnlyTxt.jsx
-│  │  │  ├─ PostAuthorInfo.jsx
-│  │  │  ├─ PostComment.jsx
-│  │  │  ├─ PostDate.jsx
-│  │  │  ├─ PostForm.jsx
-│  │  │  ├─ PostForm.module.css
-│  │  │  ├─ PostHeartBtn.jsx
-│  │  │  └─ PostImg.jsx
 │  │  ├─ Product.js
 │  │  ├─ UserFollow.js
 │  │  ├─ UserInfo.jsx
 │  │  ├─ UserInfo.module.css
 │  │  ├─ UserPost.jsx
 │  │  ├─ button
-│  │  │  ├─ FollowButton.jsx
-│  │  │  ├─ FollowDisabledButton.jsx
-│  │  │  ├─ NextButton.jsx
-│  │  │  ├─ NextDisabledButton.jsx
-│  │  │  ├─ SaveButton.jsx
-│  │  │  ├─ SaveDisabledButton.jsx
-│  │  │  ├─ SearchCancelButton.jsx
-│  │  │  ├─ SearchFollowButton.jsx
-│  │  │  └─ UnFollowButton.jsx
 │  │  ├─ comment
-│  │  │  ├─ Comments.jsx
-│  │  │  ├─ Comments.module.css
-│  │  │  └─ TestPost.jsx
 │  │  ├─ editProfile
-│  │  │  ├─ EditProfile.jsx
-│  │  │  └─ EditProfile.module.css
-│  │  ├─ index.jsx
 │  │  ├─ join
-│  │  │  ├─ EmailJoin.jsx
-│  │  │  └─ EmailJoin.module.css
 │  │  ├─ loding
-│  │  │  ├─ Loding.jsx
-│  │  │  └─ Styles.jsx
 │  │  ├─ login
-│  │  │  ├─ Login.jsx
-│  │  │  ├─ Login.module.css
-│  │  │  ├─ Splash.jsx
-│  │  │  ├─ Splash.module.css
-│  │  │  ├─ Title.jsx
-│  │  │  └─ Title.module.css
 │  │  ├─ membership
-│  │  │  ├─ JoinMembership.jsx
-│  │  │  └─ JoinMembership.module.css
 │  │  ├─ modal
-│  │  │  ├─ ButtonModal.jsx
-│  │  │  ├─ ButtonModalActive.jsx
-│  │  │  ├─ InnerAlert.jsx
-│  │  │  ├─ LoginModal.jsx
-│  │  │  ├─ LoginModal.module.css
-│  │  │  ├─ Modal.jsx
-│  │  │  ├─ Modal.module.css
-│  │  │  ├─ PostModal.jsx
-│  │  │  └─ PostModal.module.css
 │  │  ├─ nav
-│  │  │  ├─ Nav.jsx
-│  │  │  ├─ TopBasicNav.jsx
-│  │  │  ├─ TopMainNav.jsx
-│  │  │  ├─ TopSearchNav.jsx
-│  │  │  └─ TopUploadNav.jsx
 │  │  ├─ search
-│  │  │  ├─ NonSearch.jsx
-│  │  │  ├─ RecomendSearch.jsx
-│  │  │  ├─ ShowSearch.jsx
-│  │  │  └─ UserSearch.jsx
 │  │  └─ tab
-│  │     └─ TabMenu.jsx
 │  ├─ font.css
 │  ├─ hooks
-│  │  ├─ useComments.jsx
-│  │  └─ useReport.jsx
 │  ├─ index.js
 │  ├─ pages
 │  │  ├─ FollowersList.jsx
@@ -219,29 +164,12 @@ test pw: abcdef
 │  │  ├─ PageRouter.jsx
 │  │  ├─ Search.jsx
 │  │  ├─ addProduct
-│  │  │  ├─ AddProduct.jsx
-│  │  │  └─ AddProduct.module.css
 │  │  ├─ news
-│  │  │  ├─ News.jsx
-│  │  │  ├─ NewsCard.jsx
-│  │  │  ├─ NewsCard.module.css
-│  │  │  ├─ NewsList.jsx
-│  │  │  └─ NewsList.module.css
 │  │  ├─ postDetail
-│  │  │  └─ PostDetail.jsx
 │  │  ├─ postEdit
-│  │  │  ├─ PostEdit.jsx
-│  │  │  └─ PostEdit.module.css
 │  │  ├─ postUpload
-│  │  │  ├─ PostUpload.jsx
-│  │  │  ├─ PostUploadForm.jsx
-│  │  │  ├─ PostUploadForm.module.css
-│  │  │  └─ PostUploadTest.jsx
 │  │  ├─ productEdit
-│  │  │  └─ ProductEdit.jsx
 │  │  └─ userprofile
-│  │     ├─ UserProfile.jsx
-│  │     └─ UserProfile.module.css
 │  ├─ reportWebVitals.js
 │  ├─ setupTests.js
 │  └─ styles

@@ -2,6 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 import brush from '../../assets/brush.png';
 
+function NonSearch() {
+    return (
+        <Section>
+            <h1 className="ir">검색할 계정이 없음</h1>
+            <Div>
+                <Img src={brush} />
+                <P>검색할 수 있는 계정이 없습니다.</P>
+            </Div>
+        </Section>
+    );
+}
+
 const Section = styled.section`
     height: 100vh;
 `;
@@ -25,17 +37,5 @@ const P = styled.p`
     margin-bottom: 20px;
     font-size: 1.4rem;
 `;
-
-function NonSearch() {
-    return (
-        <Section>
-            <h1 className="ir">검색할 계정이 없음</h1>
-            <Div>
-                <Img src={brush} />
-                <P>검색할 수 있는 계정이 없습니다.</P>
-            </Div>
-        </Section>
-    );
-}
 
 export default NonSearch;

@@ -4,7 +4,7 @@ import axios from 'axios';
 import Nav from '../components/nav/Nav';
 import TabMenu from '../components/tab/TabMenu';
 import styled from 'styled-components';
-import Loding from '../components/loding/Loding';
+import Loading from '../components/loading/Loading';
 import NonSearch from '../components/search/NonSearch';
 import ShowSearch from '../components/search/ShowSearch';
 import RecommendSearch from '../components/search/RecomendSearch';
@@ -45,7 +45,7 @@ function Search() {
                 <TopSearchNav propFunc={inputOnChange} />
             </Nav>
             {loading ? (
-                <Loding />
+                <Loading />
             ) : (
                 <View>
                     <ScrollBlind>
@@ -70,7 +70,6 @@ const View = styled.div`
     width: 450px;
     height: 100%;
     position: absolute;
-    border: 1px soli dred;
     overflow: hidden;
 `;
 

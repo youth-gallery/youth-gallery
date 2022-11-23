@@ -10,7 +10,7 @@ import UserPost from '../../components/UserPost';
 import TabMenu from '../../components/tab/TabMenu';
 import Nav from '../../components/nav/Nav';
 import ButtonModalActive from '../../components/modal/ButtonModalActive';
-import Loding from '../../components/loding/Loding';
+import Loading from '../../components/loading/Loading';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 function UserProfile() {
@@ -140,7 +140,7 @@ function UserProfile() {
                 <TopBasicNav openModalProp={openModal} />
             </Nav>
             {loading ? (
-                <Loding />
+                <Loading />
             ) : (
                 <div className={styles.user_profile_wrap}>
                     <UserInfo

@@ -6,7 +6,7 @@ import TabMenu from '../components/tab/TabMenu';
 import Nav from '../components/nav/Nav';
 import TopMainNav from '../components/nav/TopMainNav';
 import NonFollowing from './NonFollowing';
-import Loding from '../components/loding/Loding';
+import Loading from '../components/loading/Loading';
 
 function Home() {
     const [posts, setPosts] = useState({});
@@ -43,7 +43,7 @@ function Home() {
             <Div>
                 <PaddingDiv>
                     {loading ? (
-                        <Loding />
+                        <Loading />
                     ) : posts.data && posts.data.posts.length !== 0 ? (
                         <View>
                             <ScrollBlind>

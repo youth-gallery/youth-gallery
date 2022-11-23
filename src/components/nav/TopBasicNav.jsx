@@ -4,7 +4,27 @@ import iconArrowLeft from '../../assets/icon-arrow-left.png';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ButtonModal from '../modal/ButtonModal';
 
-const Warpper = styled.div`
+function TopBasicNav({ title, openModalProp }) {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const handleGoBack = () => {
+        navigate(-1);
+    };
+
+    return (
+        <>
+            <Wrapper>
+                <ArrowLeftButton name="back" onClick={handleGoBack} />
+                <NavTitle>{title}</NavTitle>
+            </Wrapper>
+            {location.pathname === '/myprofile' ? (
+                <ButtonModal openModalProp={openModalProp} />
+            ) : null}
+        </>
+    );
+}
+
+const Wrapper = styled.div`
     display: flex;
     align-items: center;
     margin-right: 8px;
@@ -26,25 +46,5 @@ const ArrowLeftButton = styled.button`
     flex-shrink: 0;
     cursor: pointer;
 `;
-
-function TopBasicNav({ title, openModalProp }) {
-    const navigate = useNavigate();
-    const location = useLocation();
-    const handleGoBack = () => {
-        navigate(-1);
-    };
-
-    return (
-        <>
-            <Warpper>
-                <ArrowLeftButton name="back" onClick={handleGoBack} />
-                <NavTitle>{title}</NavTitle>
-            </Warpper>
-            {location.pathname === '/myprofile' ? (
-                <ButtonModal openModalProp={openModalProp} />
-            ) : null}
-        </>
-    );
-}
 
 export default TopBasicNav;

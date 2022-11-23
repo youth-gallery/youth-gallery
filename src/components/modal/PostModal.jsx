@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from './PostModal.module.css';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 
 function PostModal({ values, propFunc, post_id, link }) {
     const navigate = useNavigate();
@@ -38,23 +38,38 @@ function PostModal({ values, propFunc, post_id, link }) {
         }
     };
     return (
-        <ul className={styles.modal_lists}>
+        <ul>
             {values.map((value, i) => {
                 return (
-                    <li className={styles.modal_list} key={i}>
-                        <button
-                            className={styles.modal_listBtn}
+                    <Li key={i}>
+                        <Button
                             onClick={() => {
                                 setButton(value, navigate, propFunc);
                             }}
                         >
                             {value}
-                        </button>
-                    </li>
+                        </Button>
+                    </Li>
                 );
             })}
         </ul>
     );
 }
+
+const Li = styled.li`
+    padding: 14px 26px 14px 26px;
+    font-size: 1.4rem;
+    font-weight: bold;
+`;
+
+const Button = styled.button`
+    width: 100%;
+    height: 100%;
+    font-weight: bold;
+    text-align: left;
+    &:hover {
+        cursor: pointer;
+    }
+`;
 
 export default PostModal;

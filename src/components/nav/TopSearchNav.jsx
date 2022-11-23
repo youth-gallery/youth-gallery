@@ -3,28 +3,6 @@ import React from 'react';
 import iconArrowLeft from '../../assets/icon-arrow-left.png';
 import { useNavigate } from 'react-router-dom';
 
-const NavInput = styled.input`
-    //reset
-    border: initial;
-`;
-
-const ArrowLeftButton = styled.button`
-    width: 22px;
-    height: 22px;
-    background-image: url(${iconArrowLeft});
-    background-size: cover;
-    cursor: pointer;
-`;
-
-const InputIdSearch = styled(NavInput)`
-    margin-left: 20px;
-    padding-left: 16px;
-    height: 32px;
-    width: 100%;
-    border-radius: 32px;
-    background-color: #f2f2f2;
-    color: #000000;
-`;
 
 function TopSearchNav(props) {
     const inputOnChange = (event) => {
@@ -49,5 +27,28 @@ function TopSearchNav(props) {
         </>
     );
 }
+
+const NavInput = styled.input`
+    //reset
+    border: initial;
+`;
+
+const ArrowLeftButton = styled.button`
+    width: 22px;
+    height: 22px;
+    background-image: url(${iconArrowLeft});
+    background-size: cover;
+    cursor: pointer;
+`;
+
+const InputIdSearch = styled(NavInput)`
+    margin-left: 20px;
+    padding-left: 16px;
+    height: 32px;
+    width: 100%;
+    border-radius: 32px;
+    background-color: #f2f2f2;
+    color: #000000;
+`;
 
 export default TopSearchNav;

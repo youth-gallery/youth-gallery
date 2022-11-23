@@ -1,6 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
+function Nav(props) {
+    return <NavStyle>{props.children}</NavStyle>;
+}
+
 const NavStyle = styled.section`
     display: flex;
     justify-content: space-between;
@@ -17,9 +21,5 @@ const NavStyle = styled.section`
     margin: 0 auto;
     box-sizing: border-box;
 `;
-
-function Nav(props) {
-    return <NavStyle>{props.children}</NavStyle>;
-}
 
 export default Nav;

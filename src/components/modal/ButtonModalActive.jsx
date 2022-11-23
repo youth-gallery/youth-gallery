@@ -4,18 +4,6 @@ import InnerAlert from './InnerAlert';
 import Modal from './Modal';
 import PostModal from './PostModal';
 
-const BackgroundModal = styled.div`
-    background-color: rgba(0, 0, 0, 0.3);
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 30;
-    width: 450px;
-    margin: 0 auto;
-`;
-
 function ButtonModalActive({
     propState,
     propsCloseFunc,
@@ -73,5 +61,17 @@ function ButtonModalActive({
         </>
     );
 }
+
+const BackgroundModal = styled.div`
+    background-color: rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 30;
+    width: 450px;
+    margin: 0 auto;
+`;
 
 export default ButtonModalActive;

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import HomePost from '../components/PostForm/HomePost';
+import HomePost from '../../components/PostForm/HomePost';
 import axios from 'axios';
-import TabMenu from '../components/tab/TabMenu';
-import Nav from '../components/nav/Nav';
-import TopMainNav from '../components/nav/TopMainNav';
-import NonFollowing from './NonFollowing';
-import Loding from '../components/loding/Loding';
+import TabMenu from '../../components/tab/TabMenu';
+import Nav from '../../components/nav/Nav';
+import TopMainNav from '../../components/nav/TopMainNav';
+import NonFollowing from '../NonFollowing';
+import Loading from '../../components/loading/Loading';
+import * as S from './Styled';
 
 function Home() {
     const [posts, setPosts] = useState({});
@@ -40,53 +40,26 @@ function Home() {
             <Nav>
                 <TopMainNav title={'youth-gallery 홈'} />
             </Nav>
-            <Div>
-                <PaddingDiv>
+            <S.Div>
+                <S.PaddingDiv>
                     {loading ? (
-                        <Loding />
+                        <Loading />
                     ) : posts.data && posts.data.posts.length !== 0 ? (
-                        <View>
-                            <ScrollBlind>
+                        <S.View>
+                            <S.ScrollBlind>
                                 {posts.data.posts.map((post) => (
                                     <HomePost key={post.id} datas={post} />
                                 ))}
-                            </ScrollBlind>
-                        </View>
+                            </S.ScrollBlind>
+                        </S.View>
                     ) : (
                         <NonFollowing />
                     )}
-                </PaddingDiv>
-            </Div>
+                </S.PaddingDiv>
+            </S.Div>
             <TabMenu img={'homeImg'} />
         </>
     );
 }
 
-const Div = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    height: 100%;
-    position: relative;
-`;
-
-const PaddingDiv = styled.div`
-    padding: 55px 0;
-`;
-
-const View = styled.div`
-    width: 440px;
-    height: 90vh;
-    position: absolute;
-    overflow: hidden;
-    left: 0;
-`;
-
-const ScrollBlind = styled.div`
-    width: 480px;
-    height: 100%;
-    overflow-y: scroll;
-    background-color: white;
-`;
 export default Home;

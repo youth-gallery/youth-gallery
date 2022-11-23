@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import TopSearchNav from '../components/nav/TopSearchNav';
+import TopSearchNav from '../../components/nav/TopSearchNav';
 import axios from 'axios';
-import Nav from '../components/nav/Nav';
-import TabMenu from '../components/tab/TabMenu';
-import styled from 'styled-components';
-import Loading from '../components/loading/Loading';
-import NonSearch from '../components/search/NonSearch';
-import ShowSearch from '../components/search/ShowSearch';
-import RecommendSearch from '../components/search/RecomendSearch';
+import Nav from '../../components/nav/Nav';
+import TabMenu from '../../components/tab/TabMenu';
+import Loading from '../../components/loading/Loading';
+import NonSearch from '../../components/search/NonSearch';
+import ShowSearch from '../../components/search/ShowSearch';
+import RecommendSearch from '../../components/search/RecomendSearch';
+import * as S from "./Styled"
 
 function Search() {
     const [keyword, setKeyword] = useState(null);
@@ -47,9 +47,9 @@ function Search() {
             {loading ? (
                 <Loading />
             ) : (
-                <View>
-                    <ScrollBlind>
-                        <Ul>
+                <S.View>
+                    <S.ScrollBlind>
+                        <S.Ul>
                             {users.data && users.data.length ? (
                                 <ShowSearch users={users} keyword={keyword} />
                             ) : keyword === null ? (
@@ -57,33 +57,13 @@ function Search() {
                             ) : (
                                 <NonSearch />
                             )}
-                        </Ul>
-                    </ScrollBlind>
-                </View>
+                        </S.Ul>
+                    </S.ScrollBlind>
+                </S.View>
             )}
             <TabMenu img={'homeImg'} />
         </>
     );
 }
-
-const View = styled.div`
-    width: 450px;
-    height: 100%;
-    position: absolute;
-    overflow: hidden;
-`;
-
-const ScrollBlind = styled.div`
-    width: 480px;
-    height: 100%;
-    overflow-y: scroll;
-    background-color: white;
-`;
-
-const Ul = styled.ul`
-    padding: 60px 0;
-    margin: 0 16px;
-    height: 100vh;
-`;
 
 export default Search;

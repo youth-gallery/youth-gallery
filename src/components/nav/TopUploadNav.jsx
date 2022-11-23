@@ -5,18 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import SaveButton from '../button/SaveButton';
 import SaveDisabledButton from '../button/SaveDisabledButton';
 
-const ArrowLeftButton = styled.button`
-    width: 22px;
-    height: 22px;
-    background-image: url(${iconArrowLeft});
-    background-size: cover;
-    cursor: pointer;
-`;
-
-const ButtonDiv = styled.div`
-    width: 90px;
-`;
-
 function TopUploadNav({ title, state }) {
     const navigate = useNavigate();
     const handleGoBack = () => {
@@ -36,5 +24,17 @@ function TopUploadNav({ title, state }) {
         </>
     );
 }
+
+const ArrowLeftButton = styled.button`
+    width: 22px;
+    height: 22px;
+    background-image: url(${iconArrowLeft});
+    background-size: cover;
+    cursor: pointer;
+`;
+
+const ButtonDiv = styled.div`
+    width: 90px;
+`;
 
 export default TopUploadNav;

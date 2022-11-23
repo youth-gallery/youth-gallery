@@ -20,7 +20,6 @@ function UserSearch({ userImg, username, accountname, keyword }) {
         e.target.src = basicProfileImg;
     };
     return (
-        // 추후에 아이디 프로필 페이지로 연결
         <StyledLink to={'/profile/' + accountname}>
             <Div>
                 <ProfileImg src={userImg} onError={handleImgError} />
@@ -80,7 +79,6 @@ const UserName = styled.p`
     font-size: 14px;
     line-height: 17.53px;
     color: #000;
-    /* background-color: ${(props) => props.backgroundColor || `none`}; */
     margin: 0;
 `;
 
@@ -88,7 +86,6 @@ const UserEmail = styled.p`
     font-size: 12px;
     line-height: 15.02px;
     color: #767676;
-    /* background-color: ${(props) => props.backgroundColor || `none`}; */
     margin: 0;
 `;
 

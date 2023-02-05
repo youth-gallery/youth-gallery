@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import useReport from '../../hooks/useReport';
 import ButtonModalActive from '../modal/ButtonModalActive';
 import PostAuthorInfo from './PostAuthorInfo';
-import PostImg from './PostImg';
-import PostHeartBtn from './PostHeartBtn';
 import PostComment from './PostComment';
 import PostDate from './PostDate';
-import useReport from '../../hooks/useReport';
-import { Link } from 'react-router-dom';
+import PostHeartBtn from './PostHeartBtn';
+import PostImg from './PostImg';
 
 const HomePostDiv = styled.div`
     display: flex;
@@ -28,7 +28,7 @@ const HomePostTxt = styled.p`
     width: 304px;
 `;
 
-const HomePost = ({ datas }) => {
+const HomePost = ({ postsInfos }) => {
     //모달 함수
     const [showModal, setShowModal] = useState(false);
     const openModal = (propState) => {
@@ -41,39 +41,39 @@ const HomePost = ({ datas }) => {
     };
 
     const reportPost = () => {
-        useReport(`/post/${datas.id}/report`);
+        useReport(`/post/${postsInfos?.id}/report`);
         alert('신고하였습니다.');
         setShowModal(false);
     };
-    console.log(datas.author.accountname);
+    console.log(postsInfos?.author.accountname);
     return (
         <>
             <HomePostDiv>
-                <Link to={`/profile/${datas.author.accountname}`}>
-                    <HomePostProfile src={datas.author.image} />
+                <Link to={`/profile/${postsInfos?.author.accountname}`}>
+                    <HomePostProfile src={postsInfos?.author.image} />
                 </Link>
                 <div>
                     <PostAuthorInfo
-                        username={datas.author.username}
-                        accountname={datas.author.accountname}
-                        intro={datas.author.intro}
+                        username={postsInfos?.author.username}
+                        accountname={postsInfos?.author.accountname}
+                        intro={postsInfos?.author.intro}
                         openModalProp={openModal}
                     />
-                    <HomePostTxt>{datas.content}</HomePostTxt>
-                    <PostImg image={datas.image} />
+                    <HomePostTxt>{postsInfos?.content}</HomePostTxt>
+                    <PostImg image={postsInfos?.image} />
                     <div>
                         <PostHeartBtn
-                            datas_id={datas.id}
-                            hearted={datas.hearted}
-                            heartCount={datas.heartCount}
+                            datas_id={postsInfos?.id}
+                            hearted={postsInfos?.hearted}
+                            heartCount={postsInfos?.heartCount}
                         />
                         <PostComment
-                            datas_id={datas.id}
-                            username={datas.author.username}
-                            commentCount={datas.commentCount}
+                            datas_id={postsInfos?.id}
+                            username={postsInfos?.author.username}
+                            commentCount={postsInfos?.commentCount}
                         />
                     </div>
-                    <PostDate createdAt={datas.createdAt} />
+                    <PostDate createdAt={postsInfos?.createdAt} />
                 </div>
             </HomePostDiv>
             <ButtonModalActive

@@ -1,39 +1,69 @@
-import React, { useEffect, useState } from 'react';
-import HomePost from '../../components/PostForm/HomePost';
-import axios from 'axios';
-import TabMenu from '../../components/tab/TabMenu';
+import { size } from 'lodash';
+import React, { useCallback, useState } from 'react';
+import { useEffect } from 'react';
+import Loading from '../../components/loading/Loading';
 import Nav from '../../components/nav/Nav';
 import TopMainNav from '../../components/nav/TopMainNav';
+import HomePost from '../../components/PostForm/HomePost';
+import TabMenu from '../../components/tab/TabMenu';
+import axiosHomeList from '../../utils/axiosHomeList';
 import NonFollowing from '../NonFollowing';
-import Loading from '../../components/loading/Loading';
 import * as S from './Styled';
 
 function Home() {
-    const [posts, setPosts] = useState({});
-    const [loading, setLoading] = useState(true);
+    const [scrollY, setScrollY] = useState(window.pageYOffset);
 
-    const url = 'https://mandarin.api.weniv.co.kr';
-    const getToken = localStorage.getItem('token');
+    const handleFollow = useCallback(() => {
+        setScrollY(window.pageYOffset); // window 스크롤 값을 ScrollY에 저장
+    }, []);
 
     useEffect(() => {
-        setLoading(true); // api 호출 전에 true로 변경하여 로딩화면 띄우기
-        axios({
-            method: 'GET',
-            url: url + `/post/feed/?limit=100&skip=0`,
-            headers: {
-                'Authorization': `Bearer ${getToken}`,
-                'Content-type': 'application/json',
-            },
-        })
-            .then(
-                (response) => {
-                    setPosts(response);
-                    setLoading(false);
-                }
-                // api 호출 완료 됐을 때 false로 변경하려 로딩화면 숨김처리
-            )
-            .catch((error) => console.log(error.message));
+        console.log('ScrollY is ', scrollY); // ScrollY가 변화할때마다 값을 콘솔에 출력
+    }, [scrollY]);
+
+    useEffect(() => {
+        const watch = () => {
+            window.addEventListener('scroll', handleFollow);
+        };
+        watch(); // addEventListener 함수를 실행
+        return () => {
+            window.removeEventListener('scroll', handleFollow); // addEventListener 함수를 삭제
+        };
+    });
+
+    // const [loading, setLoading] = useState(false);
+    const [postsInfo, setPostInfo] = useState([]);
+    const loading = false;
+
+    const homeList = useCallback(() => {
+        axiosHomeList(10, 15).then((data) => setPostInfo(data)); //promise에서 response 추출
     }, []);
+
+    useEffect(() => {
+        homeList();
+    }, []);
+    // const url = 'https://mandarin.api.weniv.co.kr';
+    // const getToken = localStorage.getItem('token');
+
+    // useEffect(() => {
+    //     setLoading(true); // api 호출 전에 true로 변경하여 로딩화면 띄우기
+    //     axios({
+    //         method: 'GET',
+    //         url: url + `/post/feed/?limit=100&skip=0`,
+    //         headers: {
+    //             'Authorization': `Bearer ${getToken}`,
+    //             'Content-type': 'application/json',
+    //         },
+    //     })
+    //         .then(
+    //             (response) => {
+    //                 setPosts(response);
+    //                 setLoading(false);
+    //             }
+    //             // api 호출 완료 됐을 때 false로 변경하려 로딩화면 숨김처리
+    //         )
+    //         .catch((error) => console.log(error.message));
+    // }, []);
 
     return (
         <>
@@ -44,11 +74,14 @@ function Home() {
                 <S.PaddingDiv>
                     {loading ? (
                         <Loading />
-                    ) : posts.data && posts.data.posts.length !== 0 ? (
+                    ) : size(postsInfo) > 0 ? (
                         <S.View>
                             <S.ScrollBlind>
-                                {posts.data.posts.map((post) => (
-                                    <HomePost key={post.id} datas={post} />
+                                {postsInfo.map((post, i) => (
+                                    <HomePost
+                                        key={`${post.id}_${i}`}
+                                        postsInfos={post}
+                                    />
                                 ))}
                             </S.ScrollBlind>
                         </S.View>
